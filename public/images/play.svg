@@ -1,0 +1,19 @@
+<svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="50" height="50" fill="#F5F5F5"/>
+<g id="3-CHAPTER">
+<rect width="1440" height="1160" transform="translate(-120 -434)" fill="#10181F"/>
+<g id="GRID" opacity="0.15">
+<line id="1" x1="0.499512" y1="-434" x2="0.499441" y2="1183" stroke="white"/>
+</g>
+<g id="SECTIONS">
+<g id="1_2">
+<g id="audio">
+<g id="play">
+<circle id="circle" cx="25" cy="25" r="25" fill="white" fill-opacity="0.1"/>
+<path id="play_2" fill-rule="evenodd" clip-rule="evenodd" d="M34.25 25.4167L20 17.5V33.3333L34.25 25.4167Z" fill="white"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>

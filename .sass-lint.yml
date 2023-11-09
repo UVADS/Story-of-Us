@@ -1,0 +1,21 @@
+rules:
+  class-name-format:
+    - 1
+    -
+      convention: hyphenatedbem
+  nesting-depth:
+    - 1
+    -
+      max-depth: 4
+  mixins-before-declarations:
+    - 1
+    -
+      exclude: ['bp', 'media', 'includemedia']
+  no-vendor-prefixes:
+    - 0
+  no-color-literals:
+    - 0
+  hex-length:
+    - 0
+  hex-notation:
+    - 0
