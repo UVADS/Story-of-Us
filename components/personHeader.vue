@@ -12,7 +12,7 @@
       ></div>
     </div>
     <div class="person-headshot">
-      <img class="image-opacity-50" :src="`${person.fields.headshot.url}`" />
+      <img class="" :src="`${person.fields.headshot.url}`" />
     </div>
   </div>
 </template>
@@ -60,7 +60,6 @@ const props = defineProps(['person'])
       max-width: 215px;
       height: 215px;
       object-fit: cover;
-      mix-blend-mode: multiply;
     }
   }
 }

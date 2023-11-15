@@ -4,6 +4,7 @@
   <div
     class="main-content flex flex-col items-center justify-center h-screen width-full"
   >
+    <video id="homeVideo" src="/videos/rotunda.mp4" autoplay muted loop></video>
     <h1 class="home-text">
       To&nbsp;<span class="build-text">build</span> &nbsp;a school
       <span class="break" /> without walls
@@ -25,6 +26,15 @@
 h1 {
   display: flex;
   flex-wrap: wrap;
+}
+#homeVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
+  opacity: 0.5;
 }
 
 .home-text {

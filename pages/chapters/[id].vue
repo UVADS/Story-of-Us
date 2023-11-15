@@ -3,25 +3,15 @@
     <div class="sections-left">
       <ChapterInfo :chapters="chapter"></ChapterInfo>
       <div class="sections-list">
-        <div
+        <SectionFull
           v-for="section in chapterSections"
           :key="section.nid"
+          ref="sections"
           class="section"
+          :section="section"
+          @close-others="closeAllDetails"
         >
-          {{ isHidden }}
-          <SectionTeaser
-            v-show="isHidden[section.nid]"
-            :section="section"
-            class="section-teaser"
-            @click="showSectionDetails(section.nid)"
-          ></SectionTeaser>
-
-          <SectionDetail
-            v-show="!isHidden[section.nid]"
-            :section="section"
-            class="section-detail"
-          ></SectionDetail>
-        </div>
+        </SectionFull>
       </div>
     </div>
     <div class="sections-right">
@@ -40,13 +30,17 @@ const chapterId = route.params.id
 store.fetchChapters()
 const chapters = store.getChapters
 const chapter = chapters.filter((chapter) => chapter.tid === chapterId)
-const { data, pending, error, refresh } = await useFetch(
-  `https://story.ddev.site:8444/api/sections/${route.params.id}`,
+const { data, pending, error, refresh } = await useAPIFetch(
+  `/api/sections/${route.params.id}`,
   { key: route.params.id }
 )
-console.log(data)
-console.log(error)
+
 const chapterSections = data.value.results
+
+// const sections = ref(null)
+
+// onMounted(() => {})
+
 defineProps({
   chapterName: { type: String },
   chapters: { type: Object },
@@ -56,9 +50,12 @@ defineProps({
     default: () => []
   }
 })
-function showSectionDetails(section) {
-  isHidden[section.nid] = !isHidden[section.nid]
-  console.log(isHidden, section)
+function closeAll(sectioninfo) {}
+</script>
+<script>
+function closeAllDetails() {
+  document.getElementsByClassName('section-detail-component').style.display =
+    'none'
 }
 </script>
 

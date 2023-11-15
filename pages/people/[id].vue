@@ -21,10 +21,9 @@
 
 <script setup>
 const route = useRoute()
-const { data } = await useFetch(
-  `https://story.ddev.site:8444/api/person/${route.params.id}`,
-  { key: route.params.id }
-)
+const { data } = await useAPIFetch(`/api/person/${route.params.id}`, {
+  key: route.params.id
+})
 const person = data.value.person
 const sections = data.value.sections
 defineProps(['person', 'sections']) // computed

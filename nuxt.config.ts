@@ -1,8 +1,19 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 const host = process.env.SITE_HOST || 'https://localhost:4500'
-const apihost = process.env.API_HOST || 'https://story.ddev.site:8444'
+// const apihost = process.env.API_HOST || 'https://story.ddev.site:8444'
 
 export default defineNuxtConfig({
+  build: {
+    extend(config, ctx) {
+      config.module.rules.push({
+        test: /\.(ogg|mp3|wav|mpe?g)$/i,
+        loader: 'file-loader',
+        options: {
+          name: '[path][name].[ext]'
+        }
+      })
+    }
+  },
   devtools: { enabled: true },
   css: ['~/assets/css/main.scss'],
   postcss: {
@@ -23,12 +34,13 @@ export default defineNuxtConfig({
       }
     ]
   },
-  // HTTP host
+  runtimeConfig: {
+    public: {
+      apiHost: process.env.API_HOST || 'https://story.ddev.site:8444'
+    }
+  },
+
   host,
-
-  // HTTP host of the api
-  apihost,
-
   // Cache ttl
   cachettl: 86400,
 
@@ -48,6 +60,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     ['@pinia/nuxt', { autoImports: ['defineStore', 'acceptHMRUpdate'] }]
   ],
+  plugins: [{ src: '~/plugins/infiniteloading', ssr: false }],
   rules: [
     {
       test: /\.scss$/,

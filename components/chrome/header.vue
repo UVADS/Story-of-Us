@@ -1,10 +1,12 @@
 <template>
   <header class="story-header">
-    <nuxt-link to="/" class="story-logo">
+    <nuxt-link to="https://datascience.virginia.edu" class="story-logo">
       <vectors-logo></vectors-logo
     ></nuxt-link>
     <div class="separator"></div>
-    <div class="header-title">The Story of Us</div>
+    <div class="header-title">
+      <nuxt-link to="/" class="story-logo">The Story of Us</nuxt-link>
+    </div>
   </header>
 </template>
 <style scoped>

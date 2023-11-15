@@ -1,22 +1,21 @@
 import { defineStore } from 'pinia'
 
-export const useChaptersStore = defineStore('souChapters', {
-  id: 'souChapters',
-  state: () => ({ souChapters: ref([]) }),
+export const useChaptersStore = defineStore('chapters', {
+  state: () => ({ chapters: [] }),
   actions: {
-    async fetchChapters() {
-      const { data } = await useFetch('https://story.ddev.site:8444/chapters')
+    async fetchChapters(): Promise<void> {
+      const { data } = await useAPIFetch<ResultsType>('/chapters')
       if (data.value) {
-        this.souChapters = data.value
+        this.chapters = data.value
       }
     }
   },
   getters: {
     getChapters() {
-      if (this.souChapters.length < 0) {
+      if (this.chapters.length < 0) {
         fetchChapters()
       }
-      return this.souChapters
+      return this.chapters
     }
   }
 })

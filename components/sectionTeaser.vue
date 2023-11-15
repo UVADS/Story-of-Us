@@ -9,7 +9,11 @@
           {{ yearRange }}
         </div>
       </div>
-      <div class="section-play">
+      <div v-if="section.fields.audio" class="section-play">
+        <audio
+          v-if="section.fields.audio"
+          :src="`${section.fields.audio.url}`"
+        ></audio>
         <img class="play-icon" src="/images/play.svg" />
       </div>
     </div>
@@ -29,6 +33,10 @@ const props = defineProps({
   section: {
     type: Object,
     required: true
+  },
+  visible: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -42,10 +50,10 @@ const yearRange = computed(() =>
       section.fields.year_range[0].end_year
 )
 const images = computed(() => section.fields.photos)
-console.log(images)
+// console.log(images)
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .section-teaser {
   padding: 60px 0;
   display: flex;

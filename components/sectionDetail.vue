@@ -1,40 +1,44 @@
 <template>
-  <div
-    v-if="`!isHidden[${section.id}]`"
-    :id="`detail_${section.id}`"
-    class="section-detail"
-    @load="`isHidden[${section.id}]= true`"
-  >
+  <div :id="`detail_${section.id}`" class="section-detail">
     <div class="col-3 section-years digital-number">
       <div class="flex-center-line">
         <div class="icon-container">
-          <VectorsDot class="icon-dot"> </VectorsDot>
+          <VectorsDot class="icon-dot"></VectorsDot>
         </div>
         <div class="section-year">
           {{ yearRange }}
         </div>
       </div>
       <div class="section-play">
-        <img class="play-icon" src="/images/play.svg" />
+        <audio v-if="audio()" id="audioFile" :src="audio().url"></audio>
+
+        <button @click="playAudio">
+          <img class="play-icon" src="/images/play.svg" />
+        </button>
       </div>
     </div>
     <div class="section-text">
       <div class="section-summary" v-html="section.fields.summary"></div>
       <div class="section-body" v-html="section.body"></div>
-      <button class="btn-close" @click="`isHidden_${section.nid} = true`">
+      <button class="btn-close" @click.prevent="collapseSection">
         Collapse Section
       </button>
     </div>
     <div class="section-media">
       <h3 class="section-content-header">Media</h3>
-      <div class="section-media-images">
-        <img
-          v-for="photo in section.fields.photos"
-          :key="photo.url"
-          :src="`${photo.url}`"
-          :alt="photo.alt"
-          class="section-image-thumbnail"
-        />
+      <div
+        v-for="photo in section.fields.photos"
+        :key="`image_${photo.url}`"
+        class="section-media-images"
+      >
+        <DocumentModal
+          :id="`image_modal_${section.id}_${photo.id}`"
+          :key="`image_modal_${section.id}_${photo.id}`"
+          :show="showModal"
+          :image="photo"
+          @close="showModal = false"
+        >
+        </DocumentModal>
       </div>
       <VimeoPlayer
         ref="player"
@@ -44,10 +48,16 @@
         @ready="onReady"
       />
       <h3 class="section-content-header">Documents</h3>
+
       <div v-for="file in section.fields.files" :key="file.url">
-        <a :href="`${file.url}`" target="_blank" rel="noopener noreferrer">
-          {{ file.description }}
-        </a>
+        <DocumentModal
+          :id="`document_modal_${section.id}_${file.id}`"
+          :key="`document_modal_${section.id}_${file.id}`"
+          :show="showModal"
+          :document="file"
+          @close="showModal = false"
+        >
+        </DocumentModal>
       </div>
 
       <h3 class="section-content-header">People</h3>
@@ -66,12 +76,40 @@
 </template>
 
 <script setup>
+import DocumentModal from './documentModal.vue'
+import dot from './vectors/dot.vue'
+const store = useModalStore()
+// const openModal = ref(null)
+const showModal = ref(false)
 const props = defineProps({
   section: {
     type: Object,
     required: true
+  },
+  visible: {
+    type: Boolean,
+    default: false
   }
 })
+const emits = defineEmits(['visible'])
+
+function collapseSection() {
+  emits('visible', false)
+}
+function audio() {
+  return section.fields.audio.length > 0 ? section.fields.audio[0] : null
+}
+function playAudio() {
+  const audioElement = document.getElementById('audioFile')
+  if (audioElement.paused) {
+    audioElement.play()
+  } else {
+    audioElement.pause()
+  }
+}
+function openModal(modal) {
+  // store.openModal( component: DocumentModal )
+}
 
 const section = props.section
 const yearRange = computed(() =>
@@ -86,10 +124,15 @@ const images = computed(() => section.fields.photos)
 const videoId = computed(() => {
   return /[^/]*$/.exec(section.fields.video)[0]
 })
-console.log(images)
 </script>
 
 <style lang="scss">
+.btn-close {
+  width: 240px;
+  height: 45px;
+  color: #fff;
+  margin-top: 30px;
+}
 .section-teaser {
   padding: 60px 0;
   display: flex;
@@ -164,7 +207,17 @@ console.log(images)
       padding-top: 0;
     }
   }
-
+  .btn-close {
+    border-radius: 50px;
+    background: #ffffff11;
+    color: #fff;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 18px;
+    /* 112.5% */
+    letter-spacing: -0.25px;
+  }
   .section-media {
     width: 240px;
     margin-left: 120px;

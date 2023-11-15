@@ -30,23 +30,4 @@ body {
   );
   background-size: 120px 1px;
 }
-/*
-.outer {
-  position: relative;
-  background: rgba(16, 24, 31, 0.5);
-  padding: 60px 60px;
-}
-.outer:after {
-  content: ' ';
-  display: block;
-  position: absolute;
-  left: 0;
-  top: 60px;
-  width: 100%;
-  height: 100%;
-  /*background: url('/bg.jpg') no-repeat center center;
-  background-size: cover;
-  opacity: 0.15;
-  z-index: -1;
-}*/
 </style>
