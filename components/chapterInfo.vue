@@ -41,6 +41,7 @@ const props = defineProps(['chapters'])
   height: calc(100% / 3);
   margin: 20px 0;
   clear: both;
+  min-height: 240px;
 }
 
 .chapter-name {

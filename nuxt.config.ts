@@ -1,8 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 const host = process.env.SITE_HOST || 'https://localhost:4500'
-// const apihost = process.env.API_HOST || 'https://story.ddev.site:8444'
+// const apihost = process.env.API_HOST || 'http://stage.datascience.virginia.edu:8080'
 
 export default defineNuxtConfig({
+  target: 'static',
+  generate: {
+    fallback: true
+  },
   build: {
     extend(config, ctx) {
       config.module.rules.push({
@@ -36,7 +40,9 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiHost: process.env.API_HOST || 'https://story.ddev.site:8444'
+      siteHost: process.env.SITE_HOST || 'https://localhost:4500',
+      apiHost:
+        process.env.API_HOST || 'https://stage.datascience.virginia.edu:8443'
     }
   },
 

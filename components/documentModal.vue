@@ -94,7 +94,6 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-/* Inline #33 | https://localhost:4500/chapters/1 */
 * {
   font-family: 'ibm-plex-mono', monospace;
 }

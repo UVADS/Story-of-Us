@@ -7,6 +7,11 @@
     <div class="header-title">
       <nuxt-link to="/" class="story-logo">The Story of Us</nuxt-link>
     </div>
+    <div class="about">
+      <nuxt-link to="/" class="ibm-plex-mono about"
+        >About this project</nuxt-link
+      >
+    </div>
   </header>
 </template>
 <style scoped>
@@ -17,6 +22,21 @@ header {
   background: #1a2835;
   height: 60px;
   padding: 0 60px;
+}
+.about {
+  color: #fff;
+  text-align: right;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 60px; /* 107.692% */
+  text-transform: none;
+  align-self: center;
+  flex: 1 1 auto;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
 }
 .header-title {
   font-family: 'franklin-gothic-ext-comp-urw', 'sans-serif';
