@@ -5,19 +5,21 @@
     class="main-content flex flex-col items-center justify-center h-screen width-full"
   >
     <video id="homeVideo" src="/videos/rotunda.mp4" autoplay muted loop></video>
-    <h1 class="home-text">
-      To&nbsp;<span class="build-text">build</span> &nbsp;a school
-      <span class="break" /> without walls
-    </h1>
-    <div class="home-subtext">
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequuntur
-      veritatis omnis facilis quibusdam odit sequi ratione aliquam atque veniam
-      beatae, fugit debitis, unde id incidunt reiciendis officiis consequatur
-      minima saepe.
+    <div class="homepage-content flex flex-col items-center justify-center">
+      <h1 class="home-text">
+        To&nbsp;<span class="build-text">build</span> &nbsp;a school
+        <span class="break" /> without walls
+      </h1>
+      <div class="home-subtext">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequuntur
+        veritatis omnis facilis quibusdam odit sequi ratione aliquam atque
+        veniam beatae, fugit debitis, unde id incidunt reiciendis officiis
+        consequatur minima saepe.
+      </div>
+      <a href="/chapters"
+        ><button class="btn-yellow">View Digital Exhibition</button></a
+      >
     </div>
-    <a href="/chapters"
-      ><button class="btn-yellow">View Digital Exhibition</button></a
-    >
   </div>
 </template>
 
@@ -37,6 +39,9 @@ h1 {
   opacity: 0.5;
 }
 
+.homepage-content {
+  max-height: 450px;
+}
 .home-text {
   font-family: 'franklin-gothic-urw', 'Franklin Gothic', 'ITC Franklin Gothic',
     Arial, sans-serif;

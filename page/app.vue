@@ -1,10 +1,8 @@
 <template>
   <div>
     <ChromeHeader></ChromeHeader>
-    <div class="outer">
-      <div class="container gridline">
-        <slot />
-      </div>
+    <div class="container gridline">
+      <slot />
     </div>
   </div>
 </template>
@@ -15,6 +13,11 @@
 body {
   background: rgb(16, 24, 31);
   color: #fff;
+}
+#__nuxt,
+#__nuxt ~ div,
+#__nuxt ~ div ~ div {
+  height: 100%;
 }
 .container {
   max-width: 1200px;

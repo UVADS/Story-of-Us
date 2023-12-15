@@ -8,6 +8,20 @@ body {
   height: 100%;
 }
 
+#__nuxt,
+#__nuxt>div,
+#__nuxt>div>div {
+  height: 100%;
+}
+
+html,
+body,
+#fullheight {
+  min-height: 100% !important;
+  height: 100%;
+}
+
+
 @font-face {
   font-family: 'plex-mono', 'ibm-plex-mono', 'IBM Plex Mono', Arial, Helvetica, sans-serif;
   src: url('/assets/fonts/IBMPlexMono-Regular.ttf') format('truetype');
