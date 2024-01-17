@@ -3,7 +3,7 @@ const host = process.env.SITE_HOST || 'https://localhost:4500'
 // const apihost = process.env.API_HOST || 'http://stage.datascience.virginia.edu:8080'
 
 export default defineNuxtConfig({
-  target: 'static',
+  dev: process.env.NODE_ENV !== 'production',
   generate: {
     fallback: true
   },
@@ -19,7 +19,7 @@ export default defineNuxtConfig({
     }
   },
   devtools: { enabled: true },
-  css: ['~/assets/css/main.scss'],
+  css: ['assets/css/main.scss'],
   postcss: {
     plugins: {
       'postcss-import': {},
@@ -48,7 +48,7 @@ export default defineNuxtConfig({
 
   host,
   // Cache ttl
-  cachettl: 86400,
+  cachettl: 3600,
 
   // Default meta items in our simple flat meta notation.
   defaultMeta: {
@@ -66,7 +66,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     ['@pinia/nuxt', { autoImports: ['defineStore', 'acceptHMRUpdate'] }]
   ],
-  plugins: [{ src: '~/plugins/infiniteloading', ssr: false }],
+  plugins: [],
   rules: [
     {
       test: /\.scss$/,

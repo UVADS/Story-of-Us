@@ -4,23 +4,19 @@
       <div
         v-for="chapter in chapters"
         :key="`${chapter.tid}`"
-        class="menu-chapter-item"
+        :class="`menu-chapter-item ${sections && chapter.tid === chapterId? 'active-item' : '' }`"
       >
-        <VectorsDot
-          v-if="sections && chapter.tid === chapterId"
-          class="menu-dot"
-        >
-        </VectorsDot>
         <div class="menu-chapter-name">
           <a :href="`/chapters/${chapter.tid}`">{{ chapter.name }}</a>
         </div>
-        <ul v-if="sections && chapter.tid === chapterId" class="year-menu-list">
+        <ul v-if="sections && Number(chapter.tid) === chapterId" class="year-menu-list">
           <li
-            v-for="section in sections"
-            :key="section.id"
+            v-for="year in getChapterYears()"
+            :key="year"
             class="year-menu-item"
           >
-            {{ section.year_start }}
+          <NuxtLink :to="`#anchor_${ year }`"> {{ year }}</NuxtLink>
+
           </li>
         </ul>
       </div>
@@ -30,11 +26,11 @@
 
 <script setup>
 const store = useChaptersStore()
-store.fetchChapters()
+await store.fetchChapters()
 const chapters = store.getChapters
-defineProps({
+const props = defineProps({
   sections: {
-    type: Object,
+    type: Array,
     required: false,
     default: null
   },
@@ -44,6 +40,14 @@ defineProps({
     default: null
   }
 })
+function getChapterYears()
+{
+  return [...new Set(props.sections.map((item) => item.fields.year_range[0].start_year))]
+}
+function  startYear(section) {
+  return section.fields.year_range[0].start_year ?? ''
+}
+
 </script>
 
 <style lang="scss" scoped>
@@ -54,11 +58,38 @@ defineProps({
   font-weight: 600;
   line-height: 16px; /* 114.286% */
   font-family: 'ibm-plex-mono', 'Helvetica';
-}
-.menu-chapter-name {
+  display:grid;
+  grid-auto-flow: row;
+  grid-auto-rows: auto;
+  padding-top: 30px;
+  position: fixed;
+.menu-chapter-item {
   padding: 30px 0;
 }
-.menu-chapter-name:first-of-type {
+
+.menu-chapter-item:first-of-type {
   padding-top: 0;
+}
+.menu-dot {
+	/*display: none;*/
+	position: relative;
+	margin: -20px;
+  padding:  0;
+}
+.active-item::before {
+  content: url('assets/images/dot.svg');
+  margin-left: -20px;
+  float: left;
+}
+.year-menu-list
+{
+  font-family: ibm-plex-mono, 'Helvetica';
+font-size: 13px;
+font-weight: 400;
+line-height: 30px;
+letter-spacing: 0em;
+text-align: left;
+color: #fff;
+}
 }
 </style>

@@ -1,9 +1,10 @@
-<script setup></script>
+<script setup>
+const hasrun = ref(0)
+console.log(hasrun.value)
+</script>
 
 <template>
-  <div
-    class="main-content flex flex-col items-center justify-center h-screen width-full"
-  >
+
     <video id="homeVideo" src="/videos/rotunda.mp4" autoplay muted loop></video>
     <div class="homepage-content flex flex-col items-center justify-center">
       <h1 class="home-text">
@@ -19,16 +20,16 @@
       <a href="/chapters"
         ><button class="btn-yellow">View Digital Exhibition</button></a
       >
-    </div>
   </div>
 </template>
 
 <style scoped>
-@import url('https://use.typekit.net/kma2wyt.css');
+
 h1 {
   display: flex;
   flex-wrap: wrap;
 }
+
 #homeVideo {
   position: fixed;
   right: 0;
@@ -37,6 +38,8 @@ h1 {
   min-height: 100%;
   z-index: -1;
   opacity: 0.5;
+  object-fit: cover;
+
 }
 
 .homepage-content {
@@ -53,6 +56,7 @@ h1 {
   max-width: 800px;
   display: flex;
   justify-content: center;
+  align-items: center;
   color: white;
 }
 .build-text {

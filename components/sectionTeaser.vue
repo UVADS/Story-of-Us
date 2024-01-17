@@ -1,5 +1,5 @@
 <template>
-  <div :id="`teaser_${section.id}`" class="section-teaser">
+  <div :id="`teaser_${section.id}`" class="section-teaser" >
     <div class="col-3 section-years digital-number">
       <div class="flex-center-line">
         <div class="icon-container">
@@ -20,6 +20,7 @@
     <div class="section-summary">{{ section.fields.summary }}</div>
     <div class="section-image">
       <img
+        v-if="images[0] && images[0].url"
         class="image-opacity-50"
         :src="`${images[0].url}`"
         :alt="`${images[0].alt}`"
@@ -41,15 +42,15 @@ const props = defineProps({
 })
 
 const section = props.section
-const yearRange = computed(() =>
+const yearRange =
   section.fields.year_range[0].start_year ===
   section.fields.year_range[0].end_year
     ? section.fields.year_range[0].start_year
     : section.fields.year_range[0].start_year +
       ' - ' +
       section.fields.year_range[0].end_year
-)
-const images = computed(() => section.fields.photos)
+
+const images =  section.fields.photos
 // console.log(images)
 </script>
 
@@ -86,7 +87,7 @@ const images = computed(() => section.fields.photos)
   font-size: 28px;
   font-style: normal;
   font-weight: 300;
-  line-height: 40px; /* 142.857% */
+  line-height: 36px; /* 142.857% */
   padding-bottom: 30px;
 }
 .flex-center-line {
@@ -108,12 +109,12 @@ const images = computed(() => section.fields.photos)
   line-height: 30px; /* 157.895% */
 }
 .section-image {
-  align-self: flex-end;
-  margin-left: auto;
+  align-self: center;
+  margin-left: 120px;
   img {
     max-height: 150px;
 
-    object-fit: contain;
+    object-fit: cover;
   }
 }
 .play-section {

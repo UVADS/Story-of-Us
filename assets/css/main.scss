@@ -1,11 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://use.typekit.net/kma2wyt.css');
 
 body {
 
   width: 100%;
   height: 100%;
+  font-family: 'franklin-gothic-urw', "Franklin Gothic", "ITC Franklin Gothic", "franklin-gothic-ext-comp-urw", Arial, sans-serif;
 }
 
 #__nuxt,
@@ -25,7 +27,6 @@ body,
 @font-face {
   font-family: 'plex-mono', 'ibm-plex-mono', 'IBM Plex Mono', Arial, Helvetica, sans-serif;
   src: url('/assets/fonts/IBMPlexMono-Regular.ttf') format('truetype');
-  font-weight: normal;
   font-display: swap;
   font-style: normal;
 }
@@ -48,14 +49,7 @@ body,
 
 
 
-.main-content {
-  font-family: "franklin-gothic-urw", "Franklin Gothic", "ITC Franklin Gothic", Arial, sans-serif;
-  color: #FFF;
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 50px 0px;
-  height: 100%;
-}
+
 
 
 .header {
@@ -67,7 +61,7 @@ body,
 
 .image-opacity-50 {
   opacity: 0.5;
-  background: url(<path-to-image>), lightgray 50% / cover no-repeat;
+  background: lightgray 50% / cover no-repeat;
 
   mix-blend-mode: luminosity;
 }
@@ -82,6 +76,67 @@ h1 {
   font-weight: 600;
   font-size: 90px;
   line-height: 80px;
+}
+
+.hidden {
+  display: none;
+}
+
+.chapter-years {
+  padding-top: 20px;
+}
+
+.chapters {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  max-width: 960px;
+}
+
+.chapter-info {
+  border-bottom: solid 1px #fff;
+  display: grid;
+  grid-template-columns: 120px auto;
+  vertical-align: flex-start;
+  align-items: center;
+  align-content: center;
+  height: 240px;
+  height: calc(100% / 3);
+  margin: 20px 0;
+  clear: both;
+  min-height: 240px;
+}
+
+.chapter-name {
+  font-size: 48px;
+  font-family: 'franklin-gothic-urw';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 90px;
+  line-height: 80px;
+}
+
+.chapter-years {
+  font-size: 24px;
+  font-family: Digital-7;
+  line-height: 24px;
+  grid-column: 2;
+}
+
+.chapter-number {
+  color: #fdda24;
+  font-family: Digital-7;
+  font-size: 90px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 80px;
+  width: 120px;
+  min-width: 120px;
+  padding-top: calc(1em / 8);
+}
+
+.chapter-info:last-child {
+  border: none;
 }
 
 /*.gridline {
@@ -124,6 +179,24 @@ h1 {
   text-align: center;
   vertical-align: middle;
   line-height: 45px;
+}
 
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.5s;
+}
 
+.page-enter,
+.page-leave-to {
+  opacity: 0;
+}
+
+.layout-enter-active,
+.layout-leave-active {
+  transition: opacity .5s
+}
+
+.layout-enter,
+.layout-leave-active {
+  opacity: 0
 }

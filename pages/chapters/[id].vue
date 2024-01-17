@@ -1,15 +1,19 @@
 <template>
   <div class="sections-page">
     <div class="sections-left">
+      <div class="chapter-header">
       <ChapterInfo :chapters="chapter"></ChapterInfo>
+      </div>
       <div class="sections-list">
         <SectionFull
-          v-for="section in chapterSections"
-          :key="section.nid"
+          v-for="(section, index) in chapterSections"
+          :key="section.id"
+          :id="`section_${section.id}`"
           ref="sections"
           class="section"
           :section="section"
-          @close-others="closeAllDetails"
+          @close-others="closeAll(section.id)"
+          :index="index"
         >
         </SectionFull>
       </div>
@@ -17,49 +21,59 @@
     <div class="sections-right">
       <RightMenu
         :sections="chapterSections"
-        :chapter-id="chapter.tid"
+        :chapterId="chapterId"
       ></RightMenu>
     </div>
   </div>
 </template>
 
 <script setup>
+const hasrun_id = ref(0)
 const route = useRoute()
 const store = useChaptersStore()
-const chapterId = route.params.id
-store.fetchChapters()
+const chapterId =  Number(route.params.id)
+await store.fetchChapters()
 const chapters = store.getChapters
-const chapter = chapters.filter((chapter) => chapter.tid === chapterId)
+const chapter = chapters.filter((chapter) => Number(chapter.tid) === chapterId)
+console.log(chapterId, chapters, chapter)
 const { data, pending, error, refresh } = await useAPIFetch(
   `/api/sections/${route.params.id}`,
   { key: route.params.id }
 )
 
 const chapterSections = data.value.results
+const sections = ref([])
 
-// const sections = ref(null)
-
+let current = null
 // onMounted(() => {})
-
-defineProps({
+const props = defineProps({
   chapterName: { type: String },
   chapters: { type: Object },
-  chapter: { type: Object },
-  isHidden: {
-    type: Array,
-    default: () => []
-  }
+  chapter: { type: Object }
 })
-function closeAll(sectioninfo) {}
-</script>
-<script>
-function closeAllDetails() {
-  document.getElementsByClassName('section-detail-component').style.display =
-    'none'
+function closeAll(id) {
+
+  sections.value.forEach((section) => {
+    section.showDetails = false
+    if (section.id === id) {
+      section.value.focus()
+    }
+  })
+  nextTick(() => {
+    const sectionDetail = document.getElementById(`section_detail_${id}`)
+    console.log(sectionDetail)
+    sectionDetail.toggleClass('hidden')
+})
+  current = id
+
 }
 </script>
-
 <style lang="scss">
+.chapter-header {
+  min-height: 240px;
+  height:240px;
+  border-bottom: solid 1px #fff;
+}
 .sections-page {
   display: flex;
   flex-direction: row;
@@ -89,12 +103,14 @@ function closeAllDetails() {
     margin: 0;
     align-items: start;
     height: fit-content;
+    height:240px;
   }
 
   .sections-list {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    width:1080px;
   }
   .section-year {
     white-space: nowrap;

@@ -20,22 +20,20 @@
     <div class="section-text">
       <div class="section-summary" v-html="section.fields.summary"></div>
       <div class="section-body" v-html="section.body"></div>
-      <button class="btn-close" @click.prevent="collapseSection">
+      <button class="btn-close" @click.prevent="collapseSection(section.id)">
         Collapse Section
       </button>
     </div>
     <div class="section-media">
       <h3 class="section-content-header">Media</h3>
-      <div
+      <div class="section-media-images">
+
+        <DocumentModal
         v-for="photo in section.fields.photos"
         :key="`image_${photo.url}`"
-        class="section-media-images"
-      >
-        <DocumentModal
-          :id="`image_modal_${section.id}_${photo.id}`"
-          :key="`image_modal_${section.id}_${photo.id}`"
           :show="showModal"
           :image="photo"
+          :ref="media"
           @close="showModal = false"
         >
         </DocumentModal>
@@ -43,18 +41,18 @@
       <VimeoPlayer
         ref="player"
         :video-id="videoId"
-        :player-height="height"
+
         class="video-player"
-        @ready="onReady"
+
       />
-      <h3 class="section-content-header">Documents</h3>
+      <h3 class="section-content-header section-documents">Documents</h3>
 
       <div v-for="file in section.fields.files" :key="file.url">
         <DocumentModal
-          :id="`document_modal_${section.id}_${file.id}`"
           :key="`document_modal_${section.id}_${file.id}`"
           :show="showModal"
           :document="file"
+          ref="documents"
           @close="showModal = false"
         >
         </DocumentModal>
@@ -79,8 +77,11 @@
 import DocumentModal from './documentModal.vue'
 import dot from './vectors/dot.vue'
 const store = useModalStore()
+const visible = ref(false)
 // const openModal = ref(null)
 const showModal = ref(false)
+const documents = ref([])
+const media = ref([])
 const props = defineProps({
   section: {
     type: Object,
@@ -93,8 +94,13 @@ const props = defineProps({
 })
 const emits = defineEmits(['visible'])
 
-function collapseSection() {
+function collapseSection(section) {
+
   emits('visible', false)
+   nextTick(() => {
+    const sectionDetail = document.getElementById(`section_${props.section.id}`)
+    sectionDetail.scrollIntoView({ behavior: 'auto' })
+  })
 }
 function audio() {
   return section.fields.audio.length > 0 ? section.fields.audio[0] : null
@@ -112,18 +118,14 @@ function openModal(modal) {
 }
 
 const section = props.section
-const yearRange = computed(() =>
-  section.fields.year_range[0].start_year ===
+const yearRange = section.fields.year_range[0].start_year ===
   section.fields.year_range[0].end_year
     ? section.fields.year_range[0].start_year
     : section.fields.year_range[0].start_year +
       ' - ' +
       section.fields.year_range[0].end_year
-)
-const images = computed(() => section.fields.photos)
-const videoId = computed(() => {
-  return /[^/]*$/.exec(section.fields.video)[0]
-})
+const images = section.fields.photos
+const videoId = /[^/]*$/.exec(section.fields.video)[0]
 </script>
 
 <style lang="scss">
@@ -193,6 +195,7 @@ const videoId = computed(() => {
   clear: both;
   border-bottom: #fff solid 1px;
 
+
   h3 {
     color: #fff;
     font-family: 'IBM Plex Mono', monospace;
@@ -206,6 +209,7 @@ const videoId = computed(() => {
     &:first-of-type {
       padding-top: 0;
     }
+    padding-left:unset !important;
   }
   .btn-close {
     border-radius: 50px;
@@ -218,9 +222,9 @@ const videoId = computed(() => {
     /* 112.5% */
     letter-spacing: -0.25px;
   }
-  .section-media {
-    width: 240px;
-    margin-left: 120px;
+  .section-media, .section-documents {
+
+    padding-left: 120px;
     font-family: 'IBM Plex Mono', monospace;
 
     a {
@@ -234,6 +238,7 @@ const videoId = computed(() => {
       font-style: normal;
       font-weight: 400;
       line-height: 20px; /* 142.857% */
+      text-align: left;
     }
     .section-media-images {
       display: flex;
@@ -244,7 +249,7 @@ const videoId = computed(() => {
     .section-image-thumbnail {
       width: 110px;
       height: 62px;
-      object-fit: fill;
+      object-fit: cover;
       padding: 0 5px;
     }
     .video-player {

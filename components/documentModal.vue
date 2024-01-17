@@ -1,8 +1,8 @@
 <template>
-  <button v-if="document" class="btn" @click="showModal = true">
+  <button v-if="document" class="btn btn-document" @click="showModal = true">
     {{ document.description }}
   </button>
-  <button v-if="image" class="btn" @click="showModal = true">
+  <button v-if="image" class="btn btn-image" @click="showModal = true">
     <img
       :key="image.url"
       :src="`${image.url}`"
@@ -55,7 +55,11 @@
 import CloseButton from './vectors/closeButton.vue'
 const store = useModalStore()
 const showModal = ref(false)
+defineEmits(['close'])
 defineProps({
+  id: {
+    type: Number
+  },
   isDocument: {
     type: Boolean
   },
@@ -108,11 +112,23 @@ onUnmounted(() => {
 .document-description {
   max-width: 300px;
   align-content: start;
-  align-self: center;
-  margin: 0 120px 0 60px;
+  flex: 0 0 300px;
   font-family: monospace;
+  align-self: center;
 }
+.btn-document
+{
+  color: #FDDA24;
 
+  max-width:240px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: left;
+  width:240px;
+
+}
 .modal-container[data-v-ca2c163d] {
   height: 100%;
   width: 100%;
@@ -124,7 +140,7 @@ onUnmounted(() => {
 }
 
 .document-container {
-  flex: 0 0 760px;
+  flex: 1 1 760px;
   align-self: center;
 }
 embed {
@@ -185,6 +201,90 @@ embed {
 
 .modal-fade-enter-active,
 .modal-fade-leave-active {
-  transition: 0.5s ease all;
+  transition: 1s ease all;
+}
+.document-container {
+
+  .toolbar {
+    display:none;
+  }
+  :root{
+
+  }
+}
+
+/* Inline #40 | https://localhost:4500/chapters/1 */
+
+.document-container[data-v-ca2c163d] {
+  /* max-height: fit-content; */
+  /* max-height: inherit; */
+  /* max-height: initial; */
+  /* max-height: max-content; */
+  /* max-height: min-content; */
+  /* max-height: none; */
+  /* max-height: revert; */
+  /* max-height: revert-layer; */
+  /* max-height: unset; */
+  /* max-height: 7; */
+  /* max-height: 76; */
+  /* max-height: 768; */
+  /* max-height: 768p; */
+  max-height: 768px;
+}
+
+embed[data-v-ca2c163d] {
+  /* max-height: 7; */
+  /* max-height: 76; */
+  /* max-height: 768; */
+  /* max-height: 768p; */
+  max-height: 768px;
+}
+
+/* viewer.css | resource://pdf.js/web/viewer.css */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    max-height: 768px;
+  }
+}
+
+.pdfViewer {
+  /* --scale-factor: 1; */
+}
+
+body {
+  /* scrollbar-color: var(--scrollbar-color) var(--scrollbar-bg-color); */
+  scrollbar-color: rgb(255, 255, 255) var(--scrollbar-bg-color);
+}
+
+embed #toolbarViewer {
+  /* height: 32px; */
+  height: 0px;
+  display: none;
+}
+
+.pdfViewer .page {
+  border: none;
+}
+
+embed :root {
+  color: white;
+}
+
+.pdfViewer .page {
+  /* border: none; */
+}
+
+embed > html > body > div#outerContainer > div#mainContainer > div.toolbar
+{
+  display: none;
+}
+
+
+embed html, html {
+  border: none;
+  height: 768px;
+  --page-border: none !important;
+  --page-margin: none;
 }
 </style>

@@ -22,6 +22,8 @@ header {
   background: #1a2835;
   height: 60px;
   padding: 0 60px;
+  position: fixed;
+  width: 100%
 }
 .about {
   color: #fff;

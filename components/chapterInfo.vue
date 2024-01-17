@@ -1,7 +1,7 @@
 <template>
   <div
-    v-for="chapter in chapters"
-    :key="field_chapter_number"
+    v-for="(chapter) in chapters"
+    :key="`chapter_${chapter.field_chapter_number}`"
     class="chapter-info"
   >
     <div class="chapter-number">
@@ -17,6 +17,7 @@
 </template>
 
 <script setup>
+const hasrun = ref(0)
 const props = defineProps(['chapters'])
 </script>
 
@@ -29,6 +30,7 @@ const props = defineProps(['chapters'])
   height: 100%;
   display: flex;
   flex-direction: column;
+  max-width:960px;
 }
 
 .chapter-info {
@@ -38,6 +40,7 @@ const props = defineProps(['chapters'])
   vertical-align: flex-start;
   align-items: center;
   align-content: center;
+  height:240px;
   height: calc(100% / 3);
   margin: 20px 0;
   clear: both;
@@ -46,7 +49,7 @@ const props = defineProps(['chapters'])
 
 .chapter-name {
   font-size: 48px;
-  font-family: 'franklin-gothic-urw';
+  font-family: 'franklin-gothic-urw', "Franklin Gothic", "ITC Franklin Gothic", "franklin-gothic-ext-comp-urw", Arial, sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 90px;

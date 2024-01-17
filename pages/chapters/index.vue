@@ -1,17 +1,20 @@
 <script setup>
 const store = useChaptersStore()
-store.fetchChapters()
-const chapters = computed(() => store.chapters)
+await store.fetchChapters()
+const chapters =store.chapters
+const hasrun_chapters = ref(0)
 </script>
 <template>
-  <div class="main-content">
     <div class="chapters">
       <ChapterInfo :chapters="chapters"></ChapterInfo>
     </div>
-  </div>
 </template>
 
-<style>
+<style scoped>
+.main-content
+{
+  padding: 0 120px;
+}
 .chapters {
   height: 100%;
   display: flex;
