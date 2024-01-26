@@ -1,13 +1,21 @@
 <template>
-  <button v-if="document" class="btn btn-document" @click="showModal = true">
+  <button v-if="document" class="btn btn-document" @click="toggleModal(true)">
     {{ document.description }}
   </button>
-  <button v-if="image" class="btn btn-image" @click="showModal = true">
-    <img
+  <button v-if="image" class="btn btn-image" @click="toggleModal(true)">
+    <NuxtImg
       :key="image.url"
       :src="`${image.url}`"
       :alt="image.alt"
       class="section-image-thumbnail"
+    />
+  </button>
+  <button v-if="video" class="btn btn-image" @click="toggleModal(true) ">
+    <NuxtImg
+
+      :src="`https://vumbnail.com/${video}.jpg`"
+      :alt="'video'"
+      class="section-video-thumbnail"
     />
   </button>
   <Teleport to="body">
@@ -26,7 +34,7 @@
                 {{ image.credit }}
               </div>
               <div class="image-container">
-                <img :src="`${image.url}`" :alt="`${image.alt}`" />
+                <NuxtImg :src="`${image.url}`" :alt="`${image.alt}`" />
               </div>
             </div>
             <div v-if="document" class="document">
@@ -35,10 +43,21 @@
                 <p>{{ document.summary }}</p>
               </div>
               <div class="document-container">
-                <embed :src="`${document.url}#toolbar=0`" />
+
+            <VuePdfEmbed :source="pdfDocument"/>
+               <!--<embed :src="`${document.url}`" />-->
               </div>
             </div>
-            <button class="modal-close" @click="showModal = false">
+            <div v-if="video" class="video">
+              <VimeoPlayer
+                    ref="player"
+                    :video-id="video"
+                    class="video-player"
+                    :key="video"/>
+                    </div>
+
+          </div>
+            <button class="modal-close" @click="toggleModal(false)">
               <CloseButton></CloseButton>
             </button>
           </div>
@@ -46,7 +65,7 @@
             <slot name="footer"> </slot>
           </footer>
         </div>
-      </div>
+
     </Transition>
   </Teleport>
 </template>
@@ -56,7 +75,7 @@ import CloseButton from './vectors/closeButton.vue'
 const store = useModalStore()
 const showModal = ref(false)
 defineEmits(['close'])
-defineProps({
+const props = defineProps({
   id: {
     type: Number
   },
@@ -76,10 +95,31 @@ defineProps({
     required: false,
     default: null
   },
+  video: {
+    type: String,
+    required: false,
+    default: null
+  },
   show: {
     type: Boolean
   }
 })
+const pdfDocument = props.document ? props.document.url : null
+
+function toggleModal(modalValue) {
+  console.log("toggle modal", modalValue)
+  showModal.value = modalValue
+  if(showModal.value)
+  {
+    document.body.classList.add("modal-open");
+    console.log("class",document.body.classList)
+  }
+  else
+  {
+    document.body.classList.remove("modal-open");
+    console.log("class",document.body.classList)
+  }
+}
 function keydownListener(event) {
   // Assert the key is escape
   if (event.key === 'Escape') store.closeModal()
@@ -93,6 +133,7 @@ onMounted(() => {
 // Clean up on unmount
 onUnmounted(() => {
   document.removeEventListener('keydown', keydownListener)
+
 })
 // Make a function that will trigger on keydown
 </script>
@@ -104,6 +145,7 @@ onUnmounted(() => {
 .image,
 .document {
   display: flex;
+  height: 100%;
 }
 .image {
   height: 100%;
@@ -132,16 +174,20 @@ onUnmounted(() => {
 .modal-container[data-v-ca2c163d] {
   height: 100%;
   width: 100%;
+
 }
 
 .image-container {
-  max-width: 740px;
+  max-width: 540px;
   align-self: center;
 }
 
-.document-container {
-  flex: 1 1 760px;
+.document-container, .vue-pdf-embed {
+
+  flex: 1 1 auto;
   align-self: center;
+  max-width: 740px;
+  overflow: scroll;
 }
 embed {
   width: 100%;
@@ -158,13 +204,14 @@ embed {
   right: 60px;
 }
 .modal-mask {
-  width: 1440px;
-  height: 960px;
+  max-width: 1440px;
+  max-height: 960px;
   position: fixed;
-  inset: 0;
+  inset: 60px 0 0 0;
   background: rgba(0, 0, 0, 0.95);
   margin: 0 auto;
   padding: 60px;
+  z-index: 10;
 }
 .modal-container {
   padding: 1rem;
@@ -213,74 +260,54 @@ embed {
   }
 }
 
-/* Inline #40 | https://localhost:4500/chapters/1 */
+.document-container {
 
-.document-container[data-v-ca2c163d] {
-  /* max-height: fit-content; */
-  /* max-height: inherit; */
-  /* max-height: initial; */
-  /* max-height: max-content; */
-  /* max-height: min-content; */
-  /* max-height: none; */
-  /* max-height: revert; */
-  /* max-height: revert-layer; */
-  /* max-height: unset; */
-  /* max-height: 7; */
-  /* max-height: 76; */
-  /* max-height: 768; */
-  /* max-height: 768p; */
   max-height: 768px;
 }
 
-embed[data-v-ca2c163d] {
-  /* max-height: 7; */
-  /* max-height: 76; */
-  /* max-height: 768; */
-  /* max-height: 768p; */
+embed {
   max-height: 768px;
 }
-
-/* viewer.css | resource://pdf.js/web/viewer.css */
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    max-height: 768px;
-  }
-}
-
-.pdfViewer {
-  /* --scale-factor: 1; */
-}
-
-body {
-  /* scrollbar-color: var(--scrollbar-color) var(--scrollbar-bg-color); */
-  scrollbar-color: rgb(255, 255, 255) var(--scrollbar-bg-color);
-}
-
-embed #toolbarViewer {
-  /* height: 32px; */
-  height: 0px;
-  display: none;
-}
-
-.pdfViewer .page {
-  border: none;
-}
-
-embed :root {
-  color: white;
-}
-
-.pdfViewer .page {
-  /* border: none; */
-}
-
-embed > html > body > div#outerContainer > div#mainContainer > div.toolbar
+.video
 {
-  display: none;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  height: 100%;
+}
+@media (max-width: 768px) {
+
+/* Inline #49 | https://localhost:4500/chapters/1 */
+.modal-container {
+  padding: 0.5rem;
+}
+.image, .document {
+  /* display: flex; */
+  flex-direction: column;
+  width: 100%;
+  padding-top:60px;
+  .image-description, .document-description {
+    width: 100%;
+    max-width: 100%;
+    min-height: 75px;
+    flex: 0 0 auto;
+    font-family: monospace;
+    align-self: left;
+  }
+  .document-container {
+    width: 100%;
+max-height: 768px;
+}
 }
 
+.modal-mask {
+  width: 100%;
+  padding: 60px 10px;
+}
 
+}
 embed html, html {
   border: none;
   height: 768px;

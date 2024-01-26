@@ -13,7 +13,7 @@
         <audio v-if="audio()" id="audioFile" :src="audio().url"></audio>
 
         <button @click="playAudio">
-          <img class="play-icon" src="/images/play.svg" />
+          <NuxtImg class="play-icon" src="/images/play.svg" />
         </button>
       </div>
     </div>
@@ -38,13 +38,23 @@
         >
         </DocumentModal>
       </div>
-      <VimeoPlayer
+      <div class="section-media-videos">
+      <!--<VimeoPlayer
         ref="player"
         :video-id="videoId"
-
         class="video-player"
-
-      />
+        :key="videoId"
+      />-->
+      <DocumentModal
+        v-if="videoId"
+        :key="`video_${videoId}`"
+          :show="showModal"
+          :video="videoId"
+          :ref="media"
+          @close="showModal = false"
+        >
+        </DocumentModal>
+      </div>
       <h3 class="section-content-header section-documents">Documents</h3>
 
       <div v-for="file in section.fields.files" :key="file.url">
@@ -69,6 +79,16 @@
       </a>
       <br />
       <h3>Topics</h3>
+      <div v-if="section.fields.topics">
+      <a
+        v-for="topic in section.fields.topics"
+        :key="topic.id"
+        class="topic-link"
+        :href="`/topic/${topic.id}`"
+      >
+      {{ topic.name }}
+      </a>
+      </div>
     </div>
   </div>
 </template>
@@ -95,6 +115,7 @@ const props = defineProps({
 const emits = defineEmits(['visible'])
 
 function collapseSection(section) {
+
 
   emits('visible', false)
    nextTick(() => {
@@ -166,14 +187,24 @@ const videoId = /[^/]*$/.exec(section.fields.video)[0]
 }
 .section-summary,
 .section-text {
-  max-width: 480px;
+  max-width: 100%;
   color: #fff;
   font-size: 28px;
   font-style: normal;
   font-weight: 300;
   line-height: 40px; /* 142.857% */
   padding-bottom: 30px;
+  p {
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-bottom: 30px;
+
+  }
 }
+
 .section-summary {
   max-height: inherit;
   overflow: hidden;
@@ -229,17 +260,21 @@ const videoId = /[^/]*$/.exec(section.fields.video)[0]
 
     a {
       display: block;
-      padding: 10px 0;
+      padding: 5px 0;
     }
     a,
     p {
       color: #fdda24;
-      font-size: 14px;
+      font-size: 12px;
       font-style: normal;
       font-weight: 400;
       line-height: 20px; /* 142.857% */
       text-align: left;
+      letter-spacing: 0em;
+
+
     }
+
     .section-media-images {
       display: flex;
       flex-direction: row;
@@ -251,6 +286,9 @@ const videoId = /[^/]*$/.exec(section.fields.video)[0]
       height: 62px;
       object-fit: cover;
       padding: 0 5px;
+    }
+    .section-media-videos {
+      padding: 10px 5px;
     }
     .video-player {
       padding: 20px 0;
@@ -266,5 +304,98 @@ const videoId = /[^/]*$/.exec(section.fields.video)[0]
       }
     }
   }
+
+}
+@media (max-width:  768px) {
+  .section-detail {
+    padding: 20px 21px;
+    display: flex;
+    flex-direction: column;
+    clear: both;
+    border-bottom: #fff solid 1px;
+    width: 100%;
+  }
+  .section-summary,
+.section-text {
+  max-width: 100%;
+  color: #fff;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 34px; /* 142.857% */
+  padding-bottom: 30px;
+  p {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-bottom: 10px;
+  }
+}
+.btn-close {
+  width: 240px;
+  height: 45px;
+  color: #fff;
+  margin-top: 30px;
+  text-align: center;
+
+}
+  .section-media, .section-documents {
+
+    img {max-width:100%;}
+    width: 100% !important;
+    padding-left:unset !important;
+    font-family: 'IBM Plex Mono', monospace;
+
+
+a {
+  display: block;
+  padding: 5px 0;
+}
+a,
+p {
+  color: #fdda24;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+  text-align: left;
+  letter-spacing: 0em;
+}
+.section-media-images {
+  display: flex;
+  flex-direction: row;
+  width: 100% !important;
+  justify-content: left;
+  &> * { flex: 1; }
+  .btn .btn-image
+  {
+    flex: 0 1 auto;
+  }
+
+
+.section-image-thumbnail {
+  object-fit: cover;
+  padding: 0 5px;
+  max-height:120px;
+  height: unset;
+  width: 100%;
+}
+}
+.video-player {
+  padding: 20px 0;
+
+  iframe {
+    max-width: 100%;
+    max-height: auto;
+
+    #player {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+}
+}
 }
 </style>

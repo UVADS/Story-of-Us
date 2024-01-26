@@ -9,7 +9,7 @@
         <div class="menu-chapter-name">
           <a :href="`/chapters/${chapter.tid}`">{{ chapter.name }}</a>
         </div>
-        <ul v-if="sections && Number(chapter.tid) === chapterId" class="year-menu-list">
+        <ul v-if="!hideYears && sections && Number(chapter.tid) === chapterId" class="year-menu-list">
           <li
             v-for="year in getChapterYears()"
             :key="year"
@@ -38,6 +38,11 @@ const props = defineProps({
     type: Number,
     required: false,
     default: null
+  },
+  hideYears: {
+    type: Boolean,
+    required: false,
+    default: false
   }
 })
 function getChapterYears()

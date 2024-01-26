@@ -1,43 +1,37 @@
 <template>
-  <div class="person-container">
-    <div class="person-name">
-      <h1>{{ person.name }}</h1>
-      <div v-if="person.fields.person_title" class="person-title">
-        {{ person.fields.person_title }}
-      </div>
+  <div class="topic-container">
+    <div class="topic-name">
+      <h1>{{ topic.name }}</h1>
       <div
-        v-if="person.description"
-        class="person-description"
-        v-html="person.description"
+        v-if="topic.description"
+        class="topic-description"
+        v-html="topic.description"
       ></div>
-    </div>
-    <div class="person-headshot">
-      <img class="" :src="`${person.fields.headshot.url}`" />
     </div>
   </div>
 </template>
 
 <script setup>
-const props = defineProps(['person'])
+const props = defineProps(['topic'])
 </script>
 
 <style lang="scss">
-.person-container {
+.topic-container {
   display: flex;
   flex-direction: row;
   width: 100%;
   border-bottom: 1px solid #fff;
   padding-bottom: 30px;
   justify-content: space-between;
-  .person-name {
+  .topic-name {
     align-self: flex-start;
 
   }
-  .person-description {
+  .topic-description {
     padding: 20px 0;
 
   }
-  .person-title {
+  .topic-title {
     color: #fff;
     font-family:
       IBM Plex Mono,
@@ -50,7 +44,7 @@ const props = defineProps(['person'])
     text-transform: uppercase;
     padding: 20px 0;
   }
-  .person-headshot {
+  .topic-headshot {
     border-radius: 215px;
 
     flex: 0 0 auto;
@@ -63,12 +57,12 @@ const props = defineProps(['person'])
   }
 }
 @media (max-width: 768px) {
-  .person-container {
+  .topic-container {
     width: 100%;
     flex-direction: column-reverse;
 
 
-  .person-name
+  .topic-name
   {
     h1{
       color: #FFF;
@@ -87,7 +81,7 @@ line-height: 40px; /* 111.111% */
     font-weight: 600;
     line-height: 40px; /* 111.111% */
   }
-  .person-description {
+  .topic-description {
     max-width: 100%;
     padding: 20px 0;
     color: #FFF;
@@ -98,7 +92,7 @@ font-style: normal;
 font-weight: 400;
 line-height: 26px; /* 144.444% */
   }
-  .person-title {
+  .topic-title {
     color: #FFF;
 text-align: center;
 font-family:
@@ -112,7 +106,7 @@ letter-spacing: 2px;
 text-transform: uppercase;
 max-width: 100%;
   }
-  .person-headshot {
+  .topic-headshot {
     border-radius: 215px;
     order: 1;
     flex: unset;

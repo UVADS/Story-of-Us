@@ -1,11 +1,20 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 const host = process.env.SITE_HOST || 'https://localhost:4500'
-// const apihost = process.env.API_HOST || 'http://stage.datascience.virginia.edu:8080'
+const apihost =
+  process.env.API_HOST || 'http://stage.datascience.virginia.edu:8080'
 
 export default defineNuxtConfig({
   dev: process.env.NODE_ENV !== 'production',
   generate: {
     fallback: true
+  },
+  ssr: true,
+  nitro: {
+    //   baseURL: host,
+    prerender: {
+      crawlLinks: true,
+      failOnError: false
+    }
   },
   build: {
     extend(config, ctx) {
@@ -18,13 +27,27 @@ export default defineNuxtConfig({
       })
     }
   },
-  devtools: { enabled: true },
+  components: [
+    '~/components',
+    {
+      path: '~/pages',
+      pattern: '*/components/**',
+      pathPrefix: false
+    }
+  ],
+  devtools: {
+    enabled: true,
+
+    timeline: {
+      enabled: true
+    }
+  },
   css: ['assets/css/main.scss'],
   postcss: {
     plugins: {
       'postcss-import': {},
-      'tailwindcss/nesting': {},
-      tailwindcss: {},
+      //'tailwindcss/nesting': {},
+      //tailwindcss: {},
       autoprefixer: {}
     }
   },
@@ -64,9 +87,12 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/eslint-module',
     '@nuxtjs/tailwindcss',
-    ['@pinia/nuxt', { autoImports: ['defineStore', 'acceptHMRUpdate'] }]
+    ['@pinia/nuxt', { autoImports: ['defineStore', 'acceptHMRUpdate'] }],
+    '@nuxt/image'
   ],
-  plugins: [],
+  plugins: [
+    { src: '~/plugins/vue-pdf-embed.client.js', ssr: false, mode: 'client' }
+  ],
   rules: [
     {
       test: /\.scss$/,

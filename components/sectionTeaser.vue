@@ -14,12 +14,12 @@
           v-if="section.fields.audio"
           :src="`${section.fields.audio.url}`"
         ></audio>
-        <img class="play-icon" src="/images/play.svg" />
+        <NuxtImg class="play-icon" src="/images/play.svg" />
       </div>
     </div>
     <div class="section-summary">{{ section.fields.summary }}</div>
     <div class="section-image">
-      <img
+      <NuxtImg
         v-if="images[0] && images[0].url"
         class="image-opacity-50"
         :src="`${images[0].url}`"
@@ -117,10 +117,44 @@ const images =  section.fields.photos
     object-fit: cover;
   }
 }
-.play-section {
+.section-play {
   padding: 30px 0;
 }
 .vector-dot {
   line-height: 22px;
+}
+@media (max-width:  768px) {
+  .section-teaser {
+  padding: 20px 21px;
+  display: flex;
+  flex-direction: column;
+  max-height: unset;
+  clear: both;
+  border-bottom: #fff solid 1px;
+}
+.section-image {
+display:none;
+}
+.section-play {
+  display:none;
+}
+  .section-summary,
+.section-text {
+  max-width: 100%;
+  color: #fff;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 34px; /* 142.857% */
+  padding-bottom: 30px;
+  p {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-bottom: 10px;
+  }
+}
 }
 </style>

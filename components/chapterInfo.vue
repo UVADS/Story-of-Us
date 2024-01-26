@@ -5,12 +5,12 @@
     class="chapter-info"
   >
     <div class="chapter-number">
-      <a :href="`/chapters/${chapter.tid}`"
-        >0{{ chapter.field_chapter_number }}</a
-      >
+      <nuxt-link :to="`/chapters/${chapter.tid}`">
+        0{{ chapter.field_chapter_number }}</nuxt-link>
+
     </div>
     <div class="chapter-name">
-      <a :href="`/chapters/${chapter.tid}`">{{ chapter.name }}</a>
+      <nuxt-link :to="`/chapters/${chapter.tid}`">{{ chapter.name }}</nuxt-link>
     </div>
     <div class="chapter-years">{{ chapter.field_years }}</div>
   </div>
@@ -30,7 +30,7 @@ const props = defineProps(['chapters'])
   height: 100%;
   display: flex;
   flex-direction: column;
-  max-width:960px;
+  max-width:1200px;
 }
 
 .chapter-info {
@@ -42,7 +42,6 @@ const props = defineProps(['chapters'])
   align-content: center;
   height:240px;
   height: calc(100% / 3);
-  margin: 20px 0;
   clear: both;
   min-height: 240px;
 }
@@ -77,5 +76,34 @@ const props = defineProps(['chapters'])
 
 .chapter-info:last-child {
   border: none;
+}
+@media (max-width: 768px) {
+  .chapter-name
+  {
+font-size: 30px;
+font-style: normal;
+font-weight: 600;
+line-height: 30px; /* 100% */
+  }
+  .chapter-number {
+
+  font-size: 50px;
+line-height: 30px;
+
+}
+.sections-page .chapter-info {
+  border-bottom: solid 1px #fff;
+  display: grid;
+  grid-template-columns: 120px auto;
+  vertical-align: flex-start;
+  align-items: center;
+  align-content: center;
+
+  clear: both;
+}
+.chapter-years {
+  font-size: 20px;
+  line-height: 16px;
+}
 }
 </style>

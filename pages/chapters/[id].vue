@@ -35,7 +35,7 @@ const chapterId =  Number(route.params.id)
 await store.fetchChapters()
 const chapters = store.getChapters
 const chapter = chapters.filter((chapter) => Number(chapter.tid) === chapterId)
-console.log(chapterId, chapters, chapter)
+//console.log(chapterId, chapters, chapter)
 const { data, pending, error, refresh } = await useAPIFetch(
   `/api/sections/${route.params.id}`,
   { key: route.params.id }
@@ -52,8 +52,10 @@ const props = defineProps({
   chapter: { type: Object }
 })
 function closeAll(id) {
-
+  const sectionDetail = document.getElementById(`section_detail_${id}`)
   sections.value.forEach((section) => {
+
+    //sectionDetail.classList.toggle('hidden')
     section.showDetails = false
     if (section.id === id) {
       section.value.focus()
@@ -61,20 +63,21 @@ function closeAll(id) {
   })
   nextTick(() => {
     const sectionDetail = document.getElementById(`section_detail_${id}`)
-    console.log(sectionDetail)
-    sectionDetail.toggleClass('hidden')
+    //console.log(sectionDetail)
+
 })
   current = id
 
 }
 </script>
 <style lang="scss">
+
 .chapter-header {
   min-height: 240px;
   height:240px;
   border-bottom: solid 1px #fff;
 }
-.sections-page {
+.sections-page, .person-page, .topic-page {
   display: flex;
   flex-direction: row;
 
@@ -135,5 +138,81 @@ function closeAll(id) {
   font-style: normal;
   font-weight: 400;
   line-height: 30px; /* 230.769% */
+}
+@media (max-width: 768px) {
+  .sections-right
+  {
+    display: none;
+  }
+
+  .chapter-name
+  {
+font-size: 30px;
+font-style: normal;
+font-weight: 600;
+line-height: 30px; /* 100% */
+  }
+  .chapter-number {
+
+  font-size: 50px;
+line-height: 30px;
+width: unset;
+  min-width: 120px;
+}
+
+.chapter-years {
+  font-size: 20px;
+  line-height: 16px;
+}
+.sections-page {
+  display: flex;
+  flex-direction: row;
+
+  .sections-right {
+    max-width: 240px;
+    color: #fff;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 16px; /* 114.286% */
+    padding-left: 120px;
+    .menu-chapters {
+      color: #fff;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 16px; /* 114.286% */
+    }
+  }
+
+  .sections-left {
+    max-width: 1080px;
+  }
+  .chapter-info {
+    padding: 60px 0;
+    margin: 0;
+    align-items: start;
+    height: unset !important;
+    display: block;
+    grid-template-columns: unset;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    clear: both;
+    border: none;
+  div
+  {
+    padding: 10px 0;
+  }
+}
+
+  .sections-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width:100%;
+  }
+}
 }
 </style>

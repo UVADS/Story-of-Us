@@ -19,7 +19,7 @@
       :index="index"
       :ref="`section_detail_${section.id}`"
       class="section-detail-component"
-      @visible="closeDetails"
+      @visible="closeDetails(section.id)"
     ></SectionDetail>
   </div>
 </template>
@@ -66,9 +66,14 @@ function showSectionDetails(sectionId) {
   })
   showDetails.value = true
 }
-function closeDetails(visible) {
+function closeDetails(id) {
 
+    const sectionDetail = document.getElementById(`section_detail_${id}`)
+    sectionDetail.style.opacity = "0"
+    sectionDetail.style.transition = "opacity 0.5s ease-out"
+    console.log("closing section", sectionDetail, id)
     showDetails.value = false
+
 }
 function toggleDetails(visible) {
   console.log('toggle details', visible)
@@ -80,6 +85,10 @@ function toggleDetails(visible) {
 .section-detail-component
 {
   animation: show_div 2s;
+}
+.section-detail-component-close
+{
+  animation: hide_div 2s;
 }
 .hidden
 {

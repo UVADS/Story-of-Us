@@ -1,6 +1,6 @@
-@tailwind base;
+/*@tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities;*/
 @import url('https://use.typekit.net/kma2wyt.css');
 
 body {
@@ -93,6 +93,7 @@ h1 {
   max-width: 960px;
 }
 
+/*
 .chapter-info {
   border-bottom: solid 1px #fff;
   display: grid;
@@ -138,7 +139,7 @@ h1 {
 .chapter-info:last-child {
   border: none;
 }
-
+*/
 /*.gridline {
   border-left: 1px solid #aaa;
   height: 100%;

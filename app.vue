@@ -1,5 +1,10 @@
 <script setup>
-
+definePageMeta({
+  pageTransition: {
+    name: 'fade',
+    mode: 'out-in' // default
+  }
+})
 useHead({
     title: "Story of Us - UVa School of Data Science",
     titleTemplate: (titleChunk) => {
@@ -17,7 +22,7 @@ const pageClass = routeName === 'index' ? 'homepage' : routeName
     <div class="outer">
       <div class="container gridline">
         <div id="main-content"  :class="`main-content ${ pageClass }`">
-        <NuxtPage />
+          <NuxtPage/>
         </div>
       </div>
     </div>
@@ -31,6 +36,9 @@ body {
   background: rgb(16, 24, 31);
   color: #fff;
   height:100%
+}
+body.modal-open {
+  overflow: hidden;
 }
 .container {
   max-width: 1280px;
@@ -66,5 +74,31 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.page-enter-active,
+.page-leave-active {
+  transition: all 2s;
+}
+
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
+}
+@media (max-width: 768px) {
+    .container
+    {
+      max-width: 100%;
+    }
+    .main-content {
+
+color: #FFF;
+padding: 0px 21px !important;
+
+}
+.gridline
+ {
+  background-image:none;
+ }
 }
 </style>

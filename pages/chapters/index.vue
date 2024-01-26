@@ -15,6 +15,7 @@ const hasrun_chapters = ref(0)
 {
   padding: 0 120px;
 }
+/*
 .chapters {
   height: 100%;
   display: flex;
@@ -64,5 +65,5 @@ const hasrun_chapters = ref(0)
 
 .chapter-info:last-child {
   border: none;
-}
+}*/
 </style>

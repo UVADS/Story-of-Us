@@ -1,12 +1,12 @@
 <template>
-  <div class="person-page">
+  <div class="topic-page">
     <div class="page-left">
       <div>
-        <PersonHeader :person="person"></PersonHeader>
+        <TopicHeader :topic="topic"></TopicHeader>
       </div>
       <div class="sections-list">
         <SectionFull
-          v-for="(section, index) in personSections"
+          v-for="(section, index) in topicSections"
           :key="section.id"
           :id="`section_${section.id}`"
           ref="sections"
@@ -19,21 +19,21 @@
       </div>
     </div>
     <div class="page-right">
-      <RightMenu :sections="personSections" :hide-years="true"></RightMenu>
+      <RightMenu :sections="topicSections" :hide-years="true"></RightMenu>
     </div>
   </div>
 </template>
 
 <script setup>
 const route = useRoute()
-const { data } = await useAPIFetch(`/api/person/${route.params.id}`, {
+const { data } = await useAPIFetch(`/api/topic/${route.params.id}`, {
   key: route.params.id
 })
+console.log(data)
 let current = null
 const sections = ref([])
-const person = data.value.person
-const personSections = data.value.sections
-console.log(person, personSections) // computed
+const topic = data.value.topic
+const topicSections = data.value.sections
 
 function closeAll(id) {
   const sectionDetail = document.getElementById(`section_detail_${id}`)
@@ -56,7 +56,7 @@ function closeAll(id) {
 }
 </script>
 <style lang="scss">
-.person-page {
+.topic-page {
   display: flex;
   flex-direction: row;
   .page-left {
@@ -73,7 +73,7 @@ function closeAll(id) {
   }
 }
 @media (max-width:768px) {
-  .person-page {
+  .topic-page {
     .page-right
     {
       display: none;

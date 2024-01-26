@@ -1,6 +1,18 @@
 <script setup>
 const hasrun = ref(0)
 console.log(hasrun.value)
+const words = ["Build",
+"Champion",
+"Create",
+"Cultivate",
+"Design",
+"Develop",
+"Envision",
+"Establish",
+"Foster",
+"Imagine",
+"Inspire",
+"Promote"]
 </script>
 
 <template>
@@ -12,15 +24,14 @@ console.log(hasrun.value)
         <span class="break" /> without walls
       </h1>
       <div class="home-subtext">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequuntur
-        veritatis omnis facilis quibusdam odit sequi ratione aliquam atque
-        veniam beatae, fugit debitis, unde id incidunt reiciendis officiis
-        consequatur minima saepe.
+        It began as an idea then evolved into an institute before ultimately transforming into the first data science school in the country. In this exhibition you’ll learn how this improbable story unfolded and hear from the people who turned a vision into reality.
       </div>
       <a href="/chapters"
         ><button class="btn-yellow">View Digital Exhibition</button></a
       >
   </div>
+
+
 </template>
 
 <style scoped>
@@ -41,7 +52,11 @@ h1 {
   object-fit: cover;
 
 }
-
+.homepage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .homepage-content {
   max-height: 450px;
 }
@@ -69,6 +84,10 @@ h1 {
   text-align: center;
   color: #fdda24;
   max-width: fit-content;
+}
+h1
+{
+  line-height: 48px;
 }
 .home-subtext {
   font-size: 18px;
@@ -111,4 +130,45 @@ h1 {
     border-color: #fff;
   }
 }
+
+@media (max-width: 768px) {
+
+h1
+{
+  color: #FFF;
+  text-align: center;
+  font-size: 44px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 48px; /* 109.091% */
+
+}
+  .home-text {
+    color: #FFF;
+text-align: center;
+font-size: 44px;
+font-style: normal;
+font-weight: 300;
+line-height: 48px; /* 109.091% */
+  }
+  .build-text {
+    font-size: 44px;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 3px solid #fff;
+    line-height: 48px;
+    animation:
+    type 3.5s steps(35, end),
+    cursor 1s step-end infinite;
+}
+  .home-subtext {
+    color: #FFF;
+text-align: center;
+font-size: 18px;
+font-style: normal;
+font-weight: 400;
+line-height: 26px; /* 144.444% */
+  }
+}
+
 </style>

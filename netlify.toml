@@ -1,0 +1,10 @@
+[context.deploy-preview.environment]
+  NOT_PRIVATE_ITEM = "not so secret"
+  API_HOST = "https://stage.datascience.virginia.edu:8443"
+[context.branch-deploy.environment]
+  NODE_ENV = "development"
+  API_HOST = "https://stage.datascience.virginia.edu:8443"
+
+[context.dev.environment]
+  NODE_ENV = "development"
+  API_HOST = "https://stage.datascience.virginia.edu:8443"
