@@ -22,7 +22,8 @@ header {
   height: 60px;
   padding: 0 60px;
   position: fixed;
-  width: 100%
+  width: 100%;
+  z-index: 10;
 }
 .about {
   color: #fff;

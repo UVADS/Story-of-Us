@@ -1,9 +1,9 @@
 <template>
   <div>
-    <!--<div v-if="yearAnchor(section.fields.year_range[0].start_year)">
+    <div v-if="anchor">
       <a :id="`anchor_${section.fields.year_range[0].start_year}`" />
-     </div>-->
-      <SectionTeaser
+    </div>
+    <SectionTeaser
       v-show="!showDetails"
       :id="`section_teaser_${section.id}`"
       :section="section"
@@ -25,77 +25,75 @@
 </template>
 
 <script setup>
-
-const years = ref([])
-const hasrun = ref(0)
-const showDetails = ref(false)
+const years = ref([]);
+const hasrun = ref(0);
+const showDetails = ref(false);
 const props = defineProps({
   section: {
     type: Object,
-    required: true
+    required: true,
   },
   index: {
     type: Number,
-    required: true
+    required: true,
   },
   showDetails: {
     type: Boolean,
-    default: false
-  }
-})
-function yearAnchor(year)
-{
-  hasrun.value++
+    default: false,
+  },
+  anchor: {
+    type: Boolean,
+    default: false,
+  },
+});
+function yearAnchor(year) {
   if (!years.value.includes(year)) {
-    years.value.push(year)
-    console.log('year is returning true', year, years.value, hasrun.value)
-    return true
+    years.value.push(year);
+    return true;
   }
-  console.log('year is returning false', year, years.value, hasrun.value++)
-  return false
+  return false;
 }
-defineExpose({ showDetails })
-const emits = defineEmits(['closeOthers'])
+defineExpose({ showDetails });
+const emits = defineEmits(["closeOthers"]);
 
 function showSectionDetails(sectionId) {
-
-  emits('closeOthers')
+  emits("closeOthers");
   nextTick(() => {
-    const sectionDetail = document.getElementById(`section_detail_${sectionId}`)
-    sectionDetail.scrollIntoView({ behavior: 'auto' })
-  })
-  showDetails.value = true
+    const sectionDetail = document.getElementById(
+      `section_detail_${sectionId}`
+    );
+    sectionDetail.scrollIntoView({ behavior: "auto" });
+  });
+  showDetails.value = true;
 }
 function closeDetails(id) {
-
-    const sectionDetail = document.getElementById(`section_detail_${id}`)
-    sectionDetail.style.opacity = "0"
-    sectionDetail.style.transition = "opacity 0.5s ease-out"
-    console.log("closing section", sectionDetail, id)
-    showDetails.value = false
-
+  const sectionDetail = document.getElementById(`section_detail_${id}`);
+  //sectionDetail.style.opacity = "0"
+  // sectionDetail.style.transition = "opacity 0.5s ease-out"
+  //console.log("closing section", sectionDetail, id)
+  showDetails.value = false;
 }
 function toggleDetails(visible) {
-  console.log('toggle details', visible)
-  showDetails.value = !showDetails.value
+  //console.log('toggle details', visible)
+  showDetails.value = !showDetails.value;
 }
 </script>
 
 <style>
-.section-detail-component
-{
+.section-detail-component {
   animation: show_div 2s;
 }
-.section-detail-component-close
-{
+.section-detail-component-close {
   animation: hide_div 2s;
 }
-.hidden
-{
+.hidden {
   animation: hide_div 2s;
 }
 
-
+.section-play {
+  position: relative;
+  z-index: 8;
+}
 @keyframes show_div {
   0% {
     opacity: 0;

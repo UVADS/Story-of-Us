@@ -1,10 +1,5 @@
 <script setup>
-definePageMeta({
-  pageTransition: {
-    name: 'fade',
-    mode: 'out-in' // default
-  }
-})
+
 useHead({
     title: "Story of Us - UVa School of Data Science",
     titleTemplate: (titleChunk) => {

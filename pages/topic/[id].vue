@@ -29,7 +29,6 @@ const route = useRoute()
 const { data } = await useAPIFetch(`/api/topic/${route.params.id}`, {
   key: route.params.id
 })
-console.log(data)
 let current = null
 const sections = ref([])
 const topic = data.value.topic
@@ -37,7 +36,7 @@ const topicSections = data.value.sections
 
 function closeAll(id) {
   const sectionDetail = document.getElementById(`section_detail_${id}`)
-  console.log(sections)
+
   sections.value.forEach((section) => {
 
     //sectionDetail.classList.toggle('hidden')
@@ -48,7 +47,6 @@ function closeAll(id) {
   })
   nextTick(() => {
     const sectionDetail = document.getElementById(`section_detail_${id}`)
-    //console.log(sectionDetail)
 
 })
   current = id

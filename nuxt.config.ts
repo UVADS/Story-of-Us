@@ -68,6 +68,9 @@ export default defineNuxtConfig({
         process.env.API_HOST || 'https://stage.datascience.virginia.edu:8443'
     }
   },
+  routeRules: {
+    '/pdf/**': { proxy: { to: process.env.API_HOST +  "/**" } }
+  },
 
   host,
   // Cache ttl

@@ -10,11 +10,11 @@
         </div>
       </div>
       <div v-if="section.fields.audio" class="section-play">
-        <audio
-          v-if="section.fields.audio"
-          :src="`${section.fields.audio.url}`"
-        ></audio>
-        <NuxtImg class="play-icon" src="/images/play.svg" />
+        <audio v-if="audio()" :id="`audioFile_${section.id}`" :src="audio().url"></audio>
+        <button @click="playAudio(section.id)" :id="`playAudio_${section.id}`">
+          <NuxtImg class="play-icon" src="/images/play.svg" />
+        </button>
+
       </div>
     </div>
     <div class="section-summary">{{ section.fields.summary }}</div>
@@ -51,7 +51,27 @@ const yearRange =
       section.fields.year_range[0].end_year
 
 const images =  section.fields.photos
-// console.log(images)
+
+function audio() {
+
+return section.fields.audio.length > 0 ? section.fields.audio[0] : null
+}
+function playAudio(id) {
+//let lastAudioFile = null
+
+// console.log("lastAudio-entering", lastAudio)
+//const lastAudioFile = document.getElementById(`audioFile_${lastAudio}`)
+const audioElement = document.getElementById(`audioFile_${id}`)
+if (audioElement.paused) {
+  audioElement.play()
+} else {
+  audioElement.pause()
+}
+// lastAudio = id
+//console.log("lastAudio-set", lastAudio)
+
+
+}
 </script>
 
 <style lang="scss" scoped>

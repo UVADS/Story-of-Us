@@ -34,6 +34,7 @@ const props = defineProps(['person'])
 
   }
   .person-description {
+    max-width: 640px;
     padding: 20px 0;
 
   }
@@ -48,6 +49,7 @@ const props = defineProps(['person'])
     line-height: 18px; /* 112.5% */
     letter-spacing: 2px;
     text-transform: uppercase;
+    max-width: 640px;
     padding: 20px 0;
   }
   .person-headshot {

@@ -33,11 +33,9 @@ let current = null
 const sections = ref([])
 const person = data.value.person
 const personSections = data.value.sections
-console.log(person, personSections) // computed
 
 function closeAll(id) {
   const sectionDetail = document.getElementById(`section_detail_${id}`)
-  console.log(sections)
   sections.value.forEach((section) => {
 
     //sectionDetail.classList.toggle('hidden')
@@ -48,7 +46,6 @@ function closeAll(id) {
   })
   nextTick(() => {
     const sectionDetail = document.getElementById(`section_detail_${id}`)
-    //console.log(sectionDetail)
 
 })
   current = id

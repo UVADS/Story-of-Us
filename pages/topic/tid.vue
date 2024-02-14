@@ -8,7 +8,6 @@ let k = "12"
 const { data } = await useAPIFetch(`/api/topic/${k}`, {
   key: k
 })
-console.log(data)
 let current = null
 const sections = ref([])
 

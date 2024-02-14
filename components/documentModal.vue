@@ -10,9 +10,8 @@
       class="section-image-thumbnail"
     />
   </button>
-  <button v-if="video" class="btn btn-image" @click="toggleModal(true) ">
+  <button v-if="video" class="btn btn-image" @click="toggleModal(true)">
     <NuxtImg
-
       :src="`https://vumbnail.com/${video}.jpg`"
       :alt="'video'"
       class="section-video-thumbnail"
@@ -43,104 +42,95 @@
                 <p>{{ document.summary }}</p>
               </div>
               <div class="document-container">
-
-            <VuePdfEmbed :source="pdfDocument"/>
-               <!--<embed :src="`${document.url}`" />-->
+              <ClientOnly>  <VuePdfEmbed :source="docUrl" /></ClientOnly>
               </div>
             </div>
             <div v-if="video" class="video">
               <VimeoPlayer
-                    ref="player"
-                    :video-id="video"
-                    class="video-player"
-                    :key="video"/>
-                    </div>
-
+                ref="player"
+                :video-id="video"
+                class="video-player"
+                :key="video"
+              />
+            </div>
           </div>
-            <button class="modal-close" @click="toggleModal(false)">
-              <CloseButton></CloseButton>
-            </button>
-          </div>
-          <footer class="modal-footer">
-            <slot name="footer"> </slot>
-          </footer>
+          <button class="modal-close" @click="toggleModal(false)">
+            <CloseButton></CloseButton>
+          </button>
         </div>
-
+        <footer class="modal-footer">
+          <slot name="footer"> </slot>
+        </footer>
+      </div>
     </Transition>
   </Teleport>
 </template>
 
 <script setup>
-import CloseButton from './vectors/closeButton.vue'
-const store = useModalStore()
-const showModal = ref(false)
-defineEmits(['close'])
+import CloseButton from "./vectors/closeButton.vue";
+import {Buffer} from "buffer";
+const store = useModalStore();
+const showModal = ref(false);
+defineEmits(["close"]);
 const props = defineProps({
   id: {
-    type: Number
+    type: Number,
   },
   isDocument: {
-    type: Boolean
+    type: Boolean,
   },
   isImage: {
-    type: Boolean
+    type: Boolean,
   },
   document: {
     type: Object,
     required: false,
-    default: null
+    default: null,
   },
   image: {
     type: Object,
     required: false,
-    default: null
+    default: null,
   },
   video: {
     type: String,
     required: false,
-    default: null
+    default: null,
   },
   show: {
-    type: Boolean
-  }
-})
-const pdfDocument = props.document ? props.document.url : null
+    type: Boolean,
+  },
+});
+const docUrl = props.document ? props.document.url : null
 
 function toggleModal(modalValue) {
-  console.log("toggle modal", modalValue)
-  showModal.value = modalValue
-  if(showModal.value)
-  {
+  showModal.value = modalValue;
+  if (showModal.value) {
     document.body.classList.add("modal-open");
-    console.log("class",document.body.classList)
-  }
-  else
-  {
+  } else {
     document.body.classList.remove("modal-open");
-    console.log("class",document.body.classList)
   }
 }
 function keydownListener(event) {
   // Assert the key is escape
-  if (event.key === 'Escape') store.closeModal()
+  if (event.key === "Escape") store.closeModal();
 }
 
 // Attach event listener on mount
 onMounted(() => {
-  document.addEventListener('keydown', keydownListener)
-})
+  document.addEventListener("keydown", keydownListener);
+});
 
 // Clean up on unmount
 onUnmounted(() => {
-  document.removeEventListener('keydown', keydownListener)
-
-})
+  document.removeEventListener("keydown", keydownListener);
+});
 // Make a function that will trigger on keydown
 </script>
 
 <style scoped>
 * {
-  font-family: 'ibm-plex-mono', monospace;
+  font-family: "ibm-plex-mono", monospace;
 }
 .image,
 .document {
@@ -153,42 +143,42 @@ onUnmounted(() => {
 .image-description,
 .document-description {
   max-width: 300px;
+  padding-right:60px;
   align-content: start;
   flex: 0 0 300px;
   font-family: monospace;
   align-self: center;
-}
-.btn-document
-{
-  color: #FDDA24;
 
-  max-width:240px;
+}
+.btn-document {
+  color: #fdda24;
+
+  max-width: 240px;
   font-size: 12px;
   font-weight: 400;
   line-height: 18px;
   letter-spacing: 0em;
   text-align: left;
-  width:240px;
-
+  width: 240px;
 }
-.modal-container[data-v-ca2c163d] {
-  height: 100%;
-  width: 100%;
-
-}
-
 .image-container {
   max-width: 540px;
   align-self: center;
 }
 
-.document-container, .vue-pdf-embed {
-
+.document-container,
+.vue-pdf-embed {
   flex: 1 1 auto;
   align-self: center;
-  max-width: 740px;
-  overflow: scroll;
+  max-width: 780px;
+  max-height: inherit;
+  canvas
+  {
+    max-height: 700px;
+  }
 }
+.vue-pdf-embed {
+  overflow: scroll;}
 embed {
   width: 100%;
   height: 100%;
@@ -211,12 +201,14 @@ embed {
   background: rgba(0, 0, 0, 0.95);
   margin: 0 auto;
   padding: 60px;
-  z-index: 10;
+  z-index: 5;
 }
 .modal-container {
   padding: 1rem;
   border-radius: 7px;
   color: #fff;
+  height: 100%;
+  width: 100%;
 }
 .modal-footer {
   /*border-top: 1px solid #ddd;*/
@@ -251,25 +243,21 @@ embed {
   transition: 1s ease all;
 }
 .document-container {
-
   .toolbar {
-    display:none;
+    display: none;
   }
-  :root{
-
+  :root {
   }
 }
 
 .document-container {
-
   max-height: 768px;
 }
 
 embed {
   max-height: 768px;
 }
-.video
-{
+.video {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -278,37 +266,38 @@ embed {
   height: 100%;
 }
 @media (max-width: 768px) {
-
-/* Inline #49 | https://localhost:4500/chapters/1 */
-.modal-container {
-  padding: 0.5rem;
-}
-.image, .document {
-  /* display: flex; */
-  flex-direction: column;
-  width: 100%;
-  padding-top:60px;
-  .image-description, .document-description {
-    width: 100%;
-    max-width: 100%;
-    min-height: 75px;
-    flex: 0 0 auto;
-    font-family: monospace;
-    align-self: left;
+  /* Inline #49 | https://localhost:4500/chapters/1 */
+  .modal-container {
+    padding: 0.5rem;
   }
-  .document-container {
+  .image,
+  .document {
+    /* display: flex; */
+    flex-direction: column;
     width: 100%;
-max-height: 768px;
-}
-}
+    padding-top: 60px;
+    .image-description,
+    .document-description {
+      width: 100%;
+      max-width: 100%;
+      min-height: 75px;
+      flex: 0 0 auto;
+      font-family: monospace;
+      align-self: left;
+    }
+    .document-container {
+      width: 100%;
+      max-height: 768px;
+    }
+  }
 
-.modal-mask {
-  width: 100%;
-  padding: 60px 10px;
+  .modal-mask {
+    width: 100%;
+    padding: 60px 10px;
+  }
 }
-
-}
-embed html, html {
+embed html,
+html {
   border: none;
   height: 768px;
   --page-border: none !important;

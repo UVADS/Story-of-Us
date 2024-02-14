@@ -1,6 +1,5 @@
 <script setup>
 const hasrun = ref(0)
-console.log(hasrun.value)
 const words = ["Build",
 "Champion",
 "Create",
@@ -18,6 +17,7 @@ const words = ["Build",
 <template>
 
     <video id="homeVideo" src="/videos/rotunda.mp4" autoplay muted loop></video>
+    <div class="homepage-content-wrapper">
     <div class="homepage-content flex flex-col items-center justify-center">
       <h1 class="home-text">
         To&nbsp;<span class="build-text">build</span> &nbsp;a school
@@ -29,6 +29,7 @@ const words = ["Build",
       <a href="/chapters"
         ><button class="btn-yellow">View Digital Exhibition</button></a
       >
+  </div>
   </div>
 
 
@@ -56,9 +57,19 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
 .homepage-content {
-  max-height: 450px;
+  height: 100%;
+
+}
+.homepage-content-wrapper{
+  background-image: url('assets/images/databurst.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 1000px;
+  height:100%;
+  width:100%;
 }
 .home-text {
   font-family: 'franklin-gothic-urw', 'Franklin Gothic', 'ITC Franklin Gothic',
