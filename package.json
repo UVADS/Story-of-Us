@@ -9,7 +9,9 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "deploy": "nuxt build && nuxt generate",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "start": "node .output/server/index.mjs"
+
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.22.15",
