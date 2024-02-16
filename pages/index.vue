@@ -1,47 +1,59 @@
 <script setup>
 const hasrun = ref(0)
-const words = ["Build",
-"Champion",
-"Create",
-"Cultivate",
-"Design",
-"Develop",
-"Envision",
-"Establish",
-"Foster",
-"Imagine",
-"Inspire",
-"Promote"]
+const words = ref([
+  'Build',
+  'Champion',
+  'Create',
+  'Cultivate',
+  'Design',
+  'Develop',
+  'Envision',
+  'Establish',
+  'Foster',
+  'Imagine',
+  'Inspire',
+  'Promote'
+])
+console.log(words)
+console.log("text")
+
 </script>
 
 <template>
-
-    <video id="homeVideo" src="/videos/rotunda.mp4" autoplay muted loop></video>
-    <div class="homepage-content-wrapper">
+  <video id="homeVideo" src="/videos/rotunda.mp4" autoplay muted loop></video>
+  <div class="homepage-content-wrapper">
     <div class="homepage-content flex flex-col items-center justify-center">
-      <h1 class="home-text">
-        To&nbsp;<span class="build-text">build</span> &nbsp;a school
-        <span class="break" /> without walls
+      <h1 class="home-text homepage-text">
+        <span class='nowrap'>To
+        <span class="build-text"></span>
+a school</span><span class="break" /> without walls
       </h1>
-      <div class="home-subtext">
-        It began as an idea then evolved into an institute before ultimately transforming into the first data science school in the country. In this exhibition you’ll learn how this improbable story unfolded and hear from the people who turned a vision into reality.
+      <div class="home-subtext homepage-text">
+        It began as an idea then evolved into an institute before ultimately
+        transforming into the first data science school in the country. In this
+        exhibition you’ll learn how this improbable story unfolded and hear from
+        the people who turned a vision into reality.
       </div>
       <a href="/chapters"
         ><button class="btn-yellow">View Digital Exhibition</button></a
       >
-  </div>
-  </div>
+        <h1 class="typing"></h1>
 
-
+    </div>
+  </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@import '@/assets/css/typed.scss';
 
 h1 {
   display: flex;
   flex-wrap: wrap;
 }
-
+.nowrap{
+  white-space: nowrap;
+  text-align: center;
+}
 #homeVideo {
   position: fixed;
   right: 0;
@@ -51,25 +63,34 @@ h1 {
   z-index: -1;
   opacity: 0.5;
   object-fit: cover;
-
 }
 .homepage {
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 .homepage-content {
   height: 100%;
-
 }
-.homepage-content-wrapper{
+.homepage-content-wrapper {
   background-image: url('assets/images/databurst.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 1000px;
-  height:100%;
-  width:100%;
+  height: 100%;
+  width: 100%;
+}
+.btn-yellow {
+  animation: glowing 5s ease-in-out infinite;
+}
+.btn-yellow:hover {
+  /*animation: glowing 5s ease-in-out infinite;*/
+  background-color: #e4c748e7;
+}
+
+.homepage-text
+{
+  animation: fadeIn 2s;
 }
 .home-text {
   font-family: 'franklin-gothic-urw', 'Franklin Gothic', 'ITC Franklin Gothic',
@@ -79,13 +100,15 @@ h1 {
   line-height: 96px;
   letter-spacing: 0em;
   color: #fff;
-  max-width: 800px;
+  max-width: 1200px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
 }
+
 .build-text {
+
   font-family: 'franklin-gothic-urw', 'Franklin Gothic', 'ITC Franklin Gothic',
     Arial, sans-serif;
   font-size: 100px;
@@ -96,8 +119,7 @@ h1 {
   color: #fdda24;
   max-width: fit-content;
 }
-h1
-{
+h1 {
   line-height: 48px;
 }
 .home-subtext {
@@ -114,72 +136,78 @@ h1
   flex-basis: 100%;
   height: 0;
 }
-
+$speeds: (
+    type: .2,
+    pause-typed: 2,
+    delete: .08,
+    pause-deleted: 1
+);
+$options: (
+    name: "homepage-typing-text",
+    caret: true,
+    caret-speed: .75,
+    caret-width: 2px,
+    caret-color: currentColor,
+    caret-space: 1px,
+    delay: 1,
+    iterations: 1,
+    end-on: "Build",
+);
 .build-text {
+  @include typed(  'Build',
+  'Champion',
+  'Create',
+  'Cultivate',
+  'Design',
+  'Develop',
+  'Envision',
+  'Establish',
+  'Foster',
+  'Imagine',
+  'Inspire',
+  'Promote', $speeds, $options
+);
+  text-transform: lowercase;
   overflow: hidden;
   white-space: nowrap;
-  border-right: 3px solid #fff;
-  animation:
-    type 3.5s steps(35, end),
-    cursor 1s step-end infinite;
-}
-@keyframes type {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
 }
 
-@keyframes cursor {
-  from,
-  to {
-    border-color: transparent;
-  }
-  50% {
-    border-color: #fff;
-  }
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
+
 
 @media (max-width: 768px) {
-
-h1
-{
-  color: #FFF;
-  text-align: center;
-  font-size: 44px;
-  font-style: normal;
-  font-weight: 300;
-  line-height: 48px; /* 109.091% */
-
-}
+  h1 {
+    color: #fff;
+    text-align: center;
+    font-size: 44px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 48px; /* 109.091% */
+  }
   .home-text {
-    color: #FFF;
-text-align: center;
-font-size: 44px;
-font-style: normal;
-font-weight: 300;
-line-height: 48px; /* 109.091% */
+    color: #fff;
+    text-align: center;
+    font-size: 44px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 48px; /* 109.091% */
   }
   .build-text {
     font-size: 44px;
     overflow: hidden;
     white-space: nowrap;
-    border-right: 3px solid #fff;
     line-height: 48px;
-    animation:
-    type 3.5s steps(35, end),
-    cursor 1s step-end infinite;
-}
+  }
   .home-subtext {
-    color: #FFF;
-text-align: center;
-font-size: 18px;
-font-style: normal;
-font-weight: 400;
-line-height: 26px; /* 144.444% */
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px; /* 144.444% */
   }
 }
-
 </style>

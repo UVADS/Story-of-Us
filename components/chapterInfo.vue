@@ -49,7 +49,13 @@ function yearRange(years) {
   clear: both;
   min-height: 240px;
 }
+a:hover
+{
 
+  filter: brightness(0.9);
+  text-shadow: #b4b4b2 0px 2px 2px;
+
+}
 .chapter-name {
   font-size: 48px;
   font-family: 'franklin-gothic-urw', "Franklin Gothic", "ITC Franklin Gothic", "franklin-gothic-ext-comp-urw", Arial, sans-serif;
@@ -57,13 +63,16 @@ function yearRange(years) {
   font-weight: 600;
   font-size: 90px;
   line-height: 80px;
+
 }
+
 
 .chapter-years {
   font-size: 24px;
   font-family: Digital-7;
   line-height: 24px;
   grid-column: 2;
+  animation:  2s;
 }
 
 .chapter-number {
@@ -76,8 +85,13 @@ function yearRange(years) {
   width: 120px;
   min-width: 120px;
   padding-top: calc(1em / 8);
+  animation: slide 2s forwards;
 }
+@keyframes slide {
+  100% { display: none;
 
+  }
+}
 .chapter-info:last-child {
   border: none;
 }

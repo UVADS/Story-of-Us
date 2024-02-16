@@ -42,7 +42,7 @@ export default defineNuxtConfig({
       enabled: true
     }
   },
-  css: ['assets/css/main.scss'],
+  css: ['assets/css/main.scss', 'assets/css/typed.scss'],
   postcss: {
     plugins: {
       'postcss-import': {},
@@ -91,15 +91,21 @@ export default defineNuxtConfig({
     '@nuxtjs/eslint-module',
     '@nuxtjs/tailwindcss',
     ['@pinia/nuxt', { autoImports: ['defineStore', 'acceptHMRUpdate'] }],
-    '@nuxt/image'
+    '@nuxt/image',
+    '@vueuse/nuxt',
   ],
   plugins: [
-    { src: '~/plugins/vue-pdf-embed.client.js', ssr: false, mode: 'client' }
+    { src: '~/plugins/vue-pdf-embed.client.js', ssr: false, mode: 'client' },
   ],
   rules: [
     {
       test: /\.scss$/,
       use: ['style-loader', 'css-loader', 'sass-loader']
     }
-  ]
+  ],
+  vue: {
+    compilerOptions: {
+      isCustomElement: tag => tag === 'vue-typed-js'
+  }
+}
 })
