@@ -1,5 +1,4 @@
 <script setup>
-const hasrun = ref(0)
 const words = ref([
   'Build',
   'Champion',
@@ -14,8 +13,6 @@ const words = ref([
   'Inspire',
   'Promote'
 ])
-console.log(words)
-console.log("text")
 
 </script>
 
