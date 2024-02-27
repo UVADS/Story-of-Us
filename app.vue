@@ -1,4 +1,6 @@
 <script setup>
+import { useMouse } from '@vueuse/core'
+
 
 useHead({
     title: "Story of Us - UVa School of Data Science",
@@ -10,23 +12,49 @@ const router = useRouter();
 const currentRoute = router.currentRoute;
 const routeName = currentRoute.value.name
 const pageClass = routeName === 'index' ? 'homepage' : routeName
+const { x, y } = useMouse()
+
 </script>
 <template>
   <div>
+    <div id="roundCursor" class="cursor pointer-events-none"
+    :style="{top: `${y-15}px`, left: `${x-15}px`}"></div>
     <ChromeHeader></ChromeHeader>
     <div class="outer">
       <div class="container gridline">
         <div id="main-content"  :class="`main-content ${ pageClass }`">
+
           <NuxtPage/>
         </div>
       </div>
     </div>
   </div>
+
 </template>
 
-<script lang="ts" setup></script>
-
 <style>
+
+.cursor {
+  position: absolute;
+  width: 100px;
+  height: 100px !important;
+  border-radius: 50%;
+  z-index: 15;
+  background-color: #fdda24;
+  pointer-events: none;
+  opacity: 0.3;
+  filter: blur(30px);
+
+}
+
+.pointed {
+  position: absolute;
+  width: 7px;
+  height: 7px !important;
+  background-color: white;
+  border-radius: 50%;
+}
+
 body {
   background: rgb(16, 24, 31);
   color: #fff;
@@ -79,6 +107,14 @@ body.modal-open {
 .page-leave-to {
   opacity: 0;
   filter: blur(1rem);
+}
+.layout-enter-active,
+.layout-leave-active {
+  transition: all 2s;
+}
+.layout-enter-from,
+.layout-leave-to {
+  filter: grayscale(1);
 }
 @media (max-width: 768px) {
     .container

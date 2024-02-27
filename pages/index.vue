@@ -13,7 +13,6 @@ const words = ref([
   'Inspire',
   'Promote'
 ])
-
 </script>
 
 <template>
@@ -21,21 +20,25 @@ const words = ref([
   <div class="homepage-content-wrapper">
     <div class="homepage-content flex flex-col items-center justify-center">
       <h1 class="home-text homepage-text">
-        <span class='nowrap'>To
-        <span class="build-text"></span>
-a school</span><span class="break" /> without walls
+        <span class="nowrap"
+          >To
+          <span class="build-text"></span>
+          a school</span
+        ><span class="break" /> without walls
       </h1>
       <div class="home-subtext homepage-text">
+        <span class="text-1">
         It began as an idea then evolved into an institute before ultimately
-        transforming into the first data science school in the country. In this
+        transforming into the first data science school in the country. </span>
+        <span class="text-2">In this
         exhibition you’ll learn how this improbable story unfolded and hear from
         the people who turned a vision into reality.
+        </span>
       </div>
       <a href="/chapters"
-        ><button class="btn-yellow">View Digital Exhibition</button></a
+        ><button class="btn-yellow enter">View Digital Exhibition</button></a
       >
-        <h1 class="typing"></h1>
-
+      <h1 class="typing"></h1>
     </div>
   </div>
 </template>
@@ -43,11 +46,25 @@ a school</span><span class="break" /> without walls
 <style scoped lang="scss">
 @import '@/assets/css/typed.scss';
 
+
+.text-1
+{
+  animation-name: fadeIn;
+  animation-duration: 5s;
+
+}
+.text-2
+{
+  animation-name: fadeIn;
+  animation-duration: 10s;
+
+
+}
 h1 {
   display: flex;
   flex-wrap: wrap;
 }
-.nowrap{
+.nowrap {
   white-space: nowrap;
   text-align: center;
 }
@@ -85,8 +102,7 @@ h1 {
   background-color: #e4c748e7;
 }
 
-.homepage-text
-{
+.homepage-text {
   animation: fadeIn 2s;
 }
 .home-text {
@@ -105,7 +121,6 @@ h1 {
 }
 
 .build-text {
-
   font-family: 'franklin-gothic-urw', 'Franklin Gothic', 'ITC Franklin Gothic',
     Arial, sans-serif;
   font-size: 100px;
@@ -134,46 +149,54 @@ h1 {
   height: 0;
 }
 $speeds: (
-    type: .2,
-    pause-typed: 2,
-    delete: .08,
-    pause-deleted: 1
+  type: 0.2,
+  pause-typed: 2,
+  delete: 0.08,
+  pause-deleted: 1
 );
 $options: (
-    name: "homepage-typing-text",
-    caret: true,
-    caret-speed: .75,
-    caret-width: 2px,
-    caret-color: currentColor,
-    caret-space: 1px,
-    delay: 1,
-    iterations: 1,
-    end-on: "Build",
+  name: 'homepage-typing-text',
+  caret: true,
+  caret-speed: 0.75,
+  caret-width: 2px,
+  caret-color: currentColor,
+  caret-space: 1px,
+  delay: 1,
+  iterations: 1,
+  end-on: 'Build'
 );
 .build-text {
-  @include typed(  'Build',
-  'Champion',
-  'Create',
-  'Cultivate',
-  'Design',
-  'Develop',
-  'Envision',
-  'Establish',
-  'Foster',
-  'Imagine',
-  'Inspire',
-  'Promote', $speeds, $options
-);
+  @include typed(
+    'Build',
+    'Champion',
+    'Create',
+    'Cultivate',
+    'Design',
+    'Develop',
+    'Envision',
+    'Establish',
+    'Foster',
+    'Imagine',
+    'Inspire',
+    'Promote',
+    $speeds,
+    $options
+  );
   text-transform: lowercase;
   overflow: hidden;
   white-space: nowrap;
 }
 
 @keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-}
+  0% {
+    opacity: 0;
+  }
 
+  66% { opacity:0; }
+  100% {
+    opacity: 1;
+  }
+}
 
 @media (max-width: 768px) {
   h1 {

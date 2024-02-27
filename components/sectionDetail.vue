@@ -40,12 +40,6 @@
         </DocumentModal>
       </div>
       <div class="section-media-videos">
-        <!--<VimeoPlayer
-        ref="player"
-        :video-id="videoId"
-        class="video-player"
-        :key="videoId"
-      />-->
         <DocumentModal v-for="vid in videoIds" :key="`video_${vid}`" :show="showModal" :video="vid" :ref="media"
           @close="showModal = false">
         </DocumentModal>

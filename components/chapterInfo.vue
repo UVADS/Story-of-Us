@@ -18,7 +18,6 @@
 
 <script setup>
 
-const hasrun = ref(0)
 const props = defineProps(['chapters'])
 function yearRange(years) {
  return years && years.includes('-') ? years : years + " - ONWARDS"
