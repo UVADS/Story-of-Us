@@ -42,7 +42,7 @@ const { x, y } = useMouse()
   z-index: 15;
   background-color: #fdda24;
   pointer-events: none;
-  opacity: 0.3;
+  opacity: 0.1;
   filter: blur(30px);
 
 }

@@ -84,7 +84,6 @@ a:hover
   width: 120px;
   min-width: 120px;
   padding-top: calc(1em / 8);
-  animation: slide 2s forwards;
 }
 @keyframes slide {
   100% { display: none;

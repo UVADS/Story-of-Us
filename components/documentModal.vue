@@ -68,7 +68,6 @@
 
 <script setup>
 import CloseButton from "./vectors/closeButton.vue";
-import {Buffer} from "buffer";
 const store = useModalStore();
 const showModal = ref(false);
 defineEmits(["close"]);
