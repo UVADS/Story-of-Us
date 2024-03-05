@@ -21,20 +21,37 @@ const hasrun_chapters = ref(0)
   display: block;
   flex-direction: column;
 }
-/*
+</style>
 
+<style lang="scss">
 .chapter-info {
-  border-bottom: solid 1px #fff;
-  display: grid;
-  grid-template-columns: 120px auto;
-  vertical-align: flex-start;
-  align-items: center;
-  align-content: center;
-  height: calc(100% / 3);
-  margin: 20px 0;
-  clear: both;
-  min-height: 240px;
+  animation: slide-in 1s forwards;
+  animation-delay: 1s;
+  transform: translateX(-100%);
+
 }
+@keyframes slide-in {
+  0%
+  {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0%);
+
+  }
+}
+
+@-webkit-keyframes slide-in {
+  0% {
+    -webkit-transform: translateX(-100%);
+  }
+  100% {
+    -webkit-transform: translateX(0%);
+  }
+}
+</style>
+
+/*
 
 .chapter-name {
   font-size: 48px;
@@ -67,4 +84,3 @@ const hasrun_chapters = ref(0)
 .chapter-info:last-child {
   border: none;
 }*/
-</style>

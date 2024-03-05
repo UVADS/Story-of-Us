@@ -25,6 +25,7 @@ function yearRange(years) {
 </script>
 
 <style lang="scss">
+
 .chapter-years {
   padding-top: 20px;
 }
@@ -37,6 +38,8 @@ function yearRange(years) {
 }
 
 .chapter-info {
+  animation: slide-in 10s ease-in;
+  animation-delay: 3s;
   border-bottom: solid 1px #fff;
   display: grid;
   grid-template-columns: 120px auto;
@@ -47,6 +50,8 @@ function yearRange(years) {
   height: calc(100% / 3);
   clear: both;
   min-height: 240px;
+
+
 }
 a:hover
 {
@@ -85,11 +90,7 @@ a:hover
   min-width: 120px;
   padding-top: calc(1em / 8);
 }
-@keyframes slide {
-  100% { display: none;
 
-  }
-}
 .chapter-info:last-child {
   border: none;
 }

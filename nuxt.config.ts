@@ -12,7 +12,7 @@ export default defineNuxtConfig({
   nitro: {
     //   baseURL: host,
     prerender: {
-      crawlLinks: true,
+      crawlLinks: false,
       failOnError: false
     }
   },
