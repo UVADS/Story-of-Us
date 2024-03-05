@@ -18,7 +18,7 @@ const { x, y } = useMouse()
 <template>
   <div>
     <div id="roundCursor" class="cursor pointer-events-none"
-    :style="{top: `${y-15}px`, left: `${x-15}px`}"></div>
+    :style="{top: `${y-50}px`, left: `${x-50}px`}"></div>
     <ChromeHeader></ChromeHeader>
     <div class="outer">
       <div class="container gridline">
@@ -42,8 +42,8 @@ const { x, y } = useMouse()
   z-index: 15;
   background-color: #fdda24;
   pointer-events: none;
-  opacity: 0.1;
-  filter: blur(30px);
+  opacity: 0.3;
+  filter: blur(60px);
 
 }
 

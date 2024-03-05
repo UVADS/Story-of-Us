@@ -27,13 +27,13 @@ const words = ref([
         ><span class="break" /> without walls
       </h1>
       <div class="home-subtext homepage-text">
-        <span class="text-1">
+        <p class="text-1">
         It began as an idea then evolved into an institute before ultimately
-        transforming into the first data science school in the country. </span>
-        <span class="text-2">In this
+        transforming into the first data science school in the country. </p>
+        <p class="text-2">In this
         exhibition you’ll learn how this improbable story unfolded and hear from
         the people who turned a vision into reality.
-        </span>
+        </p>
       </div>
       <a href="/chapters"
         ><button class="btn-yellow enter">View Digital Exhibition</button></a
@@ -57,8 +57,10 @@ const words = ref([
 {
   animation-name: fadeIn;
   animation-duration: 10s;
-
-
+}
+.text-1, .text-2
+{
+  line-clamp: 2;
 }
 h1 {
   display: flex;
@@ -140,7 +142,7 @@ h1 {
   line-height: 26px;
   letter-spacing: 0em;
   text-align: center;
-  max-width: 600px;
+  max-width: 700px;
   padding: 30px 60px;
 }
 

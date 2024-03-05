@@ -111,20 +111,12 @@ function audio() {
   return section.fields.audio.length > 0 ? section.fields.audio[0] : null
 }
 function playAudio(id) {
-  //let lastAudioFile = null
-
-  // console.log("lastAudio-entering", lastAudio)
-  //const lastAudioFile = document.getElementById(`audioFile_${lastAudio}`)
   const audioElement = document.getElementById(`audioFile_${id}`)
   if (audioElement.paused) {
     audioElement.play()
   } else {
     audioElement.pause()
   }
-  // lastAudio = id
-  //console.log("lastAudio-set", lastAudio)
-
-
 }
 function openModal(modal) {
   // store.openModal( component: DocumentModal )

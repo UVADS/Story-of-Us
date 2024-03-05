@@ -26,7 +26,6 @@
 
 <script setup>
 const years = ref([]);
-const hasrun = ref(0);
 const showDetails = ref(false);
 const props = defineProps({
   section: {

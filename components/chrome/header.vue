@@ -46,7 +46,6 @@ header {
   line-height: 60px;
   padding-left: 15px;
   color: #fff;
-
   font-size: 22px;
   font-style: normal;
   font-weight: 600;
