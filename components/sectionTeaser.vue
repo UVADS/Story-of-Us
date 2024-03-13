@@ -9,7 +9,7 @@
           {{ yearRange }}
         </div>
       </div>
-      <div v-if="section.fields.audio" class="section-play">
+      <div v-if="audio()" class="section-play">
         <audio v-if="audio()" :id="`audioFile_${section.id}`" :src="audio().url"></audio>
         <button @click="playAudio(section.id)" :id="`playAudio_${section.id}`">
           <NuxtImg class="play-icon" src="/images/play.svg" />
@@ -54,7 +54,7 @@ const images =  section.fields.photos
 
 function audio() {
 
-return section.fields.audio.length > 0 ? section.fields.audio[0] : null
+return section.fields.audio && section.fields.audio.length > 0 ? section.fields.audio[0] : null
 }
 function playAudio(id) {
 //let lastAudioFile = null

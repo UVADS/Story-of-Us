@@ -11,12 +11,12 @@
           {{ yearRange }}
         </div>
       </div>
-      <div class="section-play">
+      <div v-if="audio()" class="section-play">
         <audio v-if="audio()" :id="`audioFile_${section.id}`" :src="audio().url"></audio>
-
         <button @click="playAudio(section.id)" :id="`playAudio_${section.id}`">
           <NuxtImg class="play-icon" src="/images/play.svg" />
         </button>
+
       </div>
     </div>
     <div class="btn-container" @click.prevent="collapseSection(section.id)">
@@ -108,7 +108,7 @@ function getVideoId(video) {
 }
 function audio() {
 
-  return section.fields.audio.length > 0 ? section.fields.audio[0] : null
+  return section.fields.audio && section.fields.audio.length > 0 ? section.fields.audio[0] : null
 }
 function playAudio(id) {
   const audioElement = document.getElementById(`audioFile_${id}`)
