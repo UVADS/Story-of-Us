@@ -8,7 +8,7 @@
       <a href="/" class="story-logo" title="Story of Us" load="eager"  >The Story of Us</a>
     </div>
     <div class="about">
-      <nuxt-link to="/" class="ibm-plex-mono about"
+      <nuxt-link to="/about" class="ibm-plex-mono about"
         >About this project</nuxt-link>
     </div>
   </header>

@@ -70,9 +70,6 @@ function showSectionDetails(sectionId) {
 }
 function closeDetails(id) {
   const sectionDetail = document.getElementById(`section_detail_${id}`);
-  //sectionDetail.style.opacity = "0"
-  // sectionDetail.style.transition = "opacity 0.5s ease-out"
-  //console.log("closing section", sectionDetail, id)
   showDetails.value = false;
 }
 function toggleDetails(visible) {

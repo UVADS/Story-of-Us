@@ -19,6 +19,7 @@ const props = defineProps({
     type: Object,
   },
 })
+const audio = props.section.fields.audio[0]
 const duration = ref(0)
 const visible = ref(false)
 onMounted(()=>{
