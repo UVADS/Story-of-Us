@@ -12,7 +12,7 @@
     <div class="chapter-name">
       <nuxt-link :to="`/chapters/${chapter.tid}`">{{ chapter.name }}</nuxt-link>
     </div>
-    <div class="chapter-years">{{   yearRange(chapter.field_years) }}</div>
+    <div class="chapter-years padding-top-20">{{   yearRange(chapter.field_years) }}</div>
   </div>
 </template>
 
@@ -38,8 +38,8 @@ function yearRange(years) {
 }
 
 .chapter-info {
-  animation: slide-in 10s ease-in;
-  animation-delay: 3s;
+  //animation: slide-in 10s ease-in;
+  //animation-delay: 3s;
   border-bottom: solid 1px #fff;
   display: grid;
   grid-template-columns: 120px auto;

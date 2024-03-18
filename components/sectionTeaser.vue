@@ -9,13 +9,9 @@
           {{ yearRange }}
         </div>
       </div>
-      <div v-if="audio()" class="section-play">
-        <audio v-if="audio()" :id="`audioFile_${section.id}`" :src="audio().url"></audio>
-        <button @click="playAudio(section.id)" :id="`playAudio_${section.id}`">
-          <NuxtImg class="play-icon" src="/images/play.svg" />
-        </button>
 
-      </div>
+
+
     </div>
     <div class="section-summary">{{ section.fields.summary }}</div>
     <div class="section-image">
@@ -30,6 +26,7 @@
 </template>
 
 <script setup>
+
 const props = defineProps({
   section: {
     type: Object,
@@ -52,26 +49,10 @@ const yearRange =
 
 const images =  section.fields.photos
 
-function audio() {
-
-return section.fields.audio && section.fields.audio.length > 0 ? section.fields.audio[0] : null
+function hasAudio() {
+  return section.fields.audio && section.fields.audio.length > 0 ? section.fields.audio[0] : null
 }
-function playAudio(id) {
-//let lastAudioFile = null
 
-// console.log("lastAudio-entering", lastAudio)
-//const lastAudioFile = document.getElementById(`audioFile_${lastAudio}`)
-const audioElement = document.getElementById(`audioFile_${id}`)
-if (audioElement.paused) {
-  audioElement.play()
-} else {
-  audioElement.pause()
-}
-// lastAudio = id
-//console.log("lastAudio-set", lastAudio)
-
-
-}
 </script>
 
 <style lang="scss" scoped>
@@ -81,6 +62,8 @@ if (audioElement.paused) {
   max-height: 270px;
   clear: both;
   border-bottom: #fff solid 1px;
+  scroll-margin-top: 50px;
+  scroll-behavior: smooth;
 }
 .section:last-child {
   border: none;
@@ -137,9 +120,7 @@ if (audioElement.paused) {
     object-fit: cover;
   }
 }
-.section-play {
-  padding: 30px 0;
-}
+
 .vector-dot {
   line-height: 22px;
 }

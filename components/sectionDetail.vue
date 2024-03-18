@@ -11,13 +11,8 @@
           {{ yearRange }}
         </div>
       </div>
-      <div v-if="audio()" class="section-play">
-        <audio v-if="audio()" :id="`audioFile_${section.id}`" :src="audio().url"></audio>
-        <button @click="playAudio(section.id)" :id="`playAudio_${section.id}`">
-          <NuxtImg class="play-icon" src="/images/play.svg" />
-        </button>
 
-      </div>
+
     </div>
     <div class="btn-container" @click.prevent="collapseSection(section.id)">
       <CloseButton class="btn btn-top-close"></CloseButton>
@@ -25,6 +20,8 @@
     <div class="section-text">
 
       <div class="section-summary" v-html="section.fields.summary"></div>
+      <AudioPlayer v-if="hasAudio(section)" :section="section" ></AudioPlayer>
+
       <div class="section-body" v-html="section.body"></div>
 
       <button class="btn-close btn" @click.prevent="collapseSection(section.id)">
@@ -99,25 +96,14 @@ function collapseSection(section) {
   emits('visible', false)
   nextTick(() => {
     const sectionDetail = document.getElementById(`section_${props.section.id}`)
-    sectionDetail.scrollIntoView({ behavior: 'auto' })
+    sectionDetail.scrollIntoView({ behavior: 'smooth' })
   })
 }
 
 function getVideoId(video) {
   return /[^/]*$/.exec(video)[0]
 }
-function audio() {
 
-  return section.fields.audio && section.fields.audio.length > 0 ? section.fields.audio[0] : null
-}
-function playAudio(id) {
-  const audioElement = document.getElementById(`audioFile_${id}`)
-  if (audioElement.paused) {
-    audioElement.play()
-  } else {
-    audioElement.pause()
-  }
-}
 function openModal(modal) {
   // store.openModal( component: DocumentModal )
 }
@@ -192,7 +178,10 @@ videoIds.value = section.fields.video !== undefined ? section.fields.video.map((
   line-height: 40px;
   /* 142.857% */
   padding-bottom: 30px;
-
+  .section-play
+  {
+    display:none;
+  }
   p {
     font-size: 19px;
     font-weight: 400;
@@ -349,7 +338,12 @@ videoIds.value = section.fields.video !== undefined ? section.fields.video.map((
     line-height: 34px;
     /* 142.857% */
     padding-bottom: 30px;
+    .section-play
+    {
+      display: flex;
+      flex-direction: row;
 
+    }
     p {
       font-size: 18px;
       font-weight: 400;

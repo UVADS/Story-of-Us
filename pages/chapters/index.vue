@@ -25,9 +25,9 @@ const hasrun_chapters = ref(0)
 
 <style lang="scss">
 .chapter-info {
-  animation: slide-in 1s forwards;
+ animation: fade-in 1s forwards;
   animation-delay: 1s;
-  transform: translateX(-100%);
+
 
 }
 @keyframes slide-in {

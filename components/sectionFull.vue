@@ -1,8 +1,11 @@
 <template>
-  <div>
+  <div class="section-container ">
     <div v-if="anchor">
       <a :id="`anchor_${section.fields.year_range[0].start_year}`" />
     </div>
+    <AudioPlayer v-if="hasAudio(section)" :section="section" class="audio-container">
+
+</AudioPlayer>
     <SectionTeaser
       v-show="!showDetails"
       :id="`section_teaser_${section.id}`"
@@ -61,7 +64,7 @@ function showSectionDetails(sectionId) {
     const sectionDetail = document.getElementById(
       `section_detail_${sectionId}`
     );
-    sectionDetail.scrollIntoView({ behavior: "auto" });
+    sectionDetail.scrollIntoView({ behavior: "smooth" });
   });
   showDetails.value = true;
 }
@@ -79,6 +82,7 @@ function toggleDetails(visible) {
 </script>
 
 <style>
+
 .section-detail-component {
   animation: show_div 2s;
 }
@@ -87,12 +91,16 @@ function toggleDetails(visible) {
 }
 .hidden {
   animation: hide_div 2s;
+  transition-property: all;
+	transition-duration: .5s;
+	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+}
+@media screen and (max-width: 768px) {
+  .audio-container {
+  display: none;
+  }
 }
 
-.section-play {
-  position: relative;
-  z-index: 8;
-}
 @keyframes show_div {
   0% {
     opacity: 0;
