@@ -23,5 +23,10 @@ And to all the students, faculty, and staff who contributed to this story over t
 <style>
 .page-content{
   padding: 60px 0 ;
+  max-width: 960px ;
+}
+.main-content
+{
+  max-width: 1200px;
 }
 </style>
