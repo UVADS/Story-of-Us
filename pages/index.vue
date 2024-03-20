@@ -1,9 +1,5 @@
 <script setup>
-useHead({
-  meta: [
-    { name: 'description', content: 'My amazing site.' }
-  ],
-});
+
 const words = ref([
   'Build',
   'Champion',

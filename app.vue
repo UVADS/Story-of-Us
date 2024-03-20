@@ -1,12 +1,35 @@
 <script setup>
 import { useMouse } from '@vueuse/core'
 
+const description = "To Build A School Without Walls. It began as an idea then evolved into an institute before ultimately transforming into the first data science school in the country. In this exhibition you’ll learn how this improbable story unfolded and hear from the people who turned a vision into reality."
+const title = "Story of Us - UVa School of Data Science"
+const url = useRoute().routeName
 
 useHead({
     title: "Story of Us - UVa School of Data Science",
     titleTemplate: (titleChunk) => {
         return titleChunk ? `${titleChunk} - Story of Us` : title
       },
+    meta: [
+    {
+      name: 'description',
+      content: description,
+    },
+
+    { hid: 'og:title', property: 'og:title', content: "Story of Us - UVa School of Data Science", },
+    { hid: 'og:url', property: 'og:url', content: url  },
+    { hid: 'og:description', property: 'og:description', content: description},
+   // { hid: 'og:image', property: 'og:image', content: process.env.baseUrl + ogImage},
+
+            // twitter card
+    { hid: "twitter:title", name: "twitter:title", content: title},
+            { hid: "twitter:url", name: "twitter:url", content: url },
+            { hid: 'twitter:description', name: 'twitter:description', content: description },
+          //  { hid: "twitter:image", name: "twitter:image", content: process.env.baseUrl + ogImage},
+        ],
+        link: [
+            { hid: "canonical", rel: "canonical", href: url },
+        ]
 })
 const router = useRouter();
 const currentRoute = router.currentRoute;

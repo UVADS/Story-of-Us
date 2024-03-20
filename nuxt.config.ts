@@ -80,7 +80,7 @@ export default defineNuxtConfig({
   defaultMeta: {
     title: 'The Story of Us - UVA School of Data Science',
     description:
-      'The Story of US - School of Data Science at the University of Virginia.',
+      "The Story of US - School of Data Science at the University of Virginia. To Build A School Without Walls. It began as an idea then evolved into an institute before ultimately transforming into the first data science school in the country. In this exhibition you’ll learn how this improbable story unfolded and hear from the people who turned a vision into reality.",
     image: `${host}/uva-datascience-og.png`,
     image_width: 1200,
     image_height: 630,

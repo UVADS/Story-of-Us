@@ -40,6 +40,10 @@
               <div class="document-description">
                 <p>{{ document.description }}</p>
                 <p>{{ document.summary }}</p>
+                <br>
+                <p>{{ document.author }}</p>
+                <p>{{ document.pub_title }}</p>
+                <p>{{ document.source_link }}</p>
               </div>
               <div class="document-container">
               <ClientOnly>  <VuePdfEmbed :source="docUrl" /></ClientOnly>
@@ -112,7 +116,7 @@ function toggleModal(modalValue) {
 }
 function keydownListener(event) {
   // Assert the key is escape
-  if (event.key === "Escape") store.closeModal();
+  if (event.key === "Escape") showModal.value = false;
 }
 
 // Attach event listener on mount
@@ -145,8 +149,9 @@ onUnmounted(() => {
   padding-right:60px;
   align-content: start;
   flex: 0 0 300px;
-  font-family: monospace;
+  font-family: mo nospace;
   align-self: center;
+  overflow: wrap;
 
 }
 .btn-document {

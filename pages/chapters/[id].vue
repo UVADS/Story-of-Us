@@ -87,14 +87,17 @@ function closeAll(id) {
   current = id;
 }
 
-
 useHead({
   title: `Chapter ${chapter[0].field_chapter_number} - ${chapter[0].name}`,
   meta: [
     {
       name: 'description',
-      content: `Chapter ${chapter[0].field_chapter_number} - ${chapter[0].name}`,
+      content: chapterSections[0].fields.summary,
     },
+    {
+      name: 'og:image',
+      content: chapterSections[0].fields.photos ? chapterSections[0].fields.photos[0].url : null,
+    }
   ]
         });
 </script>
