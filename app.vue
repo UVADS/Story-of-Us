@@ -6,7 +6,7 @@ useHead({
     title: "Story of Us - UVa School of Data Science",
     titleTemplate: (titleChunk) => {
         return titleChunk ? `${titleChunk} - Story of Us` : title
-      }
+      },
 })
 const router = useRouter();
 const currentRoute = router.currentRoute;

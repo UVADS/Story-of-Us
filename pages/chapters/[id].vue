@@ -52,7 +52,6 @@ let anchorSections = []; // onMounted(() => {})
 const props = defineProps({
   chapterName: { type: String },
   chapters: { type: Object },
-  chapter: { type: Object },
 });
 
 let sectionAnchors = [
@@ -87,6 +86,17 @@ function closeAll(id) {
   });
   current = id;
 }
+
+
+useHead({
+  title: `Chapter ${chapter[0].field_chapter_number} - ${chapter[0].name}`,
+  meta: [
+    {
+      name: 'description',
+      content: `Chapter ${chapter[0].field_chapter_number} - ${chapter[0].name}`,
+    },
+  ]
+        });
 </script>
 <style lang="scss">
 .chapter-header {

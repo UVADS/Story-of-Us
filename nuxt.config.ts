@@ -53,7 +53,7 @@ export default defineNuxtConfig({
   },
   head: {
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: 'favicon.ico' },
       { rel: 'stylesheet', href: 'https://use.typekit.net/kma2wyt.css' },
       {
         rel: 'stylesheet',

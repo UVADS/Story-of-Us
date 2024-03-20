@@ -1,4 +1,9 @@
 <script setup>
+useHead({
+  meta: [
+    { name: 'description', content: 'My amazing site.' }
+  ],
+});
 const words = ref([
   'Build',
   'Champion',
@@ -163,9 +168,9 @@ $options: (
   caret-width: 2px,
   caret-color: currentColor,
   caret-space: 1px,
-  delay: 1,
+  delay: 4,
   iterations: 1,
-  end-on: 'Build'
+  end-on: 'Build',
 );
 .build-text {
   @include typed(
