@@ -3,7 +3,7 @@
     <div v-if="anchor">
       <a :id="`anchor_${section.fields.year_range[0].start_year}`" />
     </div>
-    <AudioPlayer v-if="hasAudio(section)" :section="section" class="audio-container">
+    <AudioPlayer v-if="hasAudio(section)" :section="section" :ref="player"  @click="showSectionDetails(section.id, true)" class="audio-container">
 
 </AudioPlayer>
     <SectionTeaser
@@ -58,13 +58,17 @@ function yearAnchor(year) {
 defineExpose({ showDetails });
 const emits = defineEmits(["closeOthers"]);
 
-function showSectionDetails(sectionId) {
+function showSectionDetails(sectionId, audio = false) {
+  if (!audio) {
   emits("closeOthers");
+  }
   nextTick(() => {
     const sectionDetail = document.getElementById(
       `section_detail_${sectionId}`
     );
-    sectionDetail.scrollIntoView({ behavior: "smooth" });
+    if(!audio) {
+      sectionDetail.scrollIntoView({ behavior: "smooth" });
+    }
   });
   showDetails.value = true;
 }

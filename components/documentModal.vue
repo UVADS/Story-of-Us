@@ -43,7 +43,7 @@
                 <br>
                 <p>{{ document.author }}</p>
                 <p>{{ document.pub_title }}</p>
-                <p>{{ document.source_link }}</p>
+                <p class="source-link">{{ document.source_link }}</p>
               </div>
               <div class="document-container">
               <ClientOnly>  <VuePdfEmbed :source="docUrl" /></ClientOnly>

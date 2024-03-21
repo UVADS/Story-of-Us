@@ -51,13 +51,13 @@ const words = ref([
 .text-1
 {
   animation-name: fadeIn;
-  animation-duration: 5s;
+  animation-duration: 7s;
 
 }
 .text-2
 {
   animation-name: fadeIn;
-  animation-duration: 10s;
+  animation-duration: 12s;
 }
 .text-1, .text-2
 {

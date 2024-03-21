@@ -23,7 +23,7 @@
     </div>
     <div class="duration">
       Listen <br />
-      <div :id="`duration_${section.id}`"  :key="duration">{{ duration }}</div>
+      <div :id="`duration_${section.id}`"  :key="duration">{{ secondsToMinutes(duration) }}</div>
     </div>
   </div>
 </template>
@@ -39,23 +39,22 @@ const audio = props.section.fields.audio[0]
 const visible = ref(false)
 const audioDuration = ref(0)
 const duration = ref(0)
-
+//const isPlaying = useState('isPlaying', false)
+//const currentlyPlaying = useState('currentlyPlaying', null)
 
  onMounted(() => {
  const audioElement =  document.getElementById(`audioFile_${props.section.id}`)
 
    audioElement.onloadedmetadata = ()=> {
-    audioDuration.value = secondsToMinutes(audioElement.duration)
-    console.log('duration: ' + audioElement.duration, audioDuration.value)
-    duration.value = secondsToMinutes(audioElement.duration)
+    audioDuration.value = audioElement.duration
+    //console.log('duration: ' + audioElement.duration, audioDuration.value)
+    duration.value = audioElement.duration
 
       const durationElement =  document.getElementById(`duration_${props.section.id}`)
 
   durationElement.innerHTML = secondsToMinutes(audioElement.duration)
-    console.log(
-      'duration: ' + durationElement.innerHTML)
-
-    }
+    //console.log(    'duration: ' + durationElement.innerHTML)
+     }
 
 })
 
@@ -63,8 +62,12 @@ function playAudio(id) {
   const audioElement = document.getElementById(`audioFile_${id}`)
   if (audioElement.paused) {
     audioElement.play()
+    //isPlaying = true
+    //currentlyPlaying.value = id
     visible.value = true
   } else {
+    //isPlaying = false
+    //currentlyPlaying.value = null
     visible.value = false
     audioElement.pause()
   }
