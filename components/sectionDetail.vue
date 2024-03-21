@@ -22,6 +22,8 @@
       <div class="section-summary" v-html="section.fields.summary"></div>
       <AudioPlayer v-if="hasAudio(section)" :section="section" ></AudioPlayer>
 
+
+      <div class="section-title">{{ section.title.split(':')[1] }}</div>
       <div class="section-body" v-html="section.body"></div>
 
       <button class="btn-close btn" @click.prevent="collapseSection(section.id)">
@@ -119,7 +121,7 @@ const images = section.fields.photos
 videoIds.value = section.fields.video !== undefined ? section.fields.video.map((vid) => /[^/]*$/.exec(vid.value)[0]) : []
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .btn-close {
   width: 240px;
   height: 45px;
@@ -133,7 +135,12 @@ videoIds.value = section.fields.video !== undefined ? section.fields.video.map((
   right: 0;
   padding: 20px 20px;
 }
-
+.section-title
+{
+  color: #fdda24;
+  font-weight: 600;
+  padding: 30px 0;
+}
 .section-teaser {
   padding: 60px 0;
   display: flex;
@@ -177,7 +184,6 @@ videoIds.value = section.fields.video !== undefined ? section.fields.video.map((
   font-weight: 300;
   line-height: 40px;
   /* 142.857% */
-  padding-bottom: 30px;
   .section-play
   {
     display:none;

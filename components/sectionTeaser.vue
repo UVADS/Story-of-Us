@@ -13,7 +13,12 @@
 
 
     </div>
-    <div class="section-summary">{{ section.fields.summary }}</div>
+    <div class="section-summary">
+      <div class="section-title">{{ section.title.split(':')[1] }}</div>
+      <div>{{ section.fields.summary }}</div>
+
+    </div>
+
     <div class="section-image">
       <NuxtImg
         v-if="images[0] && images[0].url"
@@ -22,7 +27,9 @@
         :alt="`${images[0].alt}`"
       />
     </div>
+
   </div>
+
 </template>
 
 <script setup>
@@ -65,6 +72,11 @@ function hasAudio() {
   scroll-margin-top: 50px;
   scroll-behavior: smooth;
 }
+.section-title
+{
+  color: #fdda24;
+
+}
 .section:last-child {
   border: none;
 }
@@ -82,6 +94,24 @@ function hasAudio() {
   width: 130px;
   margin-right: 110px;
   white-space: nowrap;
+}
+.section-summary
+{
+  position: relative;
+  font-size: 20px !important;
+  line-height: 28px !important;
+  .section-title {
+  color: #fdda24;
+  //position: absolute;
+  //bottom: 0;
+  text-align: left;
+  width: 100%;
+  padding-bottom: 20px;
+  font-size: 18px;
+  font-weight: 600;
+
+
+}
 }
 .section-summary,
 .section-text {
