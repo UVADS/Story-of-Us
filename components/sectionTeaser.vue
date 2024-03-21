@@ -107,7 +107,7 @@ function hasAudio() {
   text-align: left;
   width: 100%;
   padding-bottom: 20px;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 600;
 
 
