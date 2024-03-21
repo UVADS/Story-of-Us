@@ -133,7 +133,7 @@ onUnmounted(() => {
 
 <style scoped>
 * {
-  font-family: "ibm-plex-mono", monospace;
+  font-family: "ibm-plex-mono", monospace !important;
 }
 .image,
 .document {
