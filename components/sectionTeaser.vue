@@ -71,7 +71,7 @@ function hasAudio() {
   border-bottom: #fff solid 1px;
   scroll-margin-top: 50px;
   scroll-behavior: smooth;
-}
+
 .section-title
 {
   color: #fdda24;
@@ -100,6 +100,7 @@ function hasAudio() {
   position: relative;
   font-size: 20px !important;
   line-height: 28px !important;
+  width: 480px;
   .section-title {
   color: #fdda24;
   //position: absolute;
@@ -109,7 +110,7 @@ function hasAudio() {
   padding-bottom: 20px;
   font-size: 24px;
   font-weight: 600;
-
+  ;
 
 }
 }
@@ -126,8 +127,8 @@ function hasAudio() {
 .flex-center-line {
   display: flex;
   align-items: center;
-  padding: 10px 0 30px 0;
-  margin-right: 120px;
+  padding: 5px 0 30px 0;
+  margin-right:0px;
 }
 .section-summary {
   max-height: inherit;
@@ -144,15 +145,17 @@ function hasAudio() {
 .section-image {
   align-self: center;
   margin-left: 120px;
+  width: 240px;
   img {
     max-height: 150px;
-
+    width: 100%;
     object-fit: cover;
   }
 }
 
 .vector-dot {
   line-height: 22px;
+}
 }
 @media (max-width:  768px) {
   .section-teaser {
@@ -162,7 +165,7 @@ function hasAudio() {
   max-height: unset;
   clear: both;
   border-bottom: #fff solid 1px;
-}
+
 .section-image {
 display:none;
 }
@@ -186,6 +189,7 @@ display:none;
     text-align: left;
     margin-bottom: 10px;
   }
+}
 }
 }
 </style>

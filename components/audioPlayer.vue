@@ -33,12 +33,20 @@ import { Icon } from '@iconify/vue'
 const props = defineProps({
   section: {
     type: Object
+  },
+  isPlaying: {
+    type: Boolean,
+    default: false
   }
 })
+const emits = defineEmits(['isPlaying'])
 const audio = props.section.fields.audio[0]
 const visible = ref(false)
 const audioDuration = ref(0)
 const duration = ref(0)
+const playerStore = useMyPlayAudioStore()
+const { isPlaying } = storeToRefs(playerStore)
+
 //const isPlaying = useState('isPlaying', false)
 //const currentlyPlaying = useState('currentlyPlaying', null)
 
@@ -62,11 +70,9 @@ function playAudio(id) {
   const audioElement = document.getElementById(`audioFile_${id}`)
   if (audioElement.paused) {
     audioElement.play()
-    //isPlaying = true
-    //currentlyPlaying.value = id
+    playerStore.currentlyPlaying = id
     visible.value = true
   } else {
-    //isPlaying = false
     //currentlyPlaying.value = null
     visible.value = false
     audioElement.pause()
@@ -100,7 +106,6 @@ function secondsToMinutes(seconds) {
 
     max-height: unset;
     position: unset;
-    margin: 30px 0;
   }
 }
 </style>
