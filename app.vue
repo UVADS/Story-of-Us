@@ -36,21 +36,25 @@ const currentRoute = router.currentRoute;
 const routeName = currentRoute.value.name
 const pageClass = routeName === 'index' ? 'homepage' : routeName
 const { x, y } = useMouse()
-
+const outer = ref([])
+/*onMounted(() => {
+  console.log(outer.value.clientHeight)
+})*/
 </script>
 <template>
   <div>
     <div id="roundCursor" class="cursor pointer-events-none"
     :style="{top: `${y-50}px`, left: `${x-50}px`}"></div>
     <ChromeHeader></ChromeHeader>
-    <div class="outer">
-      <div class="container gridline">
+    <div class="outer" id="outer" ref="outer">
+      <div class="container gridline" id="grid" ref="grid">
         <div id="main-content"  :class="`main-content ${ pageClass }`">
 
           <NuxtPage/>
         </div>
       </div>
     </div>
+    <ChromeFooter></ChromeFooter>
   </div>
 
 </template>

@@ -60,16 +60,16 @@ defineExpose({ showDetails });
 const emits = defineEmits(["closeOthers"]);
 
 function showSectionDetails(sectionId, audio = false) {
-  if (!audio) {
+  //if (!audio) {
   emits("closeOthers");
-  }
+  //}
   nextTick(() => {
     const sectionDetail = document.getElementById(
       `section_detail_${sectionId}`
     );
-    if(!audio) {
+
       sectionDetail.scrollIntoView({ behavior: "smooth" });
-    }
+
   });
   showDetails.value = true;
 }

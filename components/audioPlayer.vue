@@ -39,14 +39,18 @@ const props = defineProps({
     default: false
   }
 })
-const emits = defineEmits(['isPlaying'])
+
+const id = props.section.id
 const audio = props.section.fields.audio[0]
 const visible = ref(false)
 const audioDuration = ref(0)
 const duration = ref(0)
-const playerStore = useMyPlayAudioStore()
+const playerStore = useAudioState
 const { isPlaying } = storeToRefs(playerStore)
+const emits = defineEmits(['isPlaying', 'visible', 'id'])
 
+// Remove the existing declaration of 'emits'
+// const emits = defineEmits(['visible'])
 //const isPlaying = useState('isPlaying', false)
 //const currentlyPlaying = useState('currentlyPlaying', null)
 
@@ -65,23 +69,36 @@ const { isPlaying } = storeToRefs(playerStore)
      }
 
 })
-
+onUnmounted(() => {
+  playerStore.currentlyPlaying = null
+})
 function playAudio(id) {
   const audioElement = document.getElementById(`audioFile_${id}`)
   if (audioElement.paused) {
+
+    if(playerStore.currentlyPlaying) {
+      console.log("isplaying-stopping", playerStore.currentlyPlaying.id)
+      stopAudio()
+    }
     audioElement.play()
-    playerStore.currentlyPlaying = id
+    console.log("playing", playerStore.currentlyPlaying)
+    playerStore.currentlyPlaying = this
     visible.value = true
   } else {
-    //currentlyPlaying.value = null
-    visible.value = false
-    audioElement.pause()
+    stopAudio()
   }
 }
 function secondsToMinutes(seconds) {
   const minutes = Math.floor(seconds / 60)
   const remainingSeconds = Math.round(seconds % 60)
   return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`
+}
+function stopAudio() {
+  const id = playerStore.currentlyPlaying.id
+  playerStore.currentlyPlaying.visible = null
+  const audioElement = document.getElementById(`audioFile_${id}`)
+  audioElement.pause();
+  playerStore.currentlyPlaying = null;
 }
 </script>
 
