@@ -49,6 +49,7 @@ const props = defineProps({
     default: false,
   },
 });
+
 function yearAnchor(year) {
   if (!years.value.includes(year)) {
     years.value.push(year);
@@ -58,7 +59,6 @@ function yearAnchor(year) {
 }
 defineExpose({ showDetails });
 const emits = defineEmits(["closeOthers"]);
-
 function showSectionDetails(sectionId, audio = false) {
   //if (!audio) {
   emits("closeOthers");
@@ -67,8 +67,9 @@ function showSectionDetails(sectionId, audio = false) {
     const sectionDetail = document.getElementById(
       `section_detail_${sectionId}`
     );
-
+    if (!audio) {
       sectionDetail.scrollIntoView({ behavior: "smooth" });
+    }
 
   });
   showDetails.value = true;

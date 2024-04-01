@@ -7,7 +7,7 @@
         height="50"
         width="50"
         class="play-icon"
-        @click="playAudio(section.id)"
+        @click="playAudio(section.id, $event)"
         :id="`audio_icon_${section.id}`"
         v-if="!visible"
       ></Icon>
@@ -17,7 +17,7 @@
         height="50"
         width="50"
         class="pause-icon"
-        @click="playAudio(section.id)"
+        @click="playAudio(section.id, $event.target.parent)"
         :id="`audio_icon_${section.id}`"
       ></Icon>
     </div>
@@ -48,7 +48,7 @@ const duration = ref(0)
 const playerStore = useAudioState
 const { isPlaying } = storeToRefs(playerStore)
 const emits = defineEmits(['isPlaying', 'visible', 'id'])
-
+const player = getCurrentInstance()
 // Remove the existing declaration of 'emits'
 // const emits = defineEmits(['visible'])
 //const isPlaying = useState('isPlaying', false)
@@ -72,7 +72,15 @@ const emits = defineEmits(['isPlaying', 'visible', 'id'])
 onUnmounted(() => {
   //playerStore.currentlyPlaying = null
 })
-function playAudio(id) {
+
+function secondsToMinutes(seconds) {
+  const minutes = Math.floor(seconds / 60)
+  const remainingSeconds = Math.round(seconds % 60)
+  return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`
+}
+
+
+function playAudio(id, playertest) {
   const audioElement = document.getElementById(`audioFile_${id}`)
   if (audioElement.paused) {
 
@@ -83,6 +91,7 @@ function playAudio(id) {
     audioElement.play()
     console.log("playing", playerStore.currentlyPlaying)
     console.log("this", this)
+    console.log("this-test", playertest.target)
     playerStore.currentlyPlaying = this
 
     console.log("playing", playerStore.currentlyPlaying)
@@ -91,11 +100,6 @@ function playAudio(id) {
     stopAudio()
   }
 }
-function secondsToMinutes(seconds) {
-  const minutes = Math.floor(seconds / 60)
-  const remainingSeconds = Math.round(seconds % 60)
-  return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`
-}
 function stopAudio() {
   const id = playerStore.currentlyPlaying.id
   playerStore.currentlyPlaying.visible = null
@@ -103,6 +107,7 @@ function stopAudio() {
   audioElement.pause();
   playerStore.currentlyPlaying = null;
 }
+
 </script>
 
 <style>
