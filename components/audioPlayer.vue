@@ -80,7 +80,7 @@ function secondsToMinutes(seconds) {
 }
 
 
-function playAudio(id, playertest) {
+async function playAudio(id, playertest) {
   const audioElement = document.getElementById(`audioFile_${id}`)
   if (audioElement.paused) {
 
@@ -91,7 +91,6 @@ function playAudio(id, playertest) {
     audioElement.play()
     console.log("playing", playerStore.currentlyPlaying)
     console.log("this", this)
-    console.log("this-test", playertest.target)
     playerStore.currentlyPlaying = this
 
     console.log("playing", playerStore.currentlyPlaying)
