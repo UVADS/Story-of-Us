@@ -70,7 +70,7 @@ const emits = defineEmits(['isPlaying', 'visible', 'id'])
 
 })
 onUnmounted(() => {
-  playerStore.currentlyPlaying = null
+  //playerStore.currentlyPlaying = null
 })
 function playAudio(id) {
   const audioElement = document.getElementById(`audioFile_${id}`)
