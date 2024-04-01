@@ -91,7 +91,7 @@ async function playAudio(id, playertest) {
     audioElement.play()
     console.log("playing", playerStore.currentlyPlaying)
     console.log("this", this)
-    playerStore.currentlyPlaying = this
+    playerStore.currentlyPlaying = this != undefined ? this : id
 
     console.log("playing", playerStore.currentlyPlaying)
     visible.value = true
@@ -100,7 +100,7 @@ async function playAudio(id, playertest) {
   }
 }
 function stopAudio() {
-  const id = playerStore.currentlyPlaying.id
+  const id = playerStore.currentlyPlaying.id != undefined ? playerStore.currentlyPlaying.id : playerStore.currentlyPlaying
   playerStore.currentlyPlaying.visible = null
   const audioElement = document.getElementById(`audioFile_${id}`)
   audioElement.pause();

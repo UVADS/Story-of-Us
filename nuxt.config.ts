@@ -5,9 +5,6 @@ const apihost =
 
 export default defineNuxtConfig({
   dev: process.env.NODE_ENV !== 'production',
-  generate: {
-    fallback: true
-  },
   ssr: true,
   nitro: {
     //   baseURL: host,
