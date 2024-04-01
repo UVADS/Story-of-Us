@@ -83,7 +83,7 @@ function playAudio(id) {
     audioElement.play()
     console.log("playing", playerStore.currentlyPlaying)
     console.log("this", this)
-    playerStore.currentlyPlaying.value = this
+    playerStore.currentlyPlaying = this
 
     console.log("playing", playerStore.currentlyPlaying)
     visible.value = true
