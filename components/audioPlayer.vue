@@ -77,7 +77,7 @@ function playAudio(id) {
   if (audioElement.paused) {
 
     if(playerStore.currentlyPlaying) {
-      console.log("isplaying-stopping", playerStore.currentlyPlaying.id)
+      console.log("isplaying-stopping", playerStore.currentlyPlaying)
       stopAudio()
     }
     audioElement.play()
