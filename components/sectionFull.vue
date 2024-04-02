@@ -3,9 +3,9 @@
     <div v-if="anchor">
       <a :id="`anchor_${section.fields.year_range[0].start_year}`" />
     </div>
-    <LazyAudioPlayer v-if="hasAudio(section)" :section="section"  @click="showSectionDetails(section.id, true);" class="audio-container" :key="`audio_${section.id}`">
+    <AudioPlayer v-if="hasAudio(section)" :section="section"  @click="showSectionDetails(section.id, true);" class="audio-container" :key="`audio_${section.id}`">
 
-    </LazyAudioPlayer>
+    </AudioPlayer>
     <SectionTeaser
       v-show="!showDetails"
       :id="`section_teaser_${section.id}`"
