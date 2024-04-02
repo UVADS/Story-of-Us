@@ -1,5 +1,5 @@
 <template>
-  <div class="section-play">
+  <div class="section-play" @click="playAudio(section.id, $event, this)">
     <div>
       <audio :id="`audioFile_${section.id}`" :src="audio.url"></audio>
       <Icon
@@ -7,7 +7,7 @@
         height="50"
         width="50"
         class="play-icon"
-        @click="playAudio(section.id, $event)"
+
         :id="`audio_icon_${section.id}`"
         v-if="!visible"
       ></Icon>
@@ -17,7 +17,6 @@
         height="50"
         width="50"
         class="pause-icon"
-        @click="playAudio(section.id, $event.target.parent)"
         :id="`audio_icon_${section.id}`"
       ></Icon>
     </div>
@@ -49,10 +48,6 @@ const playerStore = useAudioState
 const { isPlaying } = storeToRefs(playerStore)
 const emits = defineEmits(['isPlaying', 'visible', 'id'])
 const player = getCurrentInstance()
-// Remove the existing declaration of 'emits'
-// const emits = defineEmits(['visible'])
-//const isPlaying = useState('isPlaying', false)
-//const currentlyPlaying = useState('currentlyPlaying', null)
 
  onMounted(() => {
  const audioElement =  document.getElementById(`audioFile_${props.section.id}`)
@@ -82,6 +77,7 @@ function secondsToMinutes(seconds) {
 
 async function playAudio(id, playertest) {
   const audioElement = document.getElementById(`audioFile_${id}`)
+  console.log("player test", playertest)
   if (audioElement.paused) {
 
     if(playerStore.currentlyPlaying) {

@@ -3,7 +3,7 @@
     <div v-if="anchor">
       <a :id="`anchor_${section.fields.year_range[0].start_year}`" />
     </div>
-    <LazyAudioPlayer v-if="hasAudio(section)" :section="section" :ref="player"  @click="showSectionDetails(section.id, true);" class="audio-container">
+    <LazyAudioPlayer v-if="hasAudio(section)" :section="section"  @click="showSectionDetails(section.id, true);" class="audio-container" :key="`audio_${section.id}`">
 
     </LazyAudioPlayer>
     <SectionTeaser
@@ -29,7 +29,6 @@
 
 <script setup>
 const years = ref([]);
-const player = ref([]);
 const showDetails = ref(false);
 const props = defineProps({
   section: {
