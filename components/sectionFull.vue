@@ -3,7 +3,7 @@
     <div v-if="anchor">
       <a :id="`anchor_${section.fields.year_range[0].start_year}`" />
     </div>
-    <AudioPlayer v-if="hasAudio(section)" :section="section"  @click="showSectionDetails(section.id, true);" class="audio-container" :key="`audio_${section.id}`">
+    <AudioPlayer :id="`audio_${section.id}`" v-if="hasAudio(section)" :section="section"  @click.prevent="showSectionDetails(section.id, true);" class="audio-container" :key="`audio_${section.id}`">
 
     </AudioPlayer>
     <SectionTeaser
@@ -66,9 +66,8 @@ function showSectionDetails(sectionId, audio = false) {
     const sectionDetail = document.getElementById(
       `section_detail_${sectionId}`
     );
-    if (!audio) {
+
       sectionDetail.scrollIntoView({ behavior: "smooth" });
-    }
 
   });
   showDetails.value = true;

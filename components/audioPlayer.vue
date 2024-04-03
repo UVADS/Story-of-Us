@@ -1,5 +1,5 @@
 <template>
-  <div class="section-play" @click="playAudio(section.id, $event, this)">
+  <div class="section-play" @click="playAudio(section.id, this)">
     <div>
       <audio :id="`audioFile_${section.id}`" :src="audio.url"></audio>
       <Icon
@@ -7,8 +7,7 @@
         height="50"
         width="50"
         class="play-icon"
-
-        :id="`audio_icon_${section.id}`"
+        :id="`audio_play_${section.id}`"
         v-if="!visible"
       ></Icon>
       <Icon
@@ -17,7 +16,7 @@
         height="50"
         width="50"
         class="pause-icon"
-        :id="`audio_icon_${section.id}`"
+        :id="`audio_pause_${section.id}`"
       ></Icon>
     </div>
     <div class="duration">
@@ -47,20 +46,17 @@ const duration = ref(0)
 const playerStore = useAudioState
 const { isPlaying } = storeToRefs(playerStore)
 const emits = defineEmits(['isPlaying', 'visible', 'id'])
-const player = getCurrentInstance()
 
  onMounted(() => {
  const audioElement =  document.getElementById(`audioFile_${props.section.id}`)
 
    audioElement.onloadedmetadata = ()=> {
     audioDuration.value = audioElement.duration
-    //console.log('duration: ' + audioElement.duration, audioDuration.value)
     duration.value = audioElement.duration
 
       const durationElement =  document.getElementById(`duration_${props.section.id}`)
 
   durationElement.innerHTML = secondsToMinutes(audioElement.duration)
-    //console.log(    'duration: ' + durationElement.innerHTML)
      }
 
 })
@@ -75,9 +71,8 @@ function secondsToMinutes(seconds) {
 }
 
 
-async function playAudio(id, playertest) {
+function playAudio(id) {
   const audioElement = document.getElementById(`audioFile_${id}`)
-  console.log("player test", playertest)
   if (audioElement.paused) {
 
     if(playerStore.currentlyPlaying) {
@@ -97,12 +92,16 @@ async function playAudio(id, playertest) {
 }
 function stopAudio() {
   const id = playerStore.currentlyPlaying.id != undefined ? playerStore.currentlyPlaying.id : playerStore.currentlyPlaying
-  playerStore.currentlyPlaying.visible = null
   const audioElement = document.getElementById(`audioFile_${id}`)
+  const pauseIcon = document.getElementById(`audio_pause_${id}`)
+  const playIcon = document.getElementById(`audio_play_${id}`)
+ //pauseIcon.style.display = "none"
+ // playIcon.style.display = "block"
+  //playerStore.currentlyPlaying.visible = null
+
   audioElement.pause();
   playerStore.currentlyPlaying = null;
 }
-
 </script>
 
 <style>
