@@ -1,5 +1,5 @@
 <template>
-  <div class="section-play" @click="playAudio(section.id, this)">
+  <div class="section-play" @click="playAudio(section.id)" :key="`section_${section.id}`">
     <div>
       <audio :id="`audioFile_${section.id}`" :src="audio.url"></audio>
       <Icon
@@ -9,6 +9,8 @@
         class="play-icon"
         :id="`audio_play_${section.id}`"
         v-if="!visible"
+        ref="play"
+
       ></Icon>
       <Icon
         v-if="visible"
@@ -17,6 +19,7 @@
         width="50"
         class="pause-icon"
         :id="`audio_pause_${section.id}`"
+        ref="pause"
       ></Icon>
     </div>
     <div class="duration">
@@ -42,10 +45,13 @@ const id = props.section.id
 const audio = props.section.fields.audio[0]
 const visible = ref(false)
 const audioDuration = ref(0)
+const audioSection = ref(null)
 const duration = ref(0)
 const playerStore = useAudioState
 const { isPlaying } = storeToRefs(playerStore)
 const emits = defineEmits(['isPlaying', 'visible', 'id'])
+const play = ref(false)
+const pause = ref(false)
 
  onMounted(() => {
  const audioElement =  document.getElementById(`audioFile_${props.section.id}`)
@@ -95,9 +101,7 @@ function stopAudio() {
   const audioElement = document.getElementById(`audioFile_${id}`)
   const pauseIcon = document.getElementById(`audio_pause_${id}`)
   const playIcon = document.getElementById(`audio_play_${id}`)
- //pauseIcon.style.display = "none"
- // playIcon.style.display = "block"
-  //playerStore.currentlyPlaying.visible = null
+
 
   audioElement.pause();
   playerStore.currentlyPlaying = null;
