@@ -1,11 +1,11 @@
 <template>
-  <div class="section-container ">
+  <div class="section-container">
     <div v-if="anchor">
       <a :id="`anchor_${section.fields.year_range[0].start_year}`" />
     </div>
-    <AudioPlayer :id="`audio_${section.id}`" v-if="hasAudio(section)" :section="section"  @click.prevent="showSectionDetails(section.id, true);" class="audio-container" :key="`audio_${section.id}`">
-
-    </AudioPlayer>
+    <div @click="showSectionDetails(section.id, true)">
+      <slot name="audioPlayer"></slot>
+    </div>
     <SectionTeaser
       v-show="!showDetails"
       :id="`section_teaser_${section.id}`"
@@ -23,67 +23,66 @@
       :ref="`section_detail_${section.id}`"
       class="section-detail-component"
       @visible="closeDetails(section.id)"
-    ></SectionDetail>
+    >
+      <slot name="audioPlayerMobile"></slot>
+    </SectionDetail>
   </div>
 </template>
 
 <script setup>
-const years = ref([]);
-const showDetails = ref(false);
+const years = ref([])
+const showDetails = ref(false)
 const props = defineProps({
   section: {
     type: Object,
-    required: true,
+    required: true
   },
   index: {
     type: Number,
-    required: true,
+    required: true
   },
   showDetails: {
     type: Boolean,
-    default: false,
+    default: false
   },
   anchor: {
     type: Boolean,
-    default: false,
-  },
-});
-
+    default: false
+  }
+})
+const id = ref(props.section.id)
 function yearAnchor(year) {
   if (!years.value.includes(year)) {
-    years.value.push(year);
-    return true;
+    years.value.push(year)
+    return true
   }
-  return false;
+  return false
 }
-defineExpose({ showDetails });
-const emits = defineEmits(["closeOthers"]);
-function showSectionDetails(sectionId, audio = false) {
-  //if (!audio) {
-  emits("closeOthers");
-  //}
+
+defineExpose({ showDetails, id })
+const emits = defineEmits(['closeOthers'])
+function showSectionDetails(sectionId, audio = false, el = null) {
+  emits('closeOthers')
   nextTick(() => {
-    const sectionDetail = document.getElementById(
-      `section_detail_${sectionId}`
-    );
+    const sectionDetail = document.getElementById(`section_detail_${sectionId}`)
 
-      sectionDetail.scrollIntoView({ behavior: "smooth" });
-
-  });
-  showDetails.value = true;
+    sectionDetail.scrollIntoView({ behavior: 'smooth' })
+  })
+  showDetails.value = true
 }
 function closeDetails(id) {
-  const sectionDetail = document.getElementById(`section_detail_${id}`);
-  showDetails.value = false;
+  const sectionDetail = document.getElementById(`section_detail_${id}`)
+  const audioPlayer = document.getElementById(`audio_${id}`)
+
+  audioPlayer && audioPlayer.classList.add('hidden-audio')
+  showDetails.value = false
 }
 function toggleDetails(visible) {
-  //console.log('toggle details', visible)
-  showDetails.value = !showDetails.value;
+  showDetails.value = !showDetails.value
 }
 </script>
 
 <style>
-
 .section-detail-component {
   animation: show_div 2s;
 }
@@ -93,12 +92,12 @@ function toggleDetails(visible) {
 .hidden {
   animation: hide_div 2s;
   transition-property: all;
-	transition-duration: .5s;
-	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+  transition-duration: 0.5s;
+  transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 }
 @media screen and (max-width: 768px) {
   .audio-container {
-  display: none;
+    display: none;
   }
 }
 

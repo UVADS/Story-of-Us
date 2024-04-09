@@ -5,18 +5,38 @@
         <ChapterInfo :chapters="chapter"></ChapterInfo>
       </div>
       <div class="sections-list">
-        <SectionFull
-          v-for="(section, index) in chapterSections"
-          :key="section.id"
-          :id="`section_${section.id}`"
-          ref="sections"
-          class="section"
-          :section="section"
-          :anchor="isAnchorSection(section.id)"
-          @close-others="closeAll(section.id)"
-          :index="index"
-        >
-        </SectionFull>
+        <div v-for="(section, index) in chapterSections" :key="section.id">
+          <SectionFull
+            :id="`section_${section.id}`"
+            ref="sections"
+            class="section"
+            :section="section"
+            :anchor="isAnchorSection(section.id)"
+            @close-others="closeAll(section.id)"
+            :index="index"
+          >
+            <template v-slot:audioPlayer>
+              <AudioPlayer
+                :id="`audio_${section.id}`"
+                v-if="hasAudio(section)"
+                :section="section"
+                ref="audioPlayers"
+                @click="audiodetails(section.id)"
+                class="full-audio"
+              ></AudioPlayer>
+            </template>
+            <template v-slot:audioPlayerMobile>
+              <AudioPlayer
+                :id="`audio_${section.id}`"
+                v-if="hasAudio(section)"
+                :section="section"
+                ref="audioPlayers"
+                @click="audiodetails(section.id)"
+                class="mobile-audio"
+              ></AudioPlayer
+            ></template>
+          </SectionFull>
+        </div>
       </div>
     </div>
     <div class="sections-right">
@@ -26,65 +46,69 @@
 </template>
 
 <script setup>
-import { storeToRefs } from 'pinia';
-import { useChaptersStore } from '~/stores/chapters';
-const route = useRoute();
-const store = useChaptersStore();
-const { fetchChapters } = store; // have all non reactiave stuff here
-await store.fetchChapters();
-const chapterId = Number(route.params.id);
-const chapters = store.getChapters;
-const chapter = chapters.filter((chapter) => Number(chapter.tid) === chapterId);
-//console.log(chapterId, chapters, chapter)
-const {
-  data,
-  pending,
-  error,
-  refresh,
-} = await useAPIFetch(`/api/sections/${route.params.id}`, {
-  key: route.params.id,
-});
+import { storeToRefs } from 'pinia'
+import { useChaptersStore } from '~/stores/chapters'
+const route = useRoute()
+const store = useChaptersStore()
+const { fetchChapters } = store
+await store.fetchChapters()
+const chapterId = Number(route.params.id)
+const chapters = store.getChapters
+const chapter = chapters.filter((chapter) => Number(chapter.tid) === chapterId)
+const { data, pending, error, refresh } = await useAPIFetch(
+  `/api/sections/${route.params.id}`,
+  {
+    key: route.params.id
+  }
+)
 
-const chapterSections = data.value.results;
-const sections = ref([]);
-let current = null;
-let anchorSections = []; // onMounted(() => {})
+const chapterSections = data.value.results
+const sections = ref([])
+const audioPlayers = ref([])
+let current = null
+let anchorSections = [] // onMounted(() => {})
 const props = defineProps({
   chapterName: { type: String },
-  chapters: { type: Object },
-});
+  chapters: { type: Object }
+})
 
 let sectionAnchors = [
   ...new Set(
     chapterSections.map((item) => item.fields.year_range[0].start_year)
-  ),
-];
+  )
+]
 chapterSections.forEach((section) => {
-  const year = section.fields.year_range[0].start_year;
+  const year = section.fields.year_range[0].start_year
 
   if (sectionAnchors.includes(year)) {
-    anchorSections.push(section.id);
-    sectionAnchors = sectionAnchors.filter((item) => item !== year);
+    anchorSections.push(section.id)
+    sectionAnchors = sectionAnchors.filter((item) => item !== year)
   }
-});
+})
 
 function isAnchorSection(id) {
-  return anchorSections.includes(id);
+  return anchorSections.includes(id)
 }
-
+function audiodetails(id) {
+  audioPlayers.value.forEach((player) => {
+    if (player.id !== id) player.visible = false
+  })
+}
 function closeAll(id) {
-  const sectionDetail = document.getElementById(`section_detail_${id}`);
+  const sectionDetail = document.getElementById(`section_detail_${id}`)
+
   sections.value.forEach((section) => {
-    //sectionDetail.classList.toggle('hidden')
-    section.showDetails = false;
+    section.showDetails = false
+
     if (section.id === id) {
-      section.value.focus();
+      sectionDetail.focus()
     }
-  });
+  })
+
   nextTick(() => {
-    const sectionDetail = document.getElementById(`section_detail_${id}`);
-  });
-  current = id;
+    const sectionDetail = document.getElementById(`section_detail_${id}`)
+  })
+  current = id
 }
 
 useHead({
@@ -92,14 +116,16 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: chapterSections[0].fields.summary,
+      content: chapterSections[0].fields.summary
     },
     {
       name: 'og:image',
-      content: chapterSections[0].fields.photos ? chapterSections[0].fields.photos[0].url : null,
+      content: chapterSections[0].fields.photos
+        ? chapterSections[0].fields.photos[0].url
+        : null
     }
   ]
-        });
+})
 </script>
 <style lang="scss">
 .chapter-header {
@@ -172,6 +198,9 @@ useHead({
   line-height: 30px; /* 230.769% */
 }
 @media (max-width: 768px) {
+  .section-play.full-audio {
+    display: none;
+  }
   .sections-right {
     display: none;
   }
@@ -196,7 +225,7 @@ useHead({
   .sections-page {
     display: flex;
     flex-direction: row;
-
+    justify-content: center;
     .sections-right {
       max-width: 240px;
       color: #fff;
@@ -215,7 +244,7 @@ useHead({
     }
 
     .sections-left {
-      max-width: 1080px;
+      max-width: 100%;
     }
     .chapter-info {
       padding: 60px 0;

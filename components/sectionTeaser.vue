@@ -1,5 +1,5 @@
 <template>
-  <div :id="`teaser_${section.id}`" class="section-teaser" >
+  <div :id="`teaser_${section.id}`" class="section-teaser">
     <div class="col-3 section-years digital-number">
       <div class="flex-center-line">
         <div class="icon-container">
@@ -9,14 +9,10 @@
           {{ yearRange }}
         </div>
       </div>
-
-
-
     </div>
-    <div class="section-summary">
+    <div class="section-summary summary-teaser">
       <div class="section-title">{{ section.title.split(':')[1] }}</div>
       <div>{{ section.fields.summary }}</div>
-
     </div>
 
     <div class="section-image">
@@ -27,13 +23,10 @@
         :alt="`${images[0].alt}`"
       />
     </div>
-
   </div>
-
 </template>
 
 <script setup>
-
 const props = defineProps({
   section: {
     type: Object,
@@ -54,15 +47,16 @@ const yearRange =
       ' - ' +
       section.fields.year_range[0].end_year
 
-const images =  section.fields.photos
+const images = section.fields.photos
 
 function hasAudio() {
-  return section.fields.audio && section.fields.audio.length > 0 ? section.fields.audio[0] : null
+  return section.fields.audio && section.fields.audio.length > 0
+    ? section.fields.audio[0]
+    : null
 }
-
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .section-teaser {
   padding: 60px 0;
   display: flex;
@@ -72,124 +66,117 @@ function hasAudio() {
   scroll-margin-top: 50px;
   scroll-behavior: smooth;
 
-.section-title
-{
-  color: #fdda24;
-
-}
-.section:last-child {
-  border: none;
-}
-.icon-container {
-  padding-right: 10px;
-}
-.section-years {
-  color: #fff;
-  font-family: Digital-7;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 22px; /* 110% */
-  letter-spacing: 2px;
-  width: 130px;
-  margin-right: 110px;
-  white-space: nowrap;
-}
-.section-summary
-{
-  position: relative;
-  font-size: 20px !important;
-  line-height: 28px !important;
-  width: 480px;
   .section-title {
-  color: #fdda24;
-  //position: absolute;
-  //bottom: 0;
-  text-align: left;
-  width: 100%;
-  padding-bottom: 20px;
-  font-size: 24px;
-  font-weight: 600;
-  ;
-
-}
-}
-.section-summary,
-.section-text {
-  max-width: 480px;
-  color: #fff;
-  font-size: 28px;
-  font-style: normal;
-  font-weight: 300;
-  line-height: 36px; /* 142.857% */
-  padding-bottom: 30px;
-}
-.flex-center-line {
-  display: flex;
-  align-items: center;
-  padding: 5px 0 30px 0;
-  margin-right:0px;
-}
-.section-summary {
-  max-height: inherit;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.section-body {
-  color: #fff;
-  font-size: 19px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 30px; /* 157.895% */
-}
-.section-image {
-  align-self: center;
-  margin-left: 120px;
-  width: 240px;
-  img {
-    max-height: 150px;
-    width: 100%;
-    object-fit: cover;
+    color: #fdda24;
   }
-}
-
-.vector-dot {
-  line-height: 22px;
-}
-}
-@media (max-width:  768px) {
-  .section-teaser {
-  padding: 20px 21px;
-  display: flex;
-  flex-direction: column;
-  max-height: unset;
-  clear: both;
-  border-bottom: #fff solid 1px;
-
-.section-image {
-display:none;
-}
-.section-play {
-  display:none;
-}
-  .section-summary,
-.section-text {
-  max-width: 100%;
-  color: #fff;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 300;
-  line-height: 34px; /* 142.857% */
-  padding-bottom: 30px;
-  p {
-    font-size: 18px;
+  .section:last-child {
+    border: none;
+  }
+  .icon-container {
+    padding-right: 10px;
+  }
+  .section-years {
+    color: #fff;
+    font-family: Digital-7;
+    font-size: 20px;
+    font-style: normal;
     font-weight: 400;
-    line-height: 26px;
-    letter-spacing: 0em;
-    text-align: left;
-    margin-bottom: 10px;
+    line-height: 22px; /* 110% */
+    letter-spacing: 2px;
+    width: 130px;
+    margin-right: 110px;
+    white-space: nowrap;
+  }
+  .section-summary {
+    position: relative;
+    font-size: 20px !important;
+    line-height: 28px !important;
+    width: 480px;
+    .section-title {
+      color: #fdda24;
+      //position: absolute;
+      //bottom: 0;
+      text-align: left;
+      width: 100%;
+      padding-bottom: 20px;
+      font-size: 24px;
+      font-weight: 600;
+    }
+  }
+  .section-summary,
+  .section-text {
+    max-width: 480px;
+    color: #fff;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 36px; /* 142.857% */
+    padding-bottom: 30px;
+  }
+  .flex-center-line {
+    display: flex;
+    align-items: center;
+    padding: 5px 0 30px 0;
+    margin-right: 0px;
+  }
+  .section-summary {
+    max-height: inherit;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .section-body {
+    color: #fff;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 30px; /* 157.895% */
+  }
+  .section-image {
+    align-self: center;
+    margin-left: 120px;
+    width: 240px;
+    img {
+      max-height: 150px;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .vector-dot {
+    line-height: 22px;
   }
 }
-}
+@media (max-width: 768px) {
+  .section-teaser {
+    padding: 20px 21px;
+    display: flex;
+    flex-direction: column;
+    max-height: unset;
+    clear: both;
+    border-bottom: #fff solid 1px;
+
+    .section-image {
+      display: none;
+    }
+
+    .section-summary,
+    .section-text {
+      max-width: 100%;
+      color: #fff;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 300;
+      line-height: 34px; /* 142.857% */
+      padding-bottom: 30px;
+      p {
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 26px;
+        letter-spacing: 0em;
+        text-align: left;
+        margin-bottom: 10px;
+      }
+    }
+  }
 }
 </style>
