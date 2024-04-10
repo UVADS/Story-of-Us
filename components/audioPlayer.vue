@@ -95,7 +95,7 @@ function playAudio(id, event) {
     isPlaying.value = true
     audioElement.play()
 
-    playerStore.currentlyPlaying = this || id.value
+    playerStore.currentlyPlaying = this || id
   } else {
     stopAudio()
   }
