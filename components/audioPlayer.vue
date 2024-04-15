@@ -65,10 +65,11 @@ onMounted(setDuration)
 
 async function setDuration() {
   const audioElement = document.getElementById(`audioFile_${props.section.id}`)
-  audioElement.addEventListener('timeupdate', function (ev) {
-    playTimer.value = secondsToMinutes(audioElement.currentTime)
-  })
+
   audioElement.onloadedmetadata = () => {
+    audioElement.addEventListener('timeupdate', function (ev) {
+      playTimer.value = secondsToMinutes(audioElement.currentTime)
+    })
     audioDuration.value = audioElement.duration
     duration.value = audioElement.duration
 
@@ -76,7 +77,8 @@ async function setDuration() {
       `duration_${props.section.id}`
     )
 
-    durationElement.innerHTML = secondsToMinutes(audioElement.duration)
+    durationElement.innerHTML =
+      playTimer + '/' + secondsToMinutes(duration.value)
   }
 }
 function secondsToMinutes(seconds) {

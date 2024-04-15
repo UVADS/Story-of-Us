@@ -40,7 +40,10 @@
       </div>
     </div>
     <div class="sections-right">
-      <RightMenu :sections="chapterSections" :chapterId="chapterId"></RightMenu>
+      <RightMenu
+        :sections="chapterSections"
+        :chapterId="Number(id)"
+      ></RightMenu>
     </div>
   </div>
 </template>
@@ -52,16 +55,23 @@ const route = useRoute()
 const store = useChaptersStore()
 const { fetchChapters } = store
 await store.fetchChapters()
-const chapterId = Number(route.params.id)
+const chapterId = route.params.id
 const chapters = store.getChapters
-const chapter = chapters.filter((chapter) => Number(chapter.tid) === chapterId)
+const id =
+  chapters[
+    chapters.findIndex((chapter) => titleUrl(chapter.name) === chapterId)
+  ].tid
+
+const chapter = chapters.filter(
+  (chapter) => titleUrl(chapter.name) === chapterId
+)
 const { data, pending, error, refresh } = await useAPIFetch(
-  `/api/sections/${route.params.id}`,
+  `/api/sections/${id}`,
   {
     key: route.params.id
   }
 )
-
+//throw new Error(id)
 const chapterSections = data.value.results
 const sections = ref([])
 const audioPlayers = ref([])

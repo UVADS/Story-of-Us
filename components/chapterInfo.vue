@@ -1,31 +1,33 @@
 <template>
   <div
-    v-for="(chapter) in chapters"
+    v-for="chapter in chapters"
     :key="`chapter_${chapter.field_chapter_number}`"
     class="chapter-info"
   >
     <div class="chapter-number">
       <nuxt-link :to="`/chapters/${chapter.tid}`">
-        0{{ chapter.field_chapter_number }}</nuxt-link>
-
+        0{{ chapter.field_chapter_number }}</nuxt-link
+      >
     </div>
     <div class="chapter-name">
-      <nuxt-link :to="`/chapters/${chapter.tid}`">{{ chapter.name }}</nuxt-link>
+      <nuxt-link :to="`/chapters/${titleUrl(chapter.name)}`">{{
+        chapter.name
+      }}</nuxt-link>
     </div>
-    <div class="chapter-years padding-top-20">{{   yearRange(chapter.field_years) }}</div>
+    <div class="chapter-years padding-top-20">
+      {{ yearRange(chapter.field_years) }}
+    </div>
   </div>
 </template>
 
 <script setup>
-
 const props = defineProps(['chapters'])
 function yearRange(years) {
- return years && years.includes('-') ? years : years + " - ONWARDS"
+  return years && years.includes('-') ? years : years + ' - ONWARDS'
 }
 </script>
 
 <style lang="scss">
-
 .chapter-years {
   padding-top: 20px;
 }
@@ -34,7 +36,7 @@ function yearRange(years) {
   height: 100%;
   display: flex;
   flex-direction: column;
-  max-width:1200px;
+  max-width: 1200px;
 }
 
 .chapter-info {
@@ -46,37 +48,31 @@ function yearRange(years) {
   vertical-align: flex-start;
   align-items: center;
   align-content: center;
-  height:240px;
+  height: 240px;
   height: calc(100% / 3);
   clear: both;
   min-height: 240px;
-
-
 }
-a:hover
-{
-
+a:hover {
   filter: brightness(0.9);
   text-shadow: #b4b4b2 0px 2px 2px;
-
 }
 .chapter-name {
   font-size: 48px;
-  font-family: 'franklin-gothic-urw', "Franklin Gothic", "ITC Franklin Gothic", "franklin-gothic-ext-comp-urw", Arial, sans-serif;
+  font-family: 'franklin-gothic-urw', 'Franklin Gothic', 'ITC Franklin Gothic',
+    'franklin-gothic-ext-comp-urw', Arial, sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 90px;
   line-height: 80px;
-
 }
-
 
 .chapter-years {
   font-size: 24px;
   font-family: Digital-7;
   line-height: 24px;
   grid-column: 2;
-  animation:  2s;
+  animation: 2s;
 }
 
 .chapter-number {
@@ -95,32 +91,29 @@ a:hover
   border: none;
 }
 @media (max-width: 768px) {
-  .chapter-name
-  {
-font-size: 30px;
-font-style: normal;
-font-weight: 600;
-line-height: 30px; /* 100% */
+  .chapter-name {
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 30px; /* 100% */
   }
   .chapter-number {
+    font-size: 50px;
+    line-height: 30px;
+  }
+  .sections-page .chapter-info {
+    border-bottom: solid 1px #fff;
+    display: grid;
+    grid-template-columns: 120px auto;
+    vertical-align: flex-start;
+    align-items: center;
+    align-content: center;
 
-  font-size: 50px;
-line-height: 30px;
-
-}
-.sections-page .chapter-info {
-  border-bottom: solid 1px #fff;
-  display: grid;
-  grid-template-columns: 120px auto;
-  vertical-align: flex-start;
-  align-items: center;
-  align-content: center;
-
-  clear: both;
-}
-.chapter-years {
-  font-size: 20px;
-  line-height: 16px;
-}
+    clear: both;
+  }
+  .chapter-years {
+    font-size: 20px;
+    line-height: 16px;
+  }
 }
 </style>

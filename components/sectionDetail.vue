@@ -89,7 +89,7 @@
           v-for="topic in section.fields.topics"
           :key="topic.id"
           class="topic-link"
-          :href="`/topic/${topic.id}`"
+          :href="`/topic/${titleUrl(topic.name)}`"
         >
           {{ topic.name }}
         </a>

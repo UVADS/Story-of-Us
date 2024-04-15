@@ -26,66 +26,63 @@
 </template>
 
 <script setup>
-import { storeToRefs } from 'pinia';
-import { useChaptersStore } from '~/stores/chapters';
-const route = useRoute();
-const store = useChaptersStore();
-const { fetchChapters } = store; // have all non reactiave stuff here
-await store.fetchChapters();
-const chapterId = Number(route.params.id);
-const chapters = store.getChapters;
-const chapter = chapters.filter((chapter) => Number(chapter.tid) === chapterId);
-//console.log(chapterId, chapters, chapter)
-const {
-  data,
-  pending,
-  error,
-  refresh,
-} = await useAPIFetch(`/api/sections/${route.params.id}`, {
-  key: route.params.id,
-});
+import { storeToRefs } from 'pinia'
+import { useChaptersStore } from '~/stores/chapters'
+const route = useRoute()
+const store = useChaptersStore()
+const { fetchChapters } = store // have all non reactiave stuff here
+await store.fetchChapters()
+const chapterId = Number(route.params.id)
+const chapters = store.getChapters
+const chapter = chapters.filter((chapter) => Number(chapter.tid) === chapterId)
+const { data, pending, error, refresh } = await useAPIFetch(
+  `/api/sections/${route.params.id}`,
+  {
+    key: route.params.id
+  }
+)
 
-const chapterSections = data.value.results;
-const sections = ref([]);
-let current = null;
-let anchorSections = []; // onMounted(() => {})
+const chapterSections = data.value.results
+const sections = ref([])
+let current = null
+let anchorSections = [] // onMounted(() => {})
 const props = defineProps({
   chapterName: { type: String },
   chapters: { type: Object },
-  chapter: { type: Object },
-});
+  chapter: { type: Object }
+})
 
 let sectionAnchors = [
   ...new Set(
     chapterSections.map((item) => item.fields.year_range[0].start_year)
-  ),
-];
+  )
+]
 chapterSections.forEach((section) => {
-  const year = section.fields.year_range[0].start_year;
+  const year = section.fields.year_range[0].start_year
 
   if (sectionAnchors.includes(year)) {
-    anchorSections.push(section.id);
-    sectionAnchors = sectionAnchors.filter((item) => item !== year);
+    anchorSections.push(section.id)
+    sectionAnchors = sectionAnchors.filter((item) => item !== year)
   }
-});
+})
 
 function isAnchorSection(id) {
-  return anchorSections.includes(id);
+  return anchorSections.includes(id)
 }
 
 function closeAll(id) {
-  const sectionDetail = document.getElementById(`section_detail_${id}`);
+  const sectionDetail = document.getElementById(`section_detail_${id}`)
   sections.value.forEach((section) => {
     //sectionDetail.classList.toggle('hidden')
-    section.showDetails = false;
+    section.showDetails = false
     if (section.id === id) {
-      section.value.focus();
+      section.value.focus()
     }
-  });
+  })
   nextTick(() => {
-    const sectionDetail = document.getElementById(`section_detail_${id}`);
-  });
-  current = id;
+    const sectionDetail = document.getElementById(`section_detail_${id}`)
+  })
+  current = id
 }
 </script>
 <style lang="scss">

@@ -1,3 +1,5 @@
+//not in use for this project
+
 import { defineStore } from 'pinia'
 
 const basicState = { component: null, props: {} }
