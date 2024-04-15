@@ -25,8 +25,19 @@
 </template>
 
 <script setup>
+import { storeToRefs } from 'pinia'
+import { useTopicsStore } from '~/stores/topics'
 const route = useRoute()
-const { data } = await useAPIFetch(`/api/person/${route.params.id}`, {
+const store = usePeopleStore()
+const { fetchPeople } = store
+await store.fetchPeople()
+const urlID = route.params.id
+const people = store.getPeople
+
+const id =
+  people[people.findIndex((person) => titleUrl(person.name) === urlID)].id
+console.log(id)
+const { data } = await useAPIFetch(`/api/person/${id}`, {
   key: route.params.id
 })
 let current = null
@@ -37,7 +48,6 @@ const personSections = data.value.sections
 function closeAll(id) {
   const sectionDetail = document.getElementById(`section_detail_${id}`)
   sections.value.forEach((section) => {
-
     //sectionDetail.classList.toggle('hidden')
     section.showDetails = false
     if (section.id === id) {
@@ -46,10 +56,8 @@ function closeAll(id) {
   })
   nextTick(() => {
     const sectionDetail = document.getElementById(`section_detail_${id}`)
-
-})
+  })
   current = id
-
 }
 </script>
 <style lang="scss">
@@ -69,10 +77,9 @@ function closeAll(id) {
     padding-left: 120px;
   }
 }
-@media (max-width:768px) {
+@media (max-width: 768px) {
   .person-page {
-    .page-right
-    {
+    .page-right {
       display: none;
     }
   }

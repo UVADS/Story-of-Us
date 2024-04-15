@@ -33,7 +33,7 @@
         class="btn-close btn"
         @click.prevent="collapseSection(section.id)"
       >
-        Close Section
+        <Icon icon="gridicons:cross" height="25" /> &nbsp; Close Section
       </button>
     </div>
     <div class="section-media">
@@ -78,7 +78,7 @@
         v-for="person in section.fields.connected_people"
         :key="person.id"
         class="person-link"
-        :href="`/people/${person.id}`"
+        :href="`/people/${titleUrl(person.name)}`"
       >
         {{ person.name }}
       </a>
@@ -99,6 +99,7 @@
 </template>
 
 <script setup>
+import { Icon } from '@iconify/vue/dist/iconify.js'
 import DocumentModal from './documentModal.vue'
 import CloseButton from './vectors/closeButton.vue'
 import dot from './vectors/dot.vue'
@@ -153,12 +154,20 @@ videoIds.value =
     : []
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .btn-close {
   width: 240px;
   height: 45px;
   color: #fff;
   margin-top: 30px;
+}
+.btn.btn-image,
+.btn {
+  text-decoration: none;
+  border: none;
+  padding: 0;
+  border: none;
+  background: none;
 }
 
 .padding- .btn-container {
@@ -279,6 +288,9 @@ videoIds.value =
     line-height: 18px;
     /* 112.5% */
     letter-spacing: -0.25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .section-media,
@@ -293,7 +305,7 @@ videoIds.value =
 
     a,
     p {
-      color: #fdda24;
+      color: #fdda24 !important;
       font-size: 12px;
       font-style: normal;
       font-weight: 400;
@@ -313,6 +325,18 @@ videoIds.value =
       max-width: 240px;
       flex-wrap: wrap;
       margin: 5px 7.5px;
+      img {
+        width: 110px;
+        max-width: 110px;
+      }
+      .btn.btn-image:only-child {
+        width: 230px;
+        img {
+          max-width: inherit;
+          width: inherit;
+          height: auto;
+        }
+      }
     }
 
     .section-image-thumbnail {
@@ -325,6 +349,10 @@ videoIds.value =
     .section-media-videos {
       padding: 10px 0px;
       max-width: 240px;
+      .section-video-thumbnail {
+        max-width: inherit;
+        width: 240px;
+      }
     }
 
     .video-player {
@@ -357,7 +385,6 @@ videoIds.value =
     padding-left: 15px;
   }
   .section-detail {
-    padding: 20px 21px;
     display: flex;
     flex-direction: column;
     clear: both;

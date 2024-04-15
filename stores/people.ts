@@ -1,13 +1,12 @@
 import { defineStore } from 'pinia'
 
-export const usePeopleStore = defineStore({
-  id: 'PeopleStore',
-  state: () => ({ }),
+export const usePeopleStore = defineStore( 'people', {
+  state: () => ({ people: [] }),
   actions: {
     async fetchPeople(): Promise<void> {
-      const { data } = await useAPIFetch<ResultsType>('/people')
+      const { data } = await useAPIFetch<ResultsType>('/api/person')
       if (data.value) {
-        this.people = data.value
+        this.people = data.value.person
       }
     }
   },

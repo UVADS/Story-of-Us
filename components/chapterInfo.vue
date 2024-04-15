@@ -32,6 +32,11 @@ function yearRange(years) {
   padding-top: 20px;
 }
 
+.a,
+div a {
+  color: #fff;
+  text-decoration: none !important;
+}
 .chapters {
   height: 100%;
   display: flex;
@@ -75,8 +80,9 @@ a:hover {
   animation: 2s;
 }
 
-.chapter-number {
-  color: #fdda24;
+.chapter-number,
+.chapter-number a {
+  color: #fdda24 !important;
   font-family: Digital-7;
   font-size: 90px;
   font-style: normal;

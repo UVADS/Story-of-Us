@@ -25,9 +25,20 @@
 </template>
 
 <script setup>
+import { storeToRefs } from 'pinia'
+import { useTopicsStore } from '~/stores/topics'
 const route = useRoute()
-const { data } = await useAPIFetch(`/api/topic/${route.params.id}`, {
-  key: route.params.id
+const store = useTopicsStore()
+const { fetchTopics } = store
+await store.fetchTopics()
+const topicName = route.params.id
+const topics = store.getTopics
+
+const id =
+  topics[topics.findIndex((topic) => titleUrl(topic.name) === topicName)].id
+
+const { data } = await useAPIFetch(`/api/topic/${id}`, {
+  key: topicName
 })
 let current = null
 const sections = ref([])
@@ -38,7 +49,6 @@ function closeAll(id) {
   const sectionDetail = document.getElementById(`section_detail_${id}`)
 
   sections.value.forEach((section) => {
-
     //sectionDetail.classList.toggle('hidden')
     section.showDetails = false
     if (section.id === id) {
@@ -47,10 +57,8 @@ function closeAll(id) {
   })
   nextTick(() => {
     const sectionDetail = document.getElementById(`section_detail_${id}`)
-
-})
+  })
   current = id
-
 }
 </script>
 <style lang="scss">
@@ -70,10 +78,9 @@ function closeAll(id) {
     padding-left: 120px;
   }
 }
-@media (max-width:768px) {
+@media (max-width: 768px) {
   .topic-page {
-    .page-right
-    {
+    .page-right {
       display: none;
     }
   }

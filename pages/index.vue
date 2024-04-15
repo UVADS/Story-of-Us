@@ -1,5 +1,4 @@
 <script setup>
-
 const words = ref([
   'Build',
   'Champion',
@@ -29,11 +28,12 @@ const words = ref([
       </h1>
       <div class="home-subtext homepage-text">
         <p class="text-1">
-        It began as an idea then evolved into an institute before ultimately
-        transforming into the first data science school in the country. </p>
-        <p class="text-2">In this
-        exhibition you’ll learn how this improbable story unfolded and hear from
-        the people who turned a vision into reality.
+          It began as an idea then evolved into an institute before ultimately
+          transforming into the first data science school in the country.
+        </p>
+        <p class="text-2">
+          In this exhibition you’ll learn how this improbable story unfolded and
+          hear from the people who turned a vision into reality.
         </p>
       </div>
       <a href="/chapters"
@@ -47,20 +47,16 @@ const words = ref([
 <style scoped lang="scss">
 @import '@/assets/css/typed.scss';
 
-
-.text-1
-{
+.text-1 {
   animation-name: fadeIn;
   animation-duration: 7s;
-
 }
-.text-2
-{
+.text-2 {
   animation-name: fadeIn;
   animation-duration: 12s;
 }
-.text-1, .text-2
-{
+.text-1,
+.text-2 {
   line-clamp: 2;
 }
 h1 {
@@ -88,6 +84,10 @@ h1 {
 }
 .homepage-content {
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
 }
 .homepage-content-wrapper {
   background-image: url('assets/images/databurst.svg');
@@ -166,7 +166,7 @@ $options: (
   caret-space: 1px,
   delay: 4,
   iterations: 1,
-  end-on: 'Build',
+  end-on: 'Build'
 );
 .build-text {
   @include typed(
@@ -195,7 +195,9 @@ $options: (
     opacity: 0;
   }
 
-  66% { opacity:0; }
+  66% {
+    opacity: 0;
+  }
   100% {
     opacity: 1;
   }

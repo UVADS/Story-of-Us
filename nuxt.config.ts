@@ -86,7 +86,7 @@ export default defineNuxtConfig({
   },
   modules: [
     '@nuxtjs/eslint-module',
-    '@nuxtjs/tailwindcss',
+
     ['@pinia/nuxt', { autoImports: ['defineStore', 'acceptHMRUpdate'] }],
     '@nuxt/image',
     '@vueuse/nuxt',

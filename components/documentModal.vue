@@ -40,13 +40,13 @@
               <div class="document-description">
                 <p>{{ document.description }}</p>
                 <p>{{ document.summary }}</p>
-                <br>
+                <br />
                 <p>{{ document.author }}</p>
                 <p>{{ document.pub_title }}</p>
                 <p class="source-link">{{ document.source_link }}</p>
               </div>
               <div class="document-container">
-              <ClientOnly>  <VuePdfEmbed :source="docUrl" /></ClientOnly>
+                <ClientOnly> <VuePdfEmbed :source="docUrl" /></ClientOnly>
               </div>
             </div>
             <div v-if="video" class="video">
@@ -71,69 +71,69 @@
 </template>
 
 <script setup>
-import CloseButton from "./vectors/closeButton.vue";
-const store = useModalStore();
-const showModal = ref(false);
-defineEmits(["close"]);
+import CloseButton from './vectors/closeButton.vue'
+const store = useModalStore()
+const showModal = ref(false)
+defineEmits(['close'])
 const props = defineProps({
   id: {
-    type: Number,
+    type: Number
   },
   isDocument: {
-    type: Boolean,
+    type: Boolean
   },
   isImage: {
-    type: Boolean,
+    type: Boolean
   },
   document: {
     type: Object,
     required: false,
-    default: null,
+    default: null
   },
   image: {
     type: Object,
     required: false,
-    default: null,
+    default: null
   },
   video: {
     type: String,
     required: false,
-    default: null,
+    default: null
   },
   show: {
-    type: Boolean,
-  },
-});
+    type: Boolean
+  }
+})
 const docUrl = props.document ? props.document.url : null
 
 function toggleModal(modalValue) {
-  showModal.value = modalValue;
+  showModal.value = modalValue
   if (showModal.value) {
-    document.body.classList.add("modal-open");
+    document.body.classList.add('modal-open')
   } else {
-    document.body.classList.remove("modal-open");
+    document.body.classList.remove('modal-open')
   }
 }
 function keydownListener(event) {
   // Assert the key is escape
-  if (event.key === "Escape") showModal.value = false;
+  if (event.key === 'Escape') showModal.value = false
 }
 
 // Attach event listener on mount
 onMounted(() => {
-  document.addEventListener("keydown", keydownListener);
-});
+  document.addEventListener('keydown', keydownListener)
+})
 
 // Clean up on unmount
 onUnmounted(() => {
-  document.removeEventListener("keydown", keydownListener);
-});
+  document.removeEventListener('keydown', keydownListener)
+})
 // Make a function that will trigger on keydown
 </script>
 
 <style scoped>
 * {
-  font-family: "ibm-plex-mono", monospace !important;
+  font-family: 'ibm-plex-mono', monospace !important;
 }
 .image,
 .document {
@@ -146,13 +146,12 @@ onUnmounted(() => {
 .image-description,
 .document-description {
   max-width: 300px;
-  padding-right:60px;
+  padding-right: 60px;
   align-content: start;
   flex: 0 0 300px;
   font-family: mo nospace;
   align-self: center;
   overflow: wrap;
-
 }
 .btn-document {
   color: #fdda24;
@@ -167,7 +166,9 @@ onUnmounted(() => {
 }
 .image-container {
   max-width: 540px;
+  width: 100%;
   align-self: center;
+  margin: 0 auto;
 }
 
 .document-container,
@@ -176,13 +177,13 @@ onUnmounted(() => {
   align-self: center;
   max-width: 780px;
   max-height: inherit;
-  canvas
-  {
+  canvas {
     max-height: 700px;
   }
 }
 .vue-pdf-embed {
-  overflow: scroll;}
+  overflow: scroll;
+}
 embed {
   width: 100%;
   height: 100%;

@@ -215,6 +215,9 @@ useHead({
     display: none;
   }
 
+  .chapter-header {
+    padding-bottom: 30px;
+  }
   .chapter-name {
     font-size: 30px;
     font-style: normal;
