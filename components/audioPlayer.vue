@@ -77,8 +77,8 @@ async function setDuration() {
       `duration_${props.section.id}`
     )
 
-    durationElement.innerHTML =
-      playTimer + '/' + secondsToMinutes(duration.value)
+    // durationElement.innerHTML =
+    //   playTimer.value + '/' + secondsToMinutes(duration.value)
   }
 }
 function secondsToMinutes(seconds) {
