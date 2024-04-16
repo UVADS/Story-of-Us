@@ -28,7 +28,7 @@
     <div class="duration">
       Listen <br />
       <div :id="`duration_${section.id}`" :key="duration">
-        {{ playTimer }}/{{ secondsToMinutes(duration) }}
+        {{ playTimer }}/{{ duration }}
       </div>
     </div>
   </div>
@@ -71,7 +71,8 @@ async function setDuration() {
       playTimer.value = secondsToMinutes(audioElement.currentTime)
     })
     audioDuration.value = audioElement.duration
-    duration.value = audioElement.duration
+    duration.value =
+      secondsToMinutes(audioElement.duration) || audioElement.duration
 
     const durationElement = document.getElementById(
       `duration_${props.section.id}`

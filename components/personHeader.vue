@@ -29,6 +29,7 @@ const props = defineProps(['person'])
   border-bottom: 1px solid #fff;
   padding-bottom: 30px;
   justify-content: space-between;
+
   .person-name {
     align-self: flex-start;
   }
@@ -67,7 +68,6 @@ const props = defineProps(['person'])
     width: 100%;
     max-width: 100%;
     flex-direction: column-reverse;
-
     .person-name {
       h1 {
         color: #fff;
@@ -80,7 +80,6 @@ const props = defineProps(['person'])
       flex: unset;
       color: #fff;
       text-align: center;
-      font-family: 'FranklinGothic URW';
       font-size: 36px;
       font-style: normal;
       font-weight: 600;
@@ -92,7 +91,6 @@ const props = defineProps(['person'])
       padding: 20px 0;
       color: #fff;
       text-align: center;
-      font-family: 'FranklinGothic URW';
       font-size: 18px;
       font-style: normal;
       font-weight: 400;

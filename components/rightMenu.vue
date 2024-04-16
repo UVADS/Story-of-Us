@@ -30,7 +30,6 @@
 
 <script setup>
 const store = useChaptersStore()
-await store.fetchChapters()
 const chapters = store.getChapters
 const props = defineProps({
   sections: {

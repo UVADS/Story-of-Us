@@ -18,7 +18,7 @@ const words = ref([
 <template>
   <video id="homeVideo" src="/videos/rotunda.mp4" autoplay muted loop></video>
   <div class="homepage-content-wrapper">
-    <div class="homepage-content flex flex-col items-center justify-center">
+    <div class="homepage-content">
       <h1 class="home-text homepage-text">
         <span class="nowrap"
           >To

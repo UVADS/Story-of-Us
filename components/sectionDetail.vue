@@ -396,7 +396,7 @@ videoIds.value =
     }
     .section-summary,
     .section-text {
-      max-width: 100%;
+      min-width: 100%;
       color: #fff;
       font-size: 24px;
       font-style: normal;

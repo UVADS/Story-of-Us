@@ -9,6 +9,7 @@ body {
   height: 100%;
   font-family: 'franklin-gothic-urw', "Franklin Gothic", "ITC Franklin Gothic", "franklin-gothic-ext-comp-urw", Arial, sans-serif;
   background: #000;
+  margin: 0 auto;
 }
 
 #__nuxt,
@@ -89,7 +90,9 @@ h1 {
   }
 }
 
-
+.body {
+  overflow-x: hidden;
+}
 
 .chapter-years {
   padding-top: 20px;

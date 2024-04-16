@@ -216,7 +216,8 @@ useHead({
   }
 
   .chapter-header {
-    padding-bottom: 30px;
+    min-height: 240px;
+    height: fit-content;
   }
   .chapter-name {
     font-size: 30px;
@@ -257,10 +258,10 @@ useHead({
     }
 
     .sections-left {
-      max-width: 100%;
+      min-width: 100%;
     }
     .chapter-info {
-      padding: 60px 0;
+      padding: 30px 0;
       margin: 0;
       align-items: start;
       height: unset !important;
@@ -279,6 +280,7 @@ useHead({
 
     .sections-list {
       display: flex;
+
       flex-direction: column;
       justify-content: space-evenly;
       width: 100%;

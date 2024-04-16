@@ -80,6 +80,14 @@ function closeAll(id) {
 }
 @media (max-width: 768px) {
   .topic-page {
+    .sections-list {
+      display: flex;
+
+      flex-direction: column;
+      justify-content: space-evenly;
+      width: 100%;
+      max-width: 100%;
+    }
     .page-right {
       display: none;
     }

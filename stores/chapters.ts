@@ -7,8 +7,7 @@ export const useChaptersStore = defineStore('chapters', {
       const { data } = await useAPIFetch<ResultsType>('/chapters')
       if (data.value) {
         this.chapters = data.value
-      }
-    }
+      }    }
   },
   getters: {
     getChapters() {
