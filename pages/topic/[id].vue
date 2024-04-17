@@ -15,6 +15,28 @@
           @close-others="closeAll(section.id)"
           :index="index"
         >
+          <template v-slot:audioPlayer>
+            <AudioPlayer
+              :id="`audio_${section.id}`"
+              v-if="hasAudio(section)"
+              :section="section"
+              ref="audioPlayers"
+              :isResponsive="false"
+              @click="audiodetails(section.id)"
+              class="full-audio"
+            ></AudioPlayer>
+          </template>
+          <template v-slot:audioPlayerMobile>
+            <AudioPlayer
+              :id="`audio_${section.id}_responsive`"
+              v-if="hasAudio(section)"
+              :isResponsive="true"
+              :section="section"
+              ref="audioPlayers"
+              @click="audiodetails(section.id)"
+              class="mobile-audio"
+            ></AudioPlayer
+          ></template>
         </SectionFull>
       </div>
     </div>
@@ -42,6 +64,7 @@ const { data } = await useAPIFetch(`/api/topic/${id}`, {
 })
 let current = null
 const sections = ref([])
+const audioPlayers = ref([])
 const topic = data.value.topic
 const topicSections = data.value.sections
 
@@ -59,6 +82,11 @@ function closeAll(id) {
     const sectionDetail = document.getElementById(`section_detail_${id}`)
   })
   current = id
+}
+function audiodetails(id) {
+  audioPlayers.value.forEach((player) => {
+    if (player.id !== id) player.visible = false
+  })
 }
 </script>
 <style lang="scss">

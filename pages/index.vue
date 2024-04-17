@@ -98,10 +98,9 @@ h1 {
   width: 100%;
 }
 .btn-yellow {
-  animation: glowing 5s ease-in-out infinite;
 }
 .btn-yellow:hover {
-  /*animation: glowing 5s ease-in-out infinite;*/
+  animation: glowing 5s ease-in-out infinite;
   background-color: #e4c748e7;
 }
 

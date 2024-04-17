@@ -60,7 +60,6 @@ div a {
 }
 a:hover {
   filter: brightness(0.9);
-  text-shadow: #b4b4b2 0px 2px 2px;
 }
 .chapter-name {
   font-size: 48px;

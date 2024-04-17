@@ -21,14 +21,16 @@
                 v-if="hasAudio(section)"
                 :section="section"
                 ref="audioPlayers"
+                :isResponsive="false"
                 @click="audiodetails(section.id)"
                 class="full-audio"
               ></AudioPlayer>
             </template>
             <template v-slot:audioPlayerMobile>
               <AudioPlayer
-                :id="`audio_${section.id}`"
+                :id="`audio_${section.id}_responsive`"
                 v-if="hasAudio(section)"
+                :isResponsive="true"
                 :section="section"
                 ref="audioPlayers"
                 @click="audiodetails(section.id)"

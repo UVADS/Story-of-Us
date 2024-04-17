@@ -330,7 +330,7 @@ videoIds.value =
         max-width: 110px;
       }
       .btn.btn-image:only-child {
-        width: 230px;
+        width: 240px;
         img {
           max-width: inherit;
           width: inherit;
@@ -344,6 +344,8 @@ videoIds.value =
       height: 62px;
       object-fit: cover;
       min-width: 110px;
+      max-height: 135px;
+      object-fit: cover;
     }
 
     .section-media-videos {

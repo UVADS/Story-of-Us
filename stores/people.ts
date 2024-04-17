@@ -17,6 +17,9 @@ export const usePeopleStore = defineStore( 'people', {
         fetchPeople()
       }
       return this.people
+    },
+    getPerson(state) {
+      return (name) => state.people.find(person => person.name === name)
     }
   }
 })

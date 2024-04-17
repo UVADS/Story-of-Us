@@ -20,7 +20,6 @@ if (props.object) {
   title.value = props.object.name
   description.value = props.object.description
 }
-
 </script>
 
 <style lang="scss">
@@ -31,13 +30,16 @@ if (props.object) {
   border-bottom: 1px solid #fff;
   padding-bottom: 30px;
   justify-content: space-between;
+  overflow: hidden;
+  .story-logo,
+  a {
+    color: #fff;
+  }
   .header-name {
     align-self: flex-start;
-
   }
   .header-description {
     padding: 20px 0;
-
   }
   .header-title {
     color: #fff;
@@ -69,64 +71,62 @@ if (props.object) {
     width: 100%;
     flex-direction: column-reverse;
 
-
-  .header-name
-  {
-    h1{
-      color: #FFF;
-text-align: center;
-font-size: 36px;
-font-style: normal;
-font-weight: 600;
-line-height: 40px; /* 111.111% */
+    .header-name {
+      h1 {
+        color: #fff;
+        text-align: center;
+        font-size: 36px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 40px; /* 111.111% */
+      }
+      flex: unset;
+      color: #fff;
+      text-align: center;
+      font-family: 'FranklinGothic URW';
+      font-size: 36px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 40px; /* 111.111% */
     }
-    flex: unset;
-    color: #FFF;
-    text-align: center;
-    font-family: "FranklinGothic URW";
-    font-size: 36px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 40px; /* 111.111% */
-  }
-  .header-description {
-    max-width: 100%;
-    padding: 20px 0;
-    color: #FFF;
-text-align: center;
-font-family: "FranklinGothic URW";
-font-size: 18px;
-font-style: normal;
-font-weight: 400;
-line-height: 26px; /* 144.444% */
-  }
-  .header-title {
-    color: #FFF;
-text-align: center;
-font-family:
-      IBM Plex Mono,
-      monospace;
-font-size: 14px;
-font-style: normal;
-font-weight: 500;
-line-height: 18px; /* 128.571% */
-letter-spacing: 2px;
-text-transform: uppercase;
-max-width: 100%;
-  }
-  .header-headshot {
-    border-radius: 215px;
-    order: 1;
-    flex: unset;
-    padding: 20px 0;
-    align-self: center;
-    img {
-      border-radius: inherit;
-      max-width: 215px;
-      height: 215px;
-      object-fit: cover;
+    .header-description {
+      max-width: 100%;
+      padding: 20px 0;
+      color: #fff;
+      text-align: center;
+      font-family: 'FranklinGothic URW';
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 26px; /* 144.444% */
     }
-  }
+    .header-title {
+      color: #fff;
+      text-align: center;
+      font-family:
+        IBM Plex Mono,
+        monospace;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 18px; /* 128.571% */
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      max-width: 100%;
+    }
+    .header-headshot {
+      border-radius: 215px;
+      order: 1;
+      flex: unset;
+      padding: 20px 0;
+      align-self: center;
+      img {
+        border-radius: inherit;
+        max-width: 215px;
+        height: 215px;
+        object-fit: cover;
+      }
+    }
   }
 }
 </style>
