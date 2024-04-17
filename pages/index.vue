@@ -136,10 +136,7 @@ h1 {
 h1 {
   line-height: 48px;
 }
-.header-title a.story-logo {
-  color: #fff !important;
-  text-decoration: none;
-}
+
 .home-subtext {
   font-size: 18px;
   font-weight: 400;

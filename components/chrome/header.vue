@@ -55,6 +55,11 @@ header {
   font-weight: 600;
   letter-spacing: 2px;
   text-transform: uppercase;
+  .story-logo,
+  a.story-logo,
+  a.story-logo:visited {
+    color: #fff;
+  }
 }
 
 .separator {

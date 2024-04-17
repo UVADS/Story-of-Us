@@ -31,10 +31,7 @@ if (props.object) {
   padding-bottom: 30px;
   justify-content: space-between;
   overflow: hidden;
-  .story-logo,
-  a {
-    color: #fff;
-  }
+
   .header-name {
     align-self: flex-start;
   }
