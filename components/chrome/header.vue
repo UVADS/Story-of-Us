@@ -59,6 +59,7 @@ header {
   a.story-logo,
   a.story-logo:visited {
     color: #fff;
+    text-decoration: none;
   }
 }
 
