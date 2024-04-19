@@ -65,7 +65,7 @@ const audio = props.section.fields.audio[0]
 const visible = ref(false)
 const duration = ref(secondsToMinutes(0))
 const playTimer = ref(secondsToMinutes(0)) || ref(0)
-const playerStore = useAudioState
+const playerStore = useAudioStore
 const emits = defineEmits(['isPlaying', 'visible', 'id'])
 const isPlaying = ref(false)
 defineExpose({ visible, isPlaying, id })
@@ -109,20 +109,20 @@ function playAudio(id, event) {
     visible.value = true
     isPlaying.value = true
     audioElement.play()
-    playerStore.currentlyPlaying = this || id
+    playerStore.currentlyPlaying = id
+    playerStore.currentElement = audioElement
+    console.log(playerStore)
+    console.log(playerStore.currentlyPlaying)
+    console.log(playerStore.currentElement)
   } else {
     stopAudio()
   }
 }
 
 function stopAudio() {
-  const id =
-    playerStore.currentlyPlaying.id === undefined
-      ? playerStore.currentlyPlaying
-      : playerStore.currentlyPlaying.id
-  const audioElement = document.getElementById(
-    `audioFile_${id}${isResponsiveId()}`
-  )
+  const id = playerStore.currentlyPlaying
+
+  const audioElement = playerStore.currentElement
   isPlaying.value = false
   audioElement.pause()
   visible.value = false

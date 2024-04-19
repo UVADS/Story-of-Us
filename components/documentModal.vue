@@ -54,12 +54,14 @@
                 ref="player"
                 :video-id="video"
                 class="video-player"
-                :key="video"
+                :key="vimeoVideo"
+                @playing="checkAudio"
+                id="vimeo-video-player"
               />
             </div>
           </div>
           <button class="modal-close" @click="toggleModal(false)">
-            <CloseButton></CloseButton>
+            <CloseButton class="btn btn-top-close"></CloseButton>
           </button>
         </div>
         <footer class="modal-footer">
@@ -72,9 +74,10 @@
 
 <script setup>
 import CloseButton from './vectors/closeButton.vue'
-const store = useModalStore()
 const showModal = ref(false)
 defineEmits(['close'])
+const playerStore = useAudioStore
+const videoTitle = ref('')
 const props = defineProps({
   id: {
     type: Number
@@ -114,14 +117,35 @@ function toggleModal(modalValue) {
     document.body.classList.remove('modal-open')
   }
 }
+function checkAudio() {
+  if (playerStore.currentElement) {
+    try {
+      const audioElement = playerStore.currentElement
+      console.log(audioElement)
+      audioElement.pause()
+    } catch (e) {
+      console.log(e)
+    }
+  }
+}
 function keydownListener(event) {
   // Assert the key is escape
   if (event.key === 'Escape') showModal.value = false
 }
-
+async function getVideoTitle() {
+  const videoElement = document.getElementById('vimeo-video-player')
+  if (videoElement) {
+    videoElement.onloadedmetadata = () => {
+      videoTitle.value = document
+        .getElementById('vimeo-video-player')
+        .getElementsByTagName('iframe')[0].title
+    }
+  }
+}
 // Attach event listener on mount
 onMounted(() => {
   document.addEventListener('keydown', keydownListener)
+  getVideoTitle()
 })
 
 // Clean up on unmount
@@ -135,6 +159,9 @@ onUnmounted(() => {
 * {
   font-family: 'ibm-plex-mono', monospace !important;
 }
+.btn.btn-top-close {
+  color: #fff;
+}
 .image,
 .document {
   display: flex;
@@ -142,6 +169,9 @@ onUnmounted(() => {
 }
 .image {
   height: 100%;
+  img {
+    width: 100%;
+  }
 }
 .image-description,
 .document-description {
@@ -197,6 +227,13 @@ embed {
   position: absolute;
   top: 60px;
   right: 60px;
+  z-index: 10;
+  background: transparent;
+  border: none;
+  .icon-close {
+    color: #fff;
+    background: #000;
+  }
 }
 .modal-mask {
   max-width: 1440px;
@@ -271,34 +308,43 @@ embed {
   height: 100%;
 }
 @media (max-width: 768px) {
-  /* Inline #49 | https://localhost:4500/chapters/1 */
   .modal-container {
     padding: 0.5rem;
+    width: inherit;
   }
   .image,
   .document {
-    /* display: flex; */
+    display: flex;
     flex-direction: column;
-    width: 100%;
-    padding-top: 60px;
+    width: unset;
+    justify-content: center;
+    padding: 0;
     .image-description,
     .document-description {
-      width: 100%;
       max-width: 100%;
       min-height: 75px;
       flex: 0 0 auto;
+      line-height: 1.5;
       font-family: monospace;
-      align-self: left;
+      text-align: center;
+      padding: 0;
     }
     .document-container {
-      width: 100%;
       max-height: 768px;
+    }
+    img {
+      padding-top: 20px;
+      width: 100%;
     }
   }
 
   .modal-mask {
-    width: 100%;
     padding: 60px 10px;
+  }
+  #vimeo-video-player {
+    iframe {
+      width: 100% !important;
+    }
   }
 }
 embed html,

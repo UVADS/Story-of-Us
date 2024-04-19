@@ -1,10 +1,12 @@
 import { defineStore } from 'pinia'
 
-export const useMyPlayAudioStore = defineStore({
-  id: 'myPlayAudioStore',
+export const useAudioStore = defineStore({
+  id: 'audioStore',
   state: () => ({
     isPlaying: false,
-    currentlyPlaying: null
+    currentlyPlaying: null,
+    currentElement: null
+
   }),
   actions: {
     test(id) {
@@ -13,5 +15,15 @@ export const useMyPlayAudioStore = defineStore({
   },
   getters: {
     getCurrentlyPlaying: (state) => state.currentlyPlaying
+  },
+  setters: {
+
+    setCurrentlyPlaying(state, id) {
+      state.currentlyPlaying = id
+    },
+    setCurrentlyPlayingElement(state, element) {
+      state.currentlyElement = element
+    }
+
   }
 })

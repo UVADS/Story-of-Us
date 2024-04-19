@@ -42,7 +42,7 @@ const router = useRouter()
 const currentRoute = router.currentRoute
 const routeName = currentRoute.value.name
 const pageClass = routeName === 'index' ? 'homepage' : routeName
-const { x, y } = useMouse()
+//const { x, y } = useMouse()
 const outer = ref([])
 </script>
 <template>

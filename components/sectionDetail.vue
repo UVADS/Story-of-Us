@@ -191,7 +191,6 @@ videoIds.value =
   display: flex;
   border-bottom: #fff solid 1px;
   position: relative;
-  padding: 20px 21px;
   .icon-container {
     padding-right: 10px;
   }
@@ -292,7 +291,9 @@ videoIds.value =
     align-items: center;
     justify-content: center;
   }
-
+  .btn.btn-top-close {
+    color: #fff;
+  }
   .section-media,
   .section-documents {
     padding-left: 120px;
