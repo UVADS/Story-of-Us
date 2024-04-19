@@ -1,22 +1,28 @@
 <script setup>
 const words = ref([
   'Build',
-  'Champion',
-  'Create',
-  'Cultivate',
-  'Design',
+  'Inspire',
   'Develop',
-  'Envision',
+  'Cultivate',
+  'Imagine',
+  'Promote',
+  'Create',
+  'Champion',
   'Establish',
   'Foster',
-  'Imagine',
-  'Inspire',
-  'Promote'
+  'Design',
+  'Envision'
 ])
 </script>
 
 <template>
-  <video id="homeVideo" src="/videos/rotunda.mp4" autoplay muted loop></video>
+  <video
+    id="homeVideo"
+    src="/videos/homepage_video.mp4"
+    autoplay
+    muted
+    loop
+  ></video>
   <div class="homepage-content-wrapper">
     <div class="homepage-content">
       <h1 class="home-text homepage-text">
@@ -86,7 +92,7 @@ h1 {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-items: center;
+  justify-content: center;
   align-items: center;
 }
 .homepage-content-wrapper {
@@ -171,17 +177,17 @@ $options: (
 .build-text {
   @include typed(
     'Build',
-    'Champion',
-    'Create',
-    'Cultivate',
-    'Design',
+    'Inspire',
     'Develop',
-    'Envision',
+    'Cultivate',
+    'Imagine',
+    'Promote',
+    'Create',
+    'Champion',
     'Establish',
     'Foster',
-    'Imagine',
-    'Inspire',
-    'Promote',
+    'Design',
+    'Envision',
     $speeds,
     $options
   );

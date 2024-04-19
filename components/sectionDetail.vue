@@ -189,9 +189,9 @@ videoIds.value =
 .section-detail {
   padding: 60px 0;
   display: flex;
-  clear: both;
   border-bottom: #fff solid 1px;
   position: relative;
+  padding: 20px 21px;
   .icon-container {
     padding-right: 10px;
   }
@@ -256,7 +256,7 @@ videoIds.value =
     .btn-top.btn {
       position: absolute;
       top: 0;
-      right: 0;
+      right: 21px;
     }
   }
   h3 {
@@ -380,6 +380,9 @@ videoIds.value =
   }
 }
 @media (max-width: 768px) {
+  .audioMobile {
+    padding-bottom: 20px;
+  }
   .section-play {
     display: flex;
     flex-direction: row;
@@ -391,7 +394,7 @@ videoIds.value =
     flex-direction: column;
     clear: both;
     border-bottom: #fff solid 1px;
-    width: 100%;
+    padding: 20px 21px;
     .section-top-container {
       display: flex;
       justify-content: space-between;
@@ -423,6 +426,8 @@ videoIds.value =
       color: #fff;
       margin-top: 30px;
       text-align: center;
+      display: flex;
+      align-items: center;
     }
 
     .section-media,

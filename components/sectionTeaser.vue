@@ -56,12 +56,11 @@ function hasAudio() {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .section-teaser {
   padding: 60px 0;
   display: flex;
   max-height: 270px;
-  clear: both;
   border-bottom: #fff solid 1px;
   scroll-margin-top: 50px;
   scroll-behavior: smooth;
@@ -152,7 +151,6 @@ function hasAudio() {
     display: flex;
     flex-direction: column;
     max-height: unset;
-    clear: both;
     border-bottom: #fff solid 1px;
 
     .section-image {
@@ -167,6 +165,7 @@ function hasAudio() {
       font-weight: 300;
       line-height: 34px; /* 142.857% */
       padding-bottom: 30px;
+      width: 100%;
       p {
         font-size: 18px;
         font-weight: 400;
