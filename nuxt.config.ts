@@ -7,7 +7,6 @@ export default defineNuxtConfig({
   dev: process.env.NODE_ENV !== 'production',
   ssr: true,
   nitro: {
-    //   baseURL: host,
     prerender: {
       crawlLinks: false,
       failOnError: false
@@ -43,8 +42,6 @@ export default defineNuxtConfig({
   postcss: {
     plugins: {
       'postcss-import': {},
-      //'tailwindcss/nesting': {},
-      //tailwindcss: {},
       autoprefixer: {}
     }
   },

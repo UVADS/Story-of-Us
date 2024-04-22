@@ -5,7 +5,7 @@
   <button v-if="image" class="btn btn-image" @click="toggleModal(true)">
     <NuxtImg
       :key="image.url"
-      :src="`${image.url}`"
+      :src="`${image.url.replace('files/', 'files/styles/max_650x650/public/')}`"
       :alt="image.alt"
       class="section-image-thumbnail"
     />
@@ -13,6 +13,7 @@
   <button v-if="video" class="btn btn-image" @click="toggleModal(true)">
     <NuxtImg
       :src="`https://vumbnail.com/${video}.jpg`"
+      sizes="300px"
       :alt="'video'"
       class="section-video-thumbnail"
     />
@@ -33,7 +34,11 @@
                 {{ image.credit }}
               </div>
               <div class="image-container">
-                <NuxtImg :src="`${image.url}`" :alt="`${image.alt}`" />
+                <NuxtImg
+                  :src="`${image.url.replace('files/', 'files/styles/max_650x650/public/')}`"
+                  :alt="`${image.alt}`"
+                  sizes="50vw sm:200px md:600px lg:1000px "
+                />
               </div>
             </div>
             <div v-if="document" class="document">

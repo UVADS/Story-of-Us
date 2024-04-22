@@ -19,8 +19,9 @@
       <NuxtImg
         v-if="images[0] && images[0].url"
         class="image-opacity-50"
-        :src="`${images[0].url}`"
+        :src="`${images[0].url.replace('files/', 'files/styles/max_650x650/public/')}`"
         :alt="`${images[0].alt}`"
+        sizes="300px sm:200px md:600px lg:1000px "
       />
     </div>
   </div>
