@@ -4,7 +4,7 @@
       <div
         v-for="chapter in chapters"
         :key="`${chapter.tid}`"
-        :class="`menu-chapter-item ${sections && chapter.tid === chapterId ? 'active-item' : ''}`"
+        :class="`menu-chapter-item ${sections && Number(chapter.tid) === Number(chapterId) ? 'active-item' : ''}`"
       >
         <div class="menu-chapter-name">
           <a :href="`/chapters/${titleUrl(chapter.name)}`">{{

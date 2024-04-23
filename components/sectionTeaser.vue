@@ -145,6 +145,20 @@ function hasAudio() {
   .vector-dot {
     line-height: 22px;
   }
+  &:hover {
+    transition: all 0.5s;
+    cursor: pointer;
+    .section-summary {
+      opacity: 0.75;
+      transition: all 0.5s;
+    }
+    .section-image .image-opacity-50 {
+      opacity: 1;
+      background: none;
+      mix-blend-mode: normal;
+      transition: all 0.5s;
+    }
+  }
 }
 @media (max-width: 768px) {
   .section-teaser {

@@ -13,6 +13,7 @@
       <nuxt-link :to="`/chapters/${titleUrl(chapter.name)}`">{{
         chapter.name
       }}</nuxt-link>
+      <span class="arrow"></span>
     </div>
     <div class="chapter-years padding-top-20">
       {{ yearRange(chapter.field_years) }}
@@ -28,11 +29,7 @@ function yearRange(years) {
 </script>
 
 <style lang="scss">
-.chapter-years {
-  padding-top: 20px;
-}
-
-.a,
+a,
 div a {
   color: #fff;
   text-decoration: none !important;
@@ -57,10 +54,9 @@ div a {
   height: calc(100% / 3);
   clear: both;
   min-height: 240px;
+  transition: all 0.5s;
 }
-a:hover {
-  filter: brightness(0.9);
-}
+
 .chapter-name {
   font-size: 48px;
   font-family: 'franklin-gothic-urw', 'Franklin Gothic', 'ITC Franklin Gothic',
@@ -69,6 +65,7 @@ a:hover {
   font-weight: 600;
   font-size: 90px;
   line-height: 80px;
+  transition: all 0.5s;
 }
 
 .chapter-years {
@@ -77,6 +74,8 @@ a:hover {
   line-height: 24px;
   grid-column: 2;
   animation: 2s;
+  transition: all 0.5s;
+  padding-top: 20px;
 }
 
 .chapter-number,
@@ -119,6 +118,36 @@ a:hover {
   .chapter-years {
     font-size: 20px;
     line-height: 16px;
+  }
+}
+</style>
+<style scoped lang="scss">
+.chapters .chapter-name::after {
+  content: '\00bb';
+  position: relative;
+  top: 0;
+  left: 10px;
+  transition: all 1s;
+  opacity: 1;
+  z-index: 10;
+  display: none;
+  color: #fdda24;
+}
+
+.chapters .chapter-info:hover {
+  .chapter-name a,
+  .chapter-years {
+    padding-left: 20px;
+    filter: brightness(2);
+    color: #fdda24;
+    transition: all 0.5s;
+  }
+
+  .chapter-name::after {
+    transition: all 0.5s;
+    opacity: 1;
+    display: inline;
+    filter: brightness(2);
   }
 }
 </style>

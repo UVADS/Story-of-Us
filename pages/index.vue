@@ -22,6 +22,9 @@ const words = ref([
     autoplay
     muted
     loop
+    preload="auto"
+    width="100%"
+    height="100%"
   ></video>
   <div class="homepage-content-wrapper">
     <div class="homepage-content">
@@ -99,7 +102,7 @@ h1 {
   background-image: url('assets/images/databurst.svg');
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 1000px;
+  background-size: cover;
   height: 100%;
   width: 100%;
 }
