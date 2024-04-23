@@ -5,7 +5,7 @@ const chapters = store.chapters
 const hasrun_chapters = ref(0)
 </script>
 <template>
-  <div class="chapters">
+  <div class="chapters" id="chaptersPage">
     <ChapterInfo :chapters="chapters"></ChapterInfo>
   </div>
 </template>

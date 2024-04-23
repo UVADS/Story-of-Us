@@ -121,33 +121,35 @@ div a {
   }
 }
 </style>
-<style scoped lang="scss">
-.chapters .chapter-name::after {
-  content: '\00bb';
-  position: relative;
-  top: 0;
-  left: 10px;
-  transition: all 1s;
-  opacity: 1;
-  z-index: 10;
-  display: none;
-  color: #fdda24;
-}
-
-.chapters .chapter-info:hover {
-  .chapter-name a,
-  .chapter-years {
-    padding-left: 20px;
-    filter: brightness(2);
+<style lang="scss">
+#chaptersPage {
+  .chapter-name::after {
+    content: '\00bb';
+    position: relative;
+    top: 0;
+    left: 10px;
+    transition: all 1s;
+    opacity: 1;
+    z-index: 10;
+    display: none;
     color: #fdda24;
-    transition: all 0.5s;
   }
 
-  .chapter-name::after {
-    transition: all 0.5s;
-    opacity: 1;
-    display: inline;
-    filter: brightness(2);
+  .chapter-info:hover {
+    .chapter-name a,
+    .chapter-years {
+      padding-left: 20px;
+      filter: brightness(2);
+      color: #fdda24;
+      transition: all 0.5s;
+    }
+
+    .chapter-name::after {
+      transition: all 0.5s;
+      opacity: 1;
+      display: inline;
+      filter: brightness(2);
+    }
   }
 }
 </style>
