@@ -164,11 +164,9 @@ function hasAudio() {
     flex-direction: column;
     max-height: unset;
     border-bottom: #fff solid 1px;
-
     .section-image {
       display: none;
     }
-
     .section-summary,
     .section-text {
       color: #fff;
