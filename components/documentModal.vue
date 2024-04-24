@@ -351,6 +351,9 @@ embed {
       width: 100% !important;
     }
   }
+  #vimeo-video-player iframe {
+    width: 100vw;
+  }
 }
 embed html,
 html {

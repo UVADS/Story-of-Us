@@ -81,9 +81,12 @@ export default defineNuxtConfig({
     type: 'website',
     url: null
   },
+  gtag: {
+    id: 'G-9TG2GBD71R'
+  },
   modules: [
     '@nuxtjs/eslint-module',
-
+    'nuxt-gtag',
     ['@pinia/nuxt', { autoImports: ['defineStore', 'acceptHMRUpdate'] }],
     '@nuxt/image',
     '@vueuse/nuxt',
@@ -100,6 +103,10 @@ export default defineNuxtConfig({
   vue: {
     compilerOptions: {
       isCustomElement: tag => tag === 'vue-typed-js'
-  }
+  },
+  app: {
+    pageTransition: { name: 'page', mode: 'out-in' },
+    layoutTransition: { name: 'layout', mode: 'out-in' }
+  },
 }
 })

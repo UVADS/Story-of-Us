@@ -69,9 +69,6 @@ function hasAudio() {
   .section-title {
     color: #fdda24;
   }
-  .section:last-child {
-    border: none;
-  }
   .icon-container {
     padding-right: 10px;
   }

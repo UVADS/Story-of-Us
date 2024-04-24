@@ -46,12 +46,7 @@ const pageClass = routeName === 'index' ? 'homepage' : routeName
 const outer = ref([])
 </script>
 <template>
-  <div>
-    <div
-      id="roundCursor"
-      class="cursor pointer-events-none"
-      :style="{ top: `${y - 50}px`, left: `${x - 50}px` }"
-    ></div>
+  <div id="appContainer">
     <ChromeHeader></ChromeHeader>
     <div class="outer" id="outer" ref="outer">
       <div class="container gridline" id="grid" ref="grid">
@@ -65,6 +60,11 @@ const outer = ref([])
 </template>
 
 <style>
+#appContainer {
+  min-height: 100vh;
+  display: grid;
+  justify-content: center;
+}
 .cursor {
   position: absolute;
   width: 100px;
@@ -76,7 +76,12 @@ const outer = ref([])
   opacity: 0.3;
   filter: blur(60px);
 }
-
+.outer {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  padding-bottom: 80px;
+}
 .pointed {
   position: absolute;
   width: 7px;
@@ -101,7 +106,7 @@ body.modal-open {
 }
 
 .gridline {
-  height: 100vh;
+  height: 100%;
   background-image: repeating-linear-gradient(
     90deg,
     #cccccc25 0 1px,
@@ -118,7 +123,7 @@ body.modal-open {
   color: #fff;
   max-width: 1440px;
   padding: 50px 0px;
-  height: calc(100vh - 60px);
+  height: 100%;
 }
 .homepage {
   display: flex;

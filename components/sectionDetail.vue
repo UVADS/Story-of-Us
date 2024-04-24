@@ -60,7 +60,12 @@
         >
         </DocumentModal>
       </div>
-      <h3 class="section-content-header section-documents">Documents</h3>
+      <h3
+        v-if="hasDocuments()"
+        class="section-content-header section-documents"
+      >
+        Documents
+      </h3>
 
       <div v-for="file in section.fields.files" :key="file.url">
         <DocumentModal
@@ -73,7 +78,7 @@
         </DocumentModal>
       </div>
 
-      <h3 class="section-content-header">People</h3>
+      <h3 v-if="hasPeople()" class="section-content-header">People</h3>
       <a
         v-for="person in section.fields.connected_people"
         :key="person.id"
@@ -83,7 +88,7 @@
         {{ person.name }}
       </a>
       <br />
-      <h3>Topics</h3>
+      <h3 v-if="hasTopics()" class="section-content-header">Topics</h3>
       <div v-if="section.fields.topics">
         <a
           v-for="topic in section.fields.topics"
@@ -136,9 +141,19 @@ function getVideoId(video) {
   return /[^/]*$/.exec(video)[0]
 }
 
-function openModal(modal) {
-  // store.openModal( component: DocumentModal )
+function hasDocuments() {
+  return props.section.fields.files && props.section.fields.files.length > 0
 }
+function hasTopics() {
+  return props.section.fields.topics && props.section.fields.topics.length > 0
+}
+function hasPeople() {
+  return (
+    props.section.fields.connected_people &&
+    props.section.fields.connected_people.length > 0
+  )
+}
+
 const section = props.section
 const yearRange =
   section.fields.year_range[0].start_year ===
@@ -183,7 +198,9 @@ videoIds.value =
   text-overflow: ellipsis;
 }
 .section:last-child {
-  border: none;
+  .section-detail {
+    border-bottom: none;
+  }
 }
 
 .section-detail {
@@ -382,7 +399,7 @@ videoIds.value =
 }
 @media (max-width: 768px) {
   .audioMobile {
-    padding-bottom: 20px;
+    padding-bottom: 80px;
   }
   .section-play {
     display: flex;
