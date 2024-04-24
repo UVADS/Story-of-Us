@@ -242,6 +242,11 @@ $options: (
     font-style: normal;
     font-weight: 400;
     line-height: 26px; /* 144.444% */
+    padding: 10px 20px;
+  }
+  .story-logo {
+    line-height: 60px;
+    display: grid;
   }
 }
 </style>

@@ -136,12 +136,15 @@ div a {
   }
 
   .chapter-info:hover {
-    .chapter-name a,
+    .chapter-name,
     .chapter-years {
       padding-left: 20px;
       filter: brightness(2);
       color: #fdda24;
       transition: all 0.5s;
+    }
+    .chapter-name a {
+      color: #fdda24;
     }
 
     .chapter-name::after {

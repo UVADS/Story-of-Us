@@ -64,6 +64,7 @@ const outer = ref([])
   min-height: 100vh;
   display: grid;
   justify-content: center;
+  min-width: 400px;
 }
 .cursor {
   position: absolute;

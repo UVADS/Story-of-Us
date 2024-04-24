@@ -23,7 +23,6 @@ header {
   flex-direction: row;
   background: #1a2835;
   height: 60px;
-  padding: 0 60px;
   position: fixed;
   width: 100%;
   z-index: 10;
@@ -95,7 +94,6 @@ header {
     background: #1a2835;
     width: 100%;
     align-items: center;
-    padding: 0 21px;
     justify-content: center;
     font-family: 'franklin-gothic-ext-comp-urw', 'sans-serif';
 
