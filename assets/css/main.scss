@@ -171,12 +171,10 @@ h1 {
   .main-content,
   .chapters,
   .sections-list {
-    max-width: 880px;
+    max-width: 880px !important;
   }
 
-  .section-teaser .section-summary[data-v-a69ba473] {
-    width: 360px;
-  }
+
 }
 
 @media only screen and (min-width: 961px) and (max-width: 1080px) {
@@ -185,7 +183,7 @@ h1 {
   .main-content,
   .chapters,
   .sections-list {
-    max-width: 960px
+    max-width: 960px !important;
   }
 
   .sections-list {
@@ -202,7 +200,7 @@ h1 {
   .main-content,
   .chapters,
   .sections-list {
-    max-width: 1080px
+    max-width: 1080px !important;
   }
 
 
@@ -211,6 +209,10 @@ h1 {
 @media only screen and (max-width: 1080px) {
   .sections-right {
     display: none;
+  }
+
+  .section-teaser .section-summary {
+    max-width: 360px !important;
   }
 
   .section-image {
@@ -225,7 +227,6 @@ h1 {
 }
 
 @media only screen and (max-width: 1350px) {
-
 
   .sections-list {
     display: flex;

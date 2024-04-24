@@ -178,6 +178,7 @@ function hasAudio() {
       line-height: 34px; /* 142.857% */
       padding-bottom: 30px;
       width: 100%;
+      max-width: 100% !important;
       p {
         font-size: 18px;
         font-weight: 400;
