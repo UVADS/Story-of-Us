@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 const host = process.env.SITE_HOST || 'https://localhost:4500'
 const apihost =
-  process.env.API_HOST || 'http://stage.datascience.virginia.edu:8080'
+  process.env.API_HOST || 'http://story-api.datascience.virginia.edu'
 
 export default defineNuxtConfig({
   dev: process.env.NODE_ENV !== 'production',
@@ -59,7 +59,7 @@ export default defineNuxtConfig({
     public: {
       siteHost: process.env.SITE_HOST || 'https://localhost:4500',
       apiHost:
-        process.env.API_HOST || 'https://stage.datascience.virginia.edu:8443'
+        process.env.API_HOST || 'https://story-api.datascience.virginia.edu'
     }
   },
   routeRules: {

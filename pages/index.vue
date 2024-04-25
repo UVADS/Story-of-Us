@@ -52,10 +52,20 @@ const words = ref([
     </div>
   </div>
 </template>
-
+<style lang="scss">
+.homepage-container {
+  header.story-header {
+    background-color: transparent;
+    justify-content: center;
+    padding-top: 60px;
+    .about {
+      display: none;
+    }
+  }
+}
+</style>
 <style scoped lang="scss">
 @import '@/assets/css/typed.scss';
-
 .text-1 {
   animation-name: fadeIn;
   animation-duration: 7s;
@@ -72,6 +82,7 @@ h1 {
   display: flex;
   flex-wrap: wrap;
 }
+
 .nowrap {
   white-space: nowrap;
   text-align: center;
@@ -91,6 +102,7 @@ h1 {
   justify-content: center;
   align-items: center;
 }
+
 .homepage-content {
   height: 100%;
   display: flex;
@@ -102,15 +114,15 @@ h1 {
   background-image: url('assets/images/databurst.svg');
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
+  background-size: contain;
   height: 100%;
   width: 100%;
 }
 .btn-yellow {
 }
 .btn-yellow:hover {
-  animation: glowing 5s ease-in-out infinite;
-  background-color: #e4c748e7;
+  //animation: glowing 5s ease-in-out infinite;
+  background-color: #fdd924d7;
 }
 
 .homepage-text {
@@ -124,11 +136,11 @@ h1 {
   line-height: 96px;
   letter-spacing: 0em;
   color: #fff;
-  max-width: 1200px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
+  width: 100%;
 }
 
 .build-text {

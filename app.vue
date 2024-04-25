@@ -1,6 +1,4 @@
 <script setup>
-import { useMouse } from '@vueuse/core'
-
 const description =
   'To Build A School Without Walls. It began as an idea then evolved into an institute before ultimately transforming into the first data science school in the country. In this exhibition you’ll learn how this improbable story unfolded and hear from the people who turned a vision into reality.'
 const title = 'Story of Us - UVa School of Data Science'
@@ -42,11 +40,14 @@ const router = useRouter()
 const currentRoute = router.currentRoute
 const routeName = currentRoute.value.name
 const pageClass = routeName === 'index' ? 'homepage' : routeName
-//const { x, y } = useMouse()
+
 const outer = ref([])
 </script>
 <template>
-  <div id="appContainer">
+  <div
+    id="appContainer"
+    :class="`app-wrapper  ${pageClass === 'homepage' ? 'homepage-container' : ''}`"
+  >
     <ChromeHeader></ChromeHeader>
     <div class="outer" id="outer" ref="outer">
       <div class="container gridline" id="grid" ref="grid">
@@ -61,9 +62,7 @@ const outer = ref([])
 
 <style>
 #appContainer {
-  min-height: 100vh;
-  display: grid;
-  justify-content: center;
+  min-height: 100%;
   min-width: 400px;
 }
 .cursor {
@@ -117,13 +116,14 @@ body.modal-open {
   background-repeat: repeat;
   min-height: 100%;
   top: 0;
-  bottom: 0;
-  height: fit-content;
+  left: 0;
+  z-index: 1;
+  position: relative;
+  width: 100%;
 }
 .main-content {
   color: #fff;
   max-width: 1440px;
-  padding: 50px 0px;
   height: 100%;
 }
 .homepage {

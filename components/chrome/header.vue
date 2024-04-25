@@ -24,9 +24,23 @@ header {
   background: #1a2835;
   height: 60px;
   position: fixed;
-  width: 100%;
   z-index: 10;
+  justify-self: center;
+  width: calc(100% - 120px);
+  padding: 0 60px;
 }
+.story-header {
+  color: #fff;
+  font-family: 'franklin-gothic-urw', 'Franklin Gothic', 'ITC Franklin Gothic',
+    Arial, sans-serif;
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 60px; /* 115.385% */
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
 .about {
   color: #fff;
   text-align: right;
@@ -36,12 +50,7 @@ header {
   font-weight: 400;
   line-height: 60px; /* 107.692% */
   text-transform: none;
-  align-self: center;
   flex: 1 1 auto;
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: auto;
-  padding-right: 60px;
 }
 .header-title {
   font-family: 'franklin-gothic-ext-comp-urw', 'sans-serif';
@@ -73,17 +82,6 @@ header {
   height: 60px;
   line-height: 60px;
   padding-right: 15px;
-}
-.story-header {
-  color: #fff;
-  font-family: 'franklin-gothic-urw', 'Franklin Gothic', 'ITC Franklin Gothic',
-    Arial, sans-serif;
-  font-size: 26px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 60px; /* 115.385% */
-  letter-spacing: 2px;
-  text-transform: uppercase;
 }
 
 @media (max-width: 768px) {

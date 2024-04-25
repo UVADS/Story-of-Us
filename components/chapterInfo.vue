@@ -55,6 +55,7 @@ div a {
   clear: both;
   min-height: 240px;
   transition: all 0.5s;
+  grid-row: 1/3;
 }
 
 .chapter-name {
@@ -139,7 +140,6 @@ div a {
     .chapter-name,
     .chapter-years {
       padding-left: 20px;
-      filter: brightness(2);
       color: #fdda24;
       transition: all 0.5s;
     }
@@ -151,7 +151,6 @@ div a {
       transition: all 0.5s;
       opacity: 1;
       display: inline;
-      filter: brightness(2);
     }
   }
 }

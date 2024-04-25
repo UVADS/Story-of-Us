@@ -8,13 +8,34 @@ const hasrun_chapters = ref(0)
   <div class="chapters" id="chaptersPage">
     <ChapterInfo :chapters="chapters"></ChapterInfo>
   </div>
+  <div class="links">
+    <NuxtLink class="btn-yellow" to="/about">About This Project</NuxtLink>
+    <NuxtLink
+      class="btn-yellow"
+      to="https://uvadatapoints.castos.com/episodes/the-story-of-us"
+      >The Story of Us Full Podcast</NuxtLink
+    >
+  </div>
 </template>
 
 <style scoped>
 .main-content {
   padding: 0 120px;
 }
-
+.links {
+  margin: 60px 0;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-around;
+  .btn-yellow {
+    margin: 0 20px;
+    font-weight: 600;
+  }
+  .btn-yellow:hover {
+    filter: brightness(0.9);
+  }
+}
 .chapters {
   height: 100%;
   display: block;
