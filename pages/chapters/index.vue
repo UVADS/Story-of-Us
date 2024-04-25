@@ -23,7 +23,8 @@ const hasrun_chapters = ref(0)
   padding: 0 120px;
 }
 .links {
-  margin: 60px 0;
+  margin-top: 30px;
+  margin-bottom: 60px;
   display: flex;
   flex-wrap: wrap;
   width: 100%;
