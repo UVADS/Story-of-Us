@@ -25,9 +25,11 @@ const hasrun_chapters = ref(0)
   padding: 0 120px;
 }
 .links {
+  display: flex;
+  display: none;
   margin-top: 30px;
   margin-bottom: 60px;
-  display: flex;
+
   flex-wrap: wrap;
   width: 100%;
   justify-content: space-around;
@@ -46,6 +48,7 @@ const hasrun_chapters = ref(0)
 }
 @media (max-width: 768px) {
   .links {
+    display: none;
     margin-top: 10px;
     margin-bottom: 100px;
     width: 100%;
