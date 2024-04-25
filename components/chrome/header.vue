@@ -23,7 +23,7 @@ header {
   flex-direction: row;
   background: #1a2835;
   height: 60px;
-  position: fixed;
+  position: absolute;
   z-index: 10;
   justify-self: center;
   width: calc(100% - 120px);

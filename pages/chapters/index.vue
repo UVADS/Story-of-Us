@@ -8,13 +8,15 @@ const hasrun_chapters = ref(0)
   <div class="chapters" id="chaptersPage">
     <ChapterInfo :chapters="chapters"></ChapterInfo>
   </div>
-  <div class="links">
-    <NuxtLink class="btn-yellow" to="/about">About This Project</NuxtLink>
-    <NuxtLink
-      class="btn-yellow"
-      to="https://uvadatapoints.castos.com/episodes/the-story-of-us"
-      >The Story of Us Full Podcast</NuxtLink
-    >
+  <div>
+    <div class="links">
+      <NuxtLink class="btn-yellow" to="/about">About This Project</NuxtLink>
+      <NuxtLink
+        class="btn-yellow"
+        to="https://uvadatapoints.castos.com/episodes/the-story-of-us"
+        >The Story of Us Full Podcast</NuxtLink
+      >
+    </div>
   </div>
 </template>
 
