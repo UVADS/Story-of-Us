@@ -125,6 +125,7 @@ body.modal-open {
   color: #fff;
   max-width: 1440px;
   height: 100%;
+  margin-bottom: 60px;
 }
 .homepage {
   display: flex;

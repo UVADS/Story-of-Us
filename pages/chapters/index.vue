@@ -44,7 +44,6 @@ const hasrun_chapters = ref(0)
 }
 @media (max-width: 768px) {
   .links {
-    position: relative;
     margin-top: 10px;
     margin-bottom: 100px;
     width: 100%;
