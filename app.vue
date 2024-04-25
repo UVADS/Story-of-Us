@@ -152,6 +152,7 @@ body.modal-open {
 @media (max-width: 768px) {
   .container {
     max-width: 100%;
+    padding-top: 0px;
   }
   .main-content {
     color: #fff;

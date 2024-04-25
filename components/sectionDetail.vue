@@ -480,7 +480,9 @@ videoIds.value =
         flex-direction: row;
         width: 100% !important;
         justify-content: left;
-
+        flex-wrap: unset;
+        margin: 0;
+        gap: 10px;
         & > * {
           flex: 1;
         }
@@ -491,7 +493,7 @@ videoIds.value =
 
         .section-image-thumbnail {
           object-fit: cover;
-          padding: 0 5px;
+          padding: 0 0px;
           max-height: 120px;
           height: 100%;
           width: 100%;

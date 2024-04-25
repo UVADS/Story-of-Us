@@ -260,5 +260,8 @@ $options: (
     line-height: 60px;
     display: grid;
   }
+  .homepage-content {
+    justify-content: unset;
+  }
 }
 </style>

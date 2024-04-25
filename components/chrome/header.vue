@@ -94,7 +94,10 @@ header {
     align-items: center;
     justify-content: center;
     font-family: 'franklin-gothic-ext-comp-urw', 'sans-serif';
-
+    position: unset;
+    z-index: unset;
+    width: 100%;
+    padding: 0;
     .story-header {
       color: #fff;
       font-family: 'franklin-gothic-urw', 'Franklin Gothic',
@@ -120,9 +123,7 @@ header {
       display: none;
     }
     .about {
-      position: absolute;
-      text-align: center;
-      bottom: 30px;
+      display: none;
     }
   }
 }

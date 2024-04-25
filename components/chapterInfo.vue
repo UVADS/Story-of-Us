@@ -124,6 +124,9 @@ div a {
 </style>
 <style lang="scss">
 #chaptersPage {
+  .chapter-info {
+    grid-row: 1/3;
+  }
   .chapter-name::after {
     content: '\00bb';
     position: relative;

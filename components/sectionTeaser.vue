@@ -149,11 +149,13 @@ function hasAudio() {
       opacity: 0.75;
       transition: all 0.5s;
     }
-    .section-image .image-opacity-50 {
-      opacity: 1;
-      background: none;
-      mix-blend-mode: normal;
-      transition: all 0.5s;
+    .section-image {
+      .image-opacity-50:hover {
+        opacity: 1;
+        background: none;
+        mix-blend-mode: normal;
+        transition: all 0.5s;
+      }
     }
   }
 }
