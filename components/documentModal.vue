@@ -62,6 +62,7 @@
                 :key="vimeoVideo"
                 @playing="checkAudio"
                 id="vimeo-video-player"
+                :player-width="435"
               />
             </div>
           </div>
@@ -113,6 +114,12 @@ const props = defineProps({
   }
 })
 const docUrl = props.document ? props.document.url : null
+/*const width = computed(() => {
+  if (process.client) {
+    console.log(window.innerWidth)
+    return window.innerWidth
+  }
+})*/
 
 function toggleModal(modalValue) {
   showModal.value = modalValue
