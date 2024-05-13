@@ -10,12 +10,15 @@
     "postinstall": "nuxt prepare",
     "deploy": "nuxt build && nuxt generate",
     "heroku-postbuild": "npm run build",
-    "start": "node .output/server/index.mjs"
+    "start": "node .output/server/index.mjs",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.22.15",
     "@iconify/vue": "^4.1.1",
     "@nuxt/devtools": "latest",
+    "@nuxt/eslint": "^0.3.12",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@nuxtjs/eslint-module": "^4.1.0",
     "@nuxtjs/tailwindcss": "^6.8.1",

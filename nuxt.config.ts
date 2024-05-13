@@ -90,7 +90,13 @@ export default defineNuxtConfig({
     ['@pinia/nuxt', { autoImports: ['defineStore', 'acceptHMRUpdate'] }],
     '@nuxt/image',
     '@vueuse/nuxt',
+    "@nuxt/eslint"
   ],
+  eslint: {
+    config: {
+      stylistic: true // <---
+    }
+  },
   plugins: [
     { src: '~/plugins/vue-pdf-embed.client.js', ssr: false, mode: 'client' },
   ],
