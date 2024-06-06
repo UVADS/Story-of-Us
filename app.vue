@@ -65,7 +65,7 @@ const outer = ref([])
 #appContainer {
   min-height: 100%;
   min-width: 400px;
-  overflow-y: visible;
+  overflow-y: auto;
 }
 .cursor {
   position: absolute;
