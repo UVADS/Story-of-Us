@@ -123,7 +123,8 @@ h1 {
   height: 100%;
   width: 100%;
 }
-.btn-yellow {
+.btn-yellow.enter {
+  font-size: 16px;
 }
 .btn-yellow:hover {
   //animation: glowing 5s ease-in-out infinite;

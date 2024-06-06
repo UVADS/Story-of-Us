@@ -1,8 +1,5 @@
 <template>
-  <div
-    :id="`detail_${section.id}`"
-    class="section-detail"
-  >
+  <div :id="`detail_${section.id}`" class="section-detail">
     <div class="section-top-container">
       <div class="col-3 section-years digital-number">
         <div class="flex-center-line">
@@ -14,10 +11,7 @@
           </div>
         </div>
       </div>
-      <div
-        class="btn-container"
-        @click.prevent="collapseSection(section.id)"
-      >
+      <div class="btn-container" @click.prevent="collapseSection(section.id)">
         <CloseButton class="btn btn-top-close" />
       </div>
     </div>
@@ -35,25 +29,17 @@
         {{ section.title.split(':')[1] }}
       </div>
 
-      <div
-        class="section-body"
-        v-html="section.body"
-      />
+      <div class="section-body" v-html="section.body" />
 
       <button
         class="btn-close btn"
         @click.prevent="collapseSection(section.id)"
       >
-        <Icon
-          icon="gridicons:cross"
-          height="25"
-        /> &nbsp; Close Section
+        <Icon icon="gridicons:cross" height="25" /> &nbsp; Close Section
       </button>
     </div>
     <div class="section-media">
-      <h3 class="section-content-header">
-        Media
-      </h3>
+      <h3 class="section-content-header">Media</h3>
       <div class="section-media-images">
         <DocumentModal
           v-for="photo in section.fields.photos"
@@ -81,10 +67,7 @@
         Documents
       </h3>
 
-      <div
-        v-for="file in section.fields.files"
-        :key="file.url"
-      >
+      <div v-for="file in section.fields.files" :key="file.url">
         <DocumentModal
           :key="`document_modal_${section.id}_${file.id}`"
           ref="documents"
@@ -94,12 +77,7 @@
         />
       </div>
 
-      <h3
-        v-if="hasPeople()"
-        class="section-content-header"
-      >
-        People
-      </h3>
+      <h3 v-if="hasPeople()" class="section-content-header">People</h3>
       <a
         v-for="person in section.fields.connected_people"
         :key="person.id"
@@ -108,13 +86,8 @@
       >
         {{ person.name }}
       </a>
-      <br>
-      <h3
-        v-if="hasTopics()"
-        class="section-content-header"
-      >
-        Topics
-      </h3>
+      <br />
+      <h3 v-if="hasTopics()" class="section-content-header">Topics</h3>
       <div v-if="section.fields.topics">
         <a
           v-for="topic in section.fields.topics"
@@ -142,12 +115,12 @@ const videoIds = ref([])
 const props = defineProps({
   section: {
     type: Object,
-    required: true,
+    required: true
   },
   visible: {
     type: Boolean,
-    default: false,
-  },
+    default: false
+  }
 })
 const emits = defineEmits(['visible'])
 
@@ -168,23 +141,23 @@ function hasTopics() {
 }
 function hasPeople() {
   return (
-    props.section.fields.connected_people
-    && props.section.fields.connected_people.length > 0
+    props.section.fields.connected_people &&
+    props.section.fields.connected_people.length > 0
   )
 }
 
 const section = props.section
-const yearRange
-  = section.fields.year_range[0].start_year
-  === section.fields.year_range[0].end_year
+const yearRange =
+  section.fields.year_range[0].start_year ===
+  section.fields.year_range[0].end_year
     ? section.fields.year_range[0].start_year
-    : section.fields.year_range[0].start_year
-    + ' - '
-    + section.fields.year_range[0].end_year
+    : section.fields.year_range[0].start_year +
+      ' - ' +
+      section.fields.year_range[0].end_year
 
-videoIds.value
-  = section.fields.video !== undefined
-    ? section.fields.video.map(vid => /[^/]*$/.exec(vid.value)[0])
+videoIds.value =
+  section.fields.video !== undefined
+    ? section.fields.video.map((vid) => /[^/]*$/.exec(vid.value)[0])
     : []
 </script>
 
@@ -406,6 +379,31 @@ videoIds.value
           max-height: 100%;
         }
       }
+    }
+  }
+}
+@media (min-width: 1120px) {
+  .section-detail {
+    .section-summary,
+    .section-text {
+      width: 480px;
+    }
+  }
+}
+@media only screen and (max-width: 1080px) and (min-width: 960px) {
+  .section-detail {
+    .section-summary,
+    .section-text {
+      width: 340px;
+      margin-right: 20px;
+    }
+  }
+}
+@media (min-width: 1120px) {
+  .section-detail {
+    .section-summary,
+    .section-text {
+      width: 480px;
     }
   }
 }

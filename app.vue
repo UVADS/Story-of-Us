@@ -49,12 +49,9 @@ const outer = ref([])
     id="appContainer"
     :class="`app-wrapper  ${pageClass === 'homepage' ? 'homepage-container' : ''}`"
   >
-    <div id="grid" class="">
-      <div v-for="i in 12" :key="i" class="grid-inner" />
-    </div>
     <ChromeHeader />
     <div id="outer" ref="outer" class="outer">
-      <div ref="grid" class="container">
+      <div ref="grid" class="container gridline">
         <div id="main-content" :class="`main-content ${pageClass}`">
           <NuxtPage />
         </div>
@@ -68,30 +65,6 @@ const outer = ref([])
 #appContainer {
   min-height: 100%;
   min-width: 400px;
-}
-#grid {
-  position: absolute;
-  z-index: -1;
-  width: 100%;
-  display: grid;
-  justify-content: center;
-  /* justify-items: center; */
-  justify-self: center;
-  /* align-items: center; */
-  /* align-content: center; */
-  grid-template-columns: 120px 120px 120px 120px 120px 120px 120px 120px 120px 120px 120px 120px;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  /* border: solid; */
-}
-.grid-inner {
-  border: 1px solid #ffffff1c;
-  border-collapse: collapse;
-  border-top: none;
-  border-bottom: none;
-  height: 100vw;
 }
 .cursor {
   position: absolute;
@@ -148,6 +121,16 @@ body.modal-open {
   z-index: 1;
   position: relative;
   width: 100%;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 .main-content {
   color: #fff;
