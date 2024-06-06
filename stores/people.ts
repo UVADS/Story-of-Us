@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-export const usePeopleStore = defineStore( 'people', {
+export const usePeopleStore = defineStore('people', {
   state: () => ({ people: [] }),
   actions: {
     async fetchPeople(): Promise<void> {
@@ -8,7 +8,7 @@ export const usePeopleStore = defineStore( 'people', {
       if (data.value) {
         this.people = data.value.person
       }
-    }
+    },
   },
 
   getters: {
@@ -19,7 +19,7 @@ export const usePeopleStore = defineStore( 'people', {
       return this.people
     },
     getPerson(state) {
-      return (name) => state.people.find(person => person.name === name)
-    }
-  }
+      return name => state.people.find(person => person.name === name)
+    },
+  },
 })

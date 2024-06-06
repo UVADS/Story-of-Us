@@ -4,7 +4,7 @@ export default defineEventHandler((event) => {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Credentials': 'true',
     'Access-Control-Allow-Headers': '*',
-    'Access-Control-Expose-Headers': '*'
+    'Access-Control-Expose-Headers': '*',
   })
   if (getMethod(event) === 'OPTIONS') {
     event.res.statusCode = 204

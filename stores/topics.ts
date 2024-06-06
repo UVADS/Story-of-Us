@@ -8,7 +8,7 @@ export const useTopicsStore = defineStore('topics', {
       if (data.value) {
         this.topics = data.value.topic
       }
-    }
+    },
   },
 
   getters: {
@@ -17,6 +17,6 @@ export const useTopicsStore = defineStore('topics', {
         fetchTopics()
       }
       return this.topics
-    }
-  }
+    },
+  },
 })

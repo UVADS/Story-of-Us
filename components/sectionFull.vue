@@ -4,64 +4,52 @@
       <a :id="`anchor_${section.fields.year_range[0].start_year}`" />
     </div>
     <div @click="showSectionDetails(section.id, true)">
-      <slot name="audioPlayer"></slot>
+      <slot name="audioPlayer" />
     </div>
     <SectionTeaser
       v-show="!showDetails"
       :id="`section_teaser_${section.id}`"
+      :ref="`section_teaser_${section.id}`"
       :section="section"
       :index="index"
       class="section-teaser-component"
-      :ref="`section_teaser_${section.id}`"
       @click="showSectionDetails(section.id)"
-    ></SectionTeaser>
+    />
     <SectionDetail
       v-show="showDetails"
       :id="`section_detail_${section.id}`"
+      :ref="`section_detail_${section.id}`"
       :section="section"
       :index="index"
-      :ref="`section_detail_${section.id}`"
       class="section-detail-component"
       @visible="closeDetails(section.id)"
     >
-      <slot name="audioPlayerMobile"></slot>
+      <slot name="audioPlayerMobile" />
     </SectionDetail>
   </div>
 </template>
 
 <script setup>
-const years = ref([])
 const showDetails = ref(false)
 const props = defineProps({
   section: {
     type: Object,
-    required: true
+    required: true,
   },
   index: {
     type: Number,
-    required: true
-  },
-  showDetails: {
-    type: Boolean,
-    default: false
+    required: true,
   },
   anchor: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 })
 const id = ref(props.section.id)
-function yearAnchor(year) {
-  if (!years.value.includes(year)) {
-    years.value.push(year)
-    return true
-  }
-  return false
-}
 
 defineExpose({ showDetails, id })
 const emits = defineEmits(['closeOthers'])
-function showSectionDetails(sectionId, audio = false, el = null) {
+function showSectionDetails(sectionId) {
   emits('closeOthers')
   nextTick(() => {
     const sectionDetail = document.getElementById(`section_detail_${sectionId}`)
@@ -71,14 +59,10 @@ function showSectionDetails(sectionId, audio = false, el = null) {
   showDetails.value = true
 }
 function closeDetails(id) {
-  const sectionDetail = document.getElementById(`section_detail_${id}`)
   const audioPlayer = document.getElementById(`audio_${id}`)
 
   audioPlayer && audioPlayer.classList.add('hidden-audio')
   showDetails.value = false
-}
-function toggleDetails(visible) {
-  showDetails.value = !showDetails.value
 }
 </script>
 

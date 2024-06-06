@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 const host = process.env.SITE_HOST || 'https://localhost:4500'
-const apihost =
-  process.env.API_HOST || 'http://story-api.datascience.virginia.edu'
+const apihost
+  = process.env.API_HOST || 'http://story-api.datascience.virginia.edu'
 
 export default defineNuxtConfig({
   dev: process.env.NODE_ENV !== 'production',
@@ -9,41 +9,41 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       crawlLinks: false,
-      failOnError: false
-    }
+      failOnError: false,
+    },
   },
   build: {
-    extend(config, ctx) {
+    extend(config, _ctx) {
       config.module.rules.push({
         test: /\.(ogg|mp3|wav|mpe?g)$/i,
         loader: 'file-loader',
         options: {
-          name: '[path][name].[ext]'
-        }
+          name: '[path][name].[ext]',
+        },
       })
-    }
+    },
   },
   components: [
     '~/components',
     {
       path: '~/pages',
       pattern: '*/components/**',
-      pathPrefix: false
-    }
+      pathPrefix: false,
+    },
   ],
   devtools: {
     enabled: true,
 
     timeline: {
-      enabled: true
-    }
+      enabled: true,
+    },
   },
   css: ['assets/css/main.scss', 'assets/css/typed.scss'],
   postcss: {
     plugins: {
       'postcss-import': {},
-      autoprefixer: {}
-    }
+      'autoprefixer': {},
+    },
   },
   head: {
     link: [
@@ -51,19 +51,19 @@ export default defineNuxtConfig({
       { rel: 'stylesheet', href: 'https://use.typekit.net/kma2wyt.css' },
       {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap'
-      }
-    ]
+        href: 'https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap',
+      },
+    ],
   },
   runtimeConfig: {
     public: {
       siteHost: process.env.SITE_HOST || 'https://localhost:4500',
       apiHost:
-        process.env.API_HOST || 'https://story-api.datascience.virginia.edu'
-    }
+        apihost || 'https://story-api.datascience.virginia.edu',
+    },
   },
   routeRules: {
-    '/pdf/**': { proxy: { to: process.env.API_HOST +  "/**" } }
+    '/pdf/**': { proxy: { to: process.env.API_HOST + '/**' } },
   },
 
   host,
@@ -74,15 +74,15 @@ export default defineNuxtConfig({
   defaultMeta: {
     title: 'The Story of Us - UVA School of Data Science',
     description:
-      "The Story of US - School of Data Science at the University of Virginia. To Build A School Without Walls. It began as an idea then evolved into an institute before ultimately transforming into the first data science school in the country. In this exhibition you’ll learn how this improbable story unfolded and hear from the people who turned a vision into reality.",
+      'The Story of US - School of Data Science at the University of Virginia. To Build A School Without Walls. It began as an idea then evolved into an institute before ultimately transforming into the first data science school in the country. In this exhibition you’ll learn how this improbable story unfolded and hear from the people who turned a vision into reality.',
     image: `${host}/uva-datascience-og.png`,
     image_width: 1200,
     image_height: 630,
     type: 'website',
-    url: null
+    url: null,
   },
   gtag: {
-    id: 'G-9TG2GBD71R'
+    id: 'G-9TG2GBD71R',
   },
   modules: [
     '@nuxtjs/eslint-module',
@@ -90,12 +90,10 @@ export default defineNuxtConfig({
     ['@pinia/nuxt', { autoImports: ['defineStore', 'acceptHMRUpdate'] }],
     '@nuxt/image',
     '@vueuse/nuxt',
-    "@nuxt/eslint"
+    '@nuxt/eslint',
   ],
   eslint: {
-    config: {
-      stylistic: true // <---
-    }
+
   },
   plugins: [
     { src: '~/plugins/vue-pdf-embed.client.js', ssr: false, mode: 'client' },
@@ -103,16 +101,16 @@ export default defineNuxtConfig({
   rules: [
     {
       test: /\.scss$/,
-      use: ['style-loader', 'css-loader', 'sass-loader']
-    }
+      use: ['style-loader', 'css-loader', 'sass-loader'],
+    },
   ],
   vue: {
     compilerOptions: {
-      isCustomElement: tag => tag === 'vue-typed-js'
+      isCustomElement: tag => tag === 'vue-typed-js',
+    },
+    app: {
+      pageTransition: { name: 'page', mode: 'out-in' },
+      layoutTransition: { name: 'layout', mode: 'out-in' },
+    },
   },
-  app: {
-    pageTransition: { name: 'page', mode: 'out-in' },
-    layoutTransition: { name: 'layout', mode: 'out-in' }
-  },
-}
 })

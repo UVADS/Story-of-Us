@@ -1,35 +1,35 @@
 <template>
   <div
+    :key="`section_${section.id}${isResponsiveId()}`"
     class="section-play"
     @click="playAudio(section.id, $event)"
-    :key="`section_${section.id}${isResponsiveId()}`"
   >
     <div>
       <audio
         :id="`audioFile_${section.id}${isResponsiveId()}`"
         :src="audio.url"
-      ></audio>
+      />
       <Icon
+        v-show="!isVisible"
+        :id="`audio_play_${section.id}${isResponsiveId()}`"
+        ref="play"
         icon="gridicons:play"
         height="50"
         width="50"
         class="icon-play icon"
-        :id="`audio_play_${section.id}${isResponsiveId()}`"
-        v-show="!visible"
-        ref="play"
-      ></Icon>
+      />
       <Icon
+        v-show="isVisible"
+        :id="`audio_pause_${section.id}${isResponsiveId()}`"
+        ref="pause"
         icon="gridicons:pause"
         height="50"
         width="50"
         class="icon-pause icon"
-        v-show="visible"
-        :id="`audio_pause_${section.id}${isResponsiveId()}`"
-        ref="pause"
-      ></Icon>
+      />
     </div>
     <div class="duration">
-      Listen <br />
+      Listen <br>
       <div
         :id="`duration_${section.id}${isResponsiveId()}`"
         :key="`duration_${isResponsiveId()}`"
@@ -41,28 +41,26 @@
           :id="`audio_progress_${section.id}${isResponsiveId()}`"
           :value="timer"
           :max="floatDuration"
-        ></progress>
+        />
       </div>
       <div class="audio-controls">
         <Icon
+          :id="`audio_replay_${section.id}${isResponsiveId()}`"
+          ref="rewind"
           icon="material-symbols-light:replay-10"
           height="35"
           width="35"
           class="icon-replay icon"
-          :id="`audio_replay_${section.id}${isResponsiveId()}`"
-          ref="rewind"
-          @click=""
-        ></Icon>
+        />
 
         <Icon
+          :id="`audio_forward_${section.id}${isResponsiveId()}`"
+          ref="forward"
           icon="material-symbols-light:forward-10"
           height="35"
           width="35"
           class="icon-forward icon"
-          :id="`audio_forward_${section.id}${isResponsiveId()}`"
-          ref="forward"
-          @click=""
-        ></Icon>
+        />
       </div>
     </div>
   </div>
@@ -70,47 +68,48 @@
 
 <script setup>
 import { Icon } from '@iconify/vue'
+
 const props = defineProps({
   section: {
-    type: Object
+    type: Object,
   },
-  isPlaying: {
+  playing: {
     type: Boolean,
-    default: true
+    default: true,
   },
   visible: {
     type: Boolean,
-    default: false
+    default: false,
   },
   isResponsive: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 })
 
 const id = props.section.id
 const audio = props.section.fields.audio[0]
-const visible = ref(false)
+const isVisible = ref(false)
 const duration = ref(secondsToMinutes(0))
 const floatDuration = ref(0)
 const playTimer = ref(secondsToMinutes(0)) || ref(0)
 const timer = ref(0)
 const playerStore = useAudioStore
-const emits = defineEmits(['isPlaying', 'visible', 'id'])
+defineEmits(['isPlaying', 'isVisible', 'id'])
 const isPlaying = ref(false)
-defineExpose({ visible, isPlaying, id })
+defineExpose({ isVisible, isPlaying, id })
 
 onMounted(setDuration)
 
 async function setDuration() {
   const audioElement = document.getElementById(
-    `audioFile_${props.section.id}${isResponsiveId()}`
+    `audioFile_${props.section.id}${isResponsiveId()}`,
   )
   audioElement.onloadedmetadata = () => {
     floatDuration.value = audioElement.duration
-    duration.value =
-      secondsToMinutes(audioElement.duration) || audioElement.duration
-    audioElement.addEventListener('timeupdate', function (ev) {
+    duration.value
+      = secondsToMinutes(audioElement.duration) || audioElement.duration
+    audioElement.addEventListener('timeupdate', function () {
       timer.value = audioElement.currentTime
       playTimer.value = secondsToMinutes(audioElement.currentTime)
     })
@@ -119,7 +118,7 @@ async function setDuration() {
     }
   }
   const durationElement = document.getElementById(
-    `duration_${props.section.id}${isResponsiveId()}`
+    `duration_${props.section.id}${isResponsiveId()}`,
   )
   durationElement.innerHTML = playTimer.value + '/' + duration.value
 }
@@ -134,25 +133,26 @@ function isResponsiveId() {
 }
 function playAudio(id, event) {
   if (
-    event.target.id.includes('replay') ||
-    event.target.id.includes('forward')
+    event.target.id.includes('replay')
+    || event.target.id.includes('forward')
   ) {
     console.log(event.target.id)
     return moveAudioTimer(id, event)
   }
   const audioElement = document.getElementById(
-    `audioFile_${id}${isResponsiveId()}`
+    `audioFile_${id}${isResponsiveId()}`,
   )
   if (audioElement.paused) {
     if (playerStore.currentlyPlaying) {
       stopAudio()
     }
-    visible.value = true
+    isVisible.value = true
     isPlaying.value = true
     audioElement.play()
     playerStore.currentlyPlaying = id
     playerStore.currentElement = audioElement
-  } else {
+  }
+  else {
     stopAudio()
   }
 }
@@ -165,18 +165,17 @@ function moveAudioTimer(id, event) {
   let timeChange = 0
   if (event.target.id.includes('replay')) {
     timeChange = -10
-  } else {
+  }
+  else {
     timeChange = 10
   }
   audioElement.currentTime = audioElement.currentTime + timeChange
 }
 function stopAudio() {
-  const id = playerStore.currentlyPlaying
-
   const audioElement = playerStore.currentElement
   isPlaying.value = false
   audioElement.pause()
-  visible.value = false
+  isVisible.value = false
   playerStore.currentlyPlaying = null
 }
 </script>
@@ -191,9 +190,6 @@ function stopAudio() {
   padding-bottom: 10px;
   position: relative;
   z-index: 25;
-}
-.iconVisible {
-  visibility: visible;
 }
 
 .section-play {

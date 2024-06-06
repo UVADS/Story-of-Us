@@ -1,21 +1,28 @@
 <template>
   <header class="story-header">
-    <nuxt-link to="https://datascience.virginia.edu" class="story-logo">
-      <vectors-logo></vectors-logo
-    ></nuxt-link>
-    <div class="separator"></div>
+    <nuxt-link
+      to="https://datascience.virginia.edu"
+      class="story-logo"
+    >
+      <vectors-logo /></nuxt-link>
+    <div class="separator" />
     <div class="header-title">
-      <a href="/" class="story-logo" title="Story of Us" load="eager"
-        >The Story of Us</a
-      >
+      <a
+        href="/"
+        class="story-logo"
+        title="Story of Us"
+        load="eager"
+      >The Story of Us</a>
     </div>
     <div class="about">
-      <nuxt-link to="/about" class="ibm-plex-mono about"
-        >About this project</nuxt-link
-      >
+      <nuxt-link
+        to="/about"
+        class="ibm-plex-mono about"
+      >About this project</nuxt-link>
     </div>
   </header>
 </template>
+
 <style scoped lang="scss">
 header {
   display: flex;

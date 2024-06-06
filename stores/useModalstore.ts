@@ -1,4 +1,4 @@
-//not in use for this project
+// not in use for this project
 
 import { defineStore } from 'pinia'
 
@@ -19,6 +19,6 @@ export const useModalStore = defineStore({
     closeModal() {
       // Reset our state
       this.modalState = basicState
-    }
-  }
+    },
+  },
 })

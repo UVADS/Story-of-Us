@@ -3,7 +3,7 @@
     <div class="col-3 section-years digital-number">
       <div class="flex-center-line">
         <div class="icon-container">
-          <VectorsDot class="icon-dot"> </VectorsDot>
+          <VectorsDot class="icon-dot" />
         </div>
         <div class="section-year">
           {{ yearRange }}
@@ -11,8 +11,10 @@
       </div>
     </div>
     <div class="section-summary summary-teaser">
-      <div class="section-title">{{ section.title.split(':')[1] }}</div>
-      <div>{{ section.fields.summary }}</div>
+      <div class="section-title">
+        {{ section.title.split(':')[1] }}
+      </div>
+      <div class="section-summary-text">{{ section.fields.summary }}</div>
     </div>
 
     <div class="section-image">
@@ -50,11 +52,12 @@ const yearRange =
 
 const images = section.fields.photos
 
+/*
 function hasAudio() {
   return section.fields.audio && section.fields.audio.length > 0
     ? section.fields.audio[0]
     : null
-}
+} */
 </script>
 
 <style lang="scss" scoped>
@@ -146,8 +149,13 @@ function hasAudio() {
     transition: all 0.5s;
     cursor: pointer;
     .section-summary {
-      opacity: 0.75;
       transition: all 0.5s;
+      .section-summary-text {
+        color: #000;
+        background: #fdda24;
+        transition: all 0.5s;
+        opacity: 1;
+      }
     }
     .section-image {
       .image-opacity-50:hover {

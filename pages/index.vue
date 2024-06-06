@@ -1,5 +1,5 @@
 <script setup>
-const words = ref([
+/* const words = ref([
   'Build',
   'Inspire',
   'Develop',
@@ -11,47 +11,51 @@ const words = ref([
   'Establish',
   'Foster',
   'Design',
-  'Envision'
-])
+  'Envision',
+]) */
 </script>
 
 <template>
-  <video
-    id="homeVideo"
-    src="/videos/homepage_video.mp4"
-    autoplay
-    muted
-    loop
-    preload="auto"
-    width="100%"
-    height="100%"
-  ></video>
-  <div class="homepage-content-wrapper">
-    <div class="homepage-content">
-      <h1 class="home-text homepage-text">
-        <span class="nowrap"
-          >To
-          <span class="build-text"></span>
-          a school</span
-        ><span class="break" /> without walls
-      </h1>
-      <div class="home-subtext homepage-text">
-        <p class="text-1">
-          It began as an idea then evolved into an institute before ultimately
-          transforming into the first data science school in the country.
-        </p>
-        <p class="text-2">
-          In this exhibition you’ll learn how this improbable story unfolded and
-          hear from the people who turned a vision into reality.
-        </p>
+  <!-- vue/no-multiple-template-root -->
+  <div>
+    <video
+      id="homeVideo"
+      src="/videos/homepage_video.mp4"
+      autoplay
+      muted
+      loop
+      preload="auto"
+      width="100%"
+      height="100%"
+    />
+    <div class="homepage-content-wrapper">
+      <div class="homepage-content">
+        <h1 class="home-text homepage-text">
+          <span class="nowrap"
+            >To
+            <span class="build-text" />
+            a school</span
+          ><span class="break" /> without walls
+        </h1>
+        <div class="home-subtext homepage-text">
+          <p class="text-1">
+            It began as an idea then evolved into an institute before ultimately
+            transforming into the first data science school in the country.
+          </p>
+          <p class="text-2">
+            In this exhibition you’ll learn how this improbable story unfolded
+            and hear from the people who turned a vision into reality.
+          </p>
+        </div>
+        <a href="/chapters"
+          ><button class="btn-yellow enter">View Digital Exhibition</button></a
+        >
+        <h1 class="typing" />
       </div>
-      <a href="/chapters"
-        ><button class="btn-yellow enter">View Digital Exhibition</button></a
-      >
-      <h1 class="typing"></h1>
     </div>
   </div>
 </template>
+
 <style lang="scss">
 .homepage-container {
   header.story-header {
@@ -64,6 +68,7 @@ const words = ref([
   }
 }
 </style>
+
 <style scoped lang="scss">
 @import '@/assets/css/typed.scss';
 .text-1 {

@@ -2,85 +2,78 @@
   <div class="sections-page">
     <div class="sections-left">
       <div class="chapter-header">
-        <ChapterInfo :chapters="chapter"></ChapterInfo>
+        <ChapterInfo :chapters="chapter" />
       </div>
       <div class="sections-list">
         <SectionFull
           v-for="(section, index) in chapterSections"
-          :key="section.id"
           :id="`section_${section.id}`"
+          :key="section.id"
           ref="sections"
           class="section"
           :section="section"
           :anchor="isAnchorSection(section.id)"
-          @close-others="closeAll(section.id)"
           :index="index"
+          @close-others="closeAll(section.id)"
         >
-          <template v-slot:audioPlayer>
+          <template #audioPlayer>
             <AudioPlayer
+              v-if="hasAudio(section)"
               :id="`audio_${section.id}`"
-              v-if="hasAudio(section)"
-              :section="section"
               ref="audioPlayers"
-              :isResponsive="false"
-              @click="audiodetails(section.id)"
+              :section="section"
+              :is-responsive="false"
               class="full-audio"
-            ></AudioPlayer>
-          </template>
-          <template v-slot:audioPlayerMobile>
-            <AudioPlayer
-              :id="`audio_${section.id}_responsive`"
-              v-if="hasAudio(section)"
-              :isResponsive="true"
-              :section="section"
-              ref="audioPlayers"
               @click="audiodetails(section.id)"
+            />
+          </template>
+          <template #audioPlayerMobile>
+            <AudioPlayer
+              v-if="hasAudio(section)"
+              :id="`audio_${section.id}_responsive`"
+              ref="audioPlayers"
+              :is-responsive="true"
+              :section="section"
               class="mobile-audio"
-            ></AudioPlayer
-          ></template>
+              @click="audiodetails(section.id)"
+            />
+          </template>
         </SectionFull>
       </div>
     </div>
 
     <div class="sections-right">
-      <RightMenu
-        :sections="chapterSections"
-        :chapterId="Number(id)"
-      ></RightMenu>
+      <RightMenu :sections="chapterSections" :chapter-id="Number(id)" />
     </div>
   </div>
 </template>
 
 <script setup>
-import { storeToRefs } from 'pinia'
 import { useChaptersStore } from '~/stores/chapters'
+
 const route = useRoute()
 const store = useChaptersStore()
-const { fetchChapters } = store
+
 await store.fetchChapters()
 const chapterId = route.params.id
-const chapters = store.getChapters
+const chaptersList = store.getChapters
 const id =
-  chapters[
-    chapters.findIndex((chapter) => titleUrl(chapter.name) === chapterId)
+  chaptersList[
+    chaptersList.findIndex((chapter) => titleUrl(chapter.name) === chapterId)
   ].tid
 
-const chapter = chapters.filter(
+const chapter = chaptersList.filter(
   (chapter) => titleUrl(chapter.name) === chapterId
 )
-const { data, pending, error, refresh } = await useAPIFetch(
-  `/api/sections/${id}`,
-  {
-    key: route.params.id
-  }
-)
-//throw new Error(id)
+const { data } = await useAPIFetch(`/api/sections/${id}`, {
+  key: route.params.id
+})
+// throw new Error(id)
 const chapterSections = data.value.results
 const sections = ref([])
 const audioPlayers = ref([])
-let current = null
-let anchorSections = [] // onMounted(() => {})
-const props = defineProps({
+const anchorSections = [] // onMounted(() => {})
+defineProps({
   chapterName: { type: String },
   chapters: { type: Object }
 })
@@ -119,9 +112,8 @@ function closeAll(id) {
   })
 
   nextTick(() => {
-    const sectionDetail = document.getElementById(`section_detail_${id}`)
+    document.getElementById(`section_detail_${id}`)
   })
-  current = id
 }
 
 useHead({
@@ -140,6 +132,7 @@ useHead({
   ]
 })
 </script>
+
 <style lang="scss">
 .chapter-header {
   min-height: 240px;

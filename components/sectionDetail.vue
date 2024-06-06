@@ -1,64 +1,78 @@
 <template>
-  <div :id="`detail_${section.id}`" class="section-detail">
+  <div
+    :id="`detail_${section.id}`"
+    class="section-detail"
+  >
     <div class="section-top-container">
       <div class="col-3 section-years digital-number">
         <div class="flex-center-line">
           <div class="icon-container">
-            <VectorsDot class="icon-dot"></VectorsDot>
+            <VectorsDot class="icon-dot" />
           </div>
           <div class="section-year">
             {{ yearRange }}
           </div>
         </div>
       </div>
-      <div class="btn-container" @click.prevent="collapseSection(section.id)">
-        <CloseButton class="btn btn-top-close"></CloseButton>
+      <div
+        class="btn-container"
+        @click.prevent="collapseSection(section.id)"
+      >
+        <CloseButton class="btn btn-top-close" />
       </div>
     </div>
     <div class="section-text">
       <div
+        :id="`section-summary-${section.id}`"
         class="section-summary summary-detail"
         v-html="section.fields.summary"
-        :id="`section-summary-${section.id}`"
-      ></div>
+      />
 
       <div class="audioMobile">
-        <slot> </slot>
+        <slot />
       </div>
-      <div class="section-title">{{ section.title.split(':')[1] }}</div>
+      <div class="section-title">
+        {{ section.title.split(':')[1] }}
+      </div>
 
-      <div class="section-body" v-html="section.body"></div>
+      <div
+        class="section-body"
+        v-html="section.body"
+      />
 
       <button
         class="btn-close btn"
         @click.prevent="collapseSection(section.id)"
       >
-        <Icon icon="gridicons:cross" height="25" /> &nbsp; Close Section
+        <Icon
+          icon="gridicons:cross"
+          height="25"
+        /> &nbsp; Close Section
       </button>
     </div>
     <div class="section-media">
-      <h3 class="section-content-header">Media</h3>
+      <h3 class="section-content-header">
+        Media
+      </h3>
       <div class="section-media-images">
         <DocumentModal
           v-for="photo in section.fields.photos"
           :key="`image_${photo.url}`"
+          :ref="media"
           :show="showModal"
           :image="photo"
-          :ref="media"
           @close="showModal = false"
-        >
-        </DocumentModal>
+        />
       </div>
       <div class="section-media-videos">
         <DocumentModal
           v-for="vid in videoIds"
           :key="`video_${vid}`"
+          :ref="media"
           :show="showModal"
           :video="vid"
-          :ref="media"
           @close="showModal = false"
-        >
-        </DocumentModal>
+        />
       </div>
       <h3
         v-if="hasDocuments()"
@@ -67,18 +81,25 @@
         Documents
       </h3>
 
-      <div v-for="file in section.fields.files" :key="file.url">
+      <div
+        v-for="file in section.fields.files"
+        :key="file.url"
+      >
         <DocumentModal
           :key="`document_modal_${section.id}_${file.id}`"
+          ref="documents"
           :show="showModal"
           :document="file"
-          ref="documents"
           @close="showModal = false"
-        >
-        </DocumentModal>
+        />
       </div>
 
-      <h3 v-if="hasPeople()" class="section-content-header">People</h3>
+      <h3
+        v-if="hasPeople()"
+        class="section-content-header"
+      >
+        People
+      </h3>
       <a
         v-for="person in section.fields.connected_people"
         :key="person.id"
@@ -87,8 +108,13 @@
       >
         {{ person.name }}
       </a>
-      <br />
-      <h3 v-if="hasTopics()" class="section-content-header">Topics</h3>
+      <br>
+      <h3
+        v-if="hasTopics()"
+        class="section-content-header"
+      >
+        Topics
+      </h3>
       <div v-if="section.fields.topics">
         <a
           v-for="topic in section.fields.topics"
@@ -107,38 +133,31 @@
 import { Icon } from '@iconify/vue/dist/iconify.js'
 import DocumentModal from './documentModal.vue'
 import CloseButton from './vectors/closeButton.vue'
-import dot from './vectors/dot.vue'
-const store = useModalStore()
-const visible = ref(false)
+
 // const openModal = ref(null)
 const showModal = ref(false)
 const documents = ref([])
 const media = ref([])
 const videoIds = ref([])
-const audioFiles = ref([])
-let lastAudio = 0
 const props = defineProps({
   section: {
     type: Object,
-    required: true
+    required: true,
   },
   visible: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 })
 const emits = defineEmits(['visible'])
 
-function collapseSection(section) {
+function collapseSection() {
   emits('visible', false)
   nextTick(() => {
-    const sectionDetail = document.getElementById(`section_${props.section.id}`)
-    sectionDetail.scrollIntoView({ behavior: 'smooth' })
+    document
+      .getElementById(`section_${props.section.id}`)
+      .scrollIntoView({ behavior: 'smooth' })
   })
-}
-
-function getVideoId(video) {
-  return /[^/]*$/.exec(video)[0]
 }
 
 function hasDocuments() {
@@ -149,23 +168,23 @@ function hasTopics() {
 }
 function hasPeople() {
   return (
-    props.section.fields.connected_people &&
-    props.section.fields.connected_people.length > 0
+    props.section.fields.connected_people
+    && props.section.fields.connected_people.length > 0
   )
 }
 
 const section = props.section
-const yearRange =
-  section.fields.year_range[0].start_year ===
-  section.fields.year_range[0].end_year
+const yearRange
+  = section.fields.year_range[0].start_year
+  === section.fields.year_range[0].end_year
     ? section.fields.year_range[0].start_year
-    : section.fields.year_range[0].start_year +
-      ' - ' +
-      section.fields.year_range[0].end_year
-const images = section.fields.photos
-videoIds.value =
-  section.fields.video !== undefined
-    ? section.fields.video.map((vid) => /[^/]*$/.exec(vid.value)[0])
+    : section.fields.year_range[0].start_year
+    + ' - '
+    + section.fields.year_range[0].end_year
+
+videoIds.value
+  = section.fields.video !== undefined
+    ? section.fields.video.map(vid => /[^/]*$/.exec(vid.value)[0])
     : []
 </script>
 

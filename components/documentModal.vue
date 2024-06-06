@@ -1,8 +1,16 @@
 <template>
-  <button v-if="document" class="btn btn-document" @click="toggleModal(true)">
+  <button
+    v-if="document"
+    class="btn btn-document"
+    @click="toggleModal(true)"
+  >
     {{ document.description }}
   </button>
-  <button v-if="image" class="btn btn-image" @click="toggleModal(true)">
+  <button
+    v-if="image"
+    class="btn btn-image"
+    @click="toggleModal(true)"
+  >
     <NuxtImg
       :key="image.url"
       :src="`${image.url.replace('files/', 'files/styles/max_650x650/public/')}`"
@@ -10,7 +18,11 @@
       class="section-image-thumbnail"
     />
   </button>
-  <button v-if="video" class="btn btn-image" @click="toggleModal(true)">
+  <button
+    v-if="video"
+    class="btn btn-image"
+    @click="toggleModal(true)"
+  >
     <NuxtImg
       :src="`https://vumbnail.com/${video}.jpg`"
       sizes="300px"
@@ -27,7 +39,10 @@
       >
         <div class="modal-container">
           <div class="modal-body">
-            <div v-if="image" class="image">
+            <div
+              v-if="image"
+              class="image"
+            >
               <div class="image-description">
                 {{ image.description }}
                 {{ image.caption }}
@@ -41,37 +56,48 @@
                 />
               </div>
             </div>
-            <div v-if="document" class="document">
+            <div
+              v-if="document"
+              class="document"
+            >
               <div class="document-description">
                 <p>{{ document.description }}</p>
                 <p>{{ document.summary }}</p>
-                <br />
+                <br>
                 <p>{{ document.author }}</p>
                 <p>{{ document.pub_title }}</p>
-                <p class="source-link">{{ document.source_link }}</p>
+                <p class="source-link">
+                  {{ document.source_link }}
+                </p>
               </div>
               <div class="document-container">
                 <ClientOnly> <VuePdfEmbed :source="docUrl" /></ClientOnly>
               </div>
             </div>
-            <div v-if="video" class="video">
+            <div
+              v-if="video"
+              class="video"
+            >
               <VimeoPlayer
+                id="vimeo-video-player"
                 ref="player"
+                :key="vimeoVideo"
                 :video-id="video"
                 class="video-player"
-                :key="vimeoVideo"
-                @playing="checkAudio"
-                id="vimeo-video-player"
                 :player-width="435"
+                @playing="checkAudio"
               />
             </div>
           </div>
-          <button class="modal-close" @click="toggleModal(false)">
-            <CloseButton class="btn btn-top-close"></CloseButton>
+          <button
+            class="modal-close"
+            @click="toggleModal(false)"
+          >
+            <CloseButton class="btn btn-top-close" />
           </button>
         </div>
         <footer class="modal-footer">
-          <slot name="footer"> </slot>
+          <slot name="footer" />
         </footer>
       </div>
     </Transition>
@@ -80,52 +106,54 @@
 
 <script setup>
 import CloseButton from './vectors/closeButton.vue'
+
 const showModal = ref(false)
 defineEmits(['close'])
 const playerStore = useAudioStore
 const videoTitle = ref('')
 const props = defineProps({
   id: {
-    type: Number
+    type: Number,
   },
   isDocument: {
-    type: Boolean
+    type: Boolean,
   },
   isImage: {
-    type: Boolean
+    type: Boolean,
   },
   document: {
     type: Object,
     required: false,
-    default: null
+    default: null,
   },
   image: {
     type: Object,
     required: false,
-    default: null
+    default: null,
   },
   video: {
     type: String,
     required: false,
-    default: null
+    default: null,
   },
   show: {
-    type: Boolean
-  }
+    type: Boolean,
+  },
 })
 const docUrl = props.document ? props.document.url : null
-/*const width = computed(() => {
+/* const width = computed(() => {
   if (process.client) {
     console.log(window.innerWidth)
     return window.innerWidth
   }
-})*/
+}) */
 
 function toggleModal(modalValue) {
   showModal.value = modalValue
   if (showModal.value) {
     document.body.classList.add('modal-open')
-  } else {
+  }
+  else {
     document.body.classList.remove('modal-open')
   }
 }
@@ -135,7 +163,8 @@ function checkAudio() {
       const audioElement = playerStore.currentElement
       console.log(audioElement)
       audioElement.pause()
-    } catch (e) {
+    }
+    catch (e) {
       console.log(e)
     }
   }

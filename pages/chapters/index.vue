@@ -2,20 +2,29 @@
 const store = useChaptersStore()
 await store.fetchChapters()
 const chapters = store.chapters
-const hasrun_chapters = ref(0)
 </script>
+
 <template>
-  <div class="chapters" id="chaptersPage">
-    <ChapterInfo :chapters="chapters"></ChapterInfo>
-  </div>
   <div>
-    <div class="links">
-      <NuxtLink class="btn-yellow" to="/about">About This Project</NuxtLink>
-      <NuxtLink
-        class="btn-yellow"
-        to="https://uvadatapoints.castos.com/episodes/the-story-of-us"
-        >The Story of Us Full Podcast</NuxtLink
-      >
+    <div
+      id="chaptersPage"
+      class="chapters"
+    >
+      <ChapterInfo :chapters="chapters" />
+    </div>
+    <div>
+      <div class="links">
+        <NuxtLink
+          class="btn-yellow"
+          to="/about"
+        >
+          About This Project
+        </NuxtLink>
+        <NuxtLink
+          class="btn-yellow"
+          to="https://uvadatapoints.castos.com/episodes/the-story-of-us"
+        >The Story of Us Full Podcast</NuxtLink>
+      </div>
     </div>
   </div>
 </template>

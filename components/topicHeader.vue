@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-const props = defineProps(['topic'])
+defineProps(['topic'])
 </script>
 
 <style lang="scss">

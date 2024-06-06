@@ -2,23 +2,29 @@
   <div class="person-container">
     <div class="person-name">
       <h1>{{ person.name }}</h1>
-      <div v-if="person.fields.person_title" class="person-title">
+      <div
+        v-if="person.fields.person_title"
+        class="person-title"
+      >
         {{ person.fields.person_title }}
       </div>
       <div
         v-if="person.description"
         class="person-description"
         v-html="person.description"
-      ></div>
+      />
     </div>
     <div class="person-headshot">
-      <img class="" :src="`${person.fields.headshot.url}`" />
+      <img
+        class=""
+        :src="`${person.fields.headshot.url}`"
+      >
     </div>
   </div>
 </template>
 
 <script setup>
-const props = defineProps(['person'])
+defineProps(['person'])
 </script>
 
 <style lang="scss">

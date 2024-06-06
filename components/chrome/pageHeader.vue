@@ -6,7 +6,7 @@
         v-if="description"
         class="header-description"
         v-html="description"
-      ></div>
+      />
     </div>
   </div>
 </template>

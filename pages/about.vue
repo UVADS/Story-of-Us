@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ChromePageHeader></ChromePageHeader>
+    <ChromePageHeader />
     <div class="page-content font-size-24">
       <p>
         The Story of Us is a digital brand showcase that chronicles the creation

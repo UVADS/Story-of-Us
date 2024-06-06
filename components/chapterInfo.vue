@@ -6,14 +6,13 @@
   >
     <div class="chapter-number">
       <nuxt-link :to="`/chapters/${chapter.tid}`">
-        0{{ chapter.field_chapter_number }}</nuxt-link
-      >
+        0{{ chapter.field_chapter_number }}</nuxt-link>
     </div>
     <div class="chapter-name">
       <nuxt-link :to="`/chapters/${titleUrl(chapter.name)}`">{{
         chapter.name
       }}</nuxt-link>
-      <span class="arrow"></span>
+      <span class="arrow" />
     </div>
     <div class="chapter-years padding-top-20">
       {{ yearRange(chapter.field_years) }}
@@ -22,7 +21,7 @@
 </template>
 
 <script setup>
-const props = defineProps(['chapters'])
+defineProps(['chapters'])
 function yearRange(years) {
   return years && years.includes('-') ? years : years + ' - ONWARDS'
 }
@@ -122,6 +121,7 @@ div a {
   }
 }
 </style>
+
 <style lang="scss">
 #chaptersPage {
   .chapter-info {

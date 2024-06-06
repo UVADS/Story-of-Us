@@ -20,7 +20,9 @@
             :key="year"
             class="year-menu-item"
           >
-            <NuxtLink :to="`#anchor_${year}`"> {{ year }}</NuxtLink>
+            <NuxtLink :to="`#anchor_${year}`">
+              {{ year }}
+            </NuxtLink>
           </li>
         </ul>
       </div>
@@ -35,28 +37,25 @@ const props = defineProps({
   sections: {
     type: Array,
     required: false,
-    default: null
+    default: null,
   },
   chapterId: {
     type: Number,
     required: false,
-    default: null
+    default: null,
   },
   hideYears: {
     type: Boolean,
     required: false,
-    default: false
-  }
+    default: false,
+  },
 })
 function getChapterYears() {
   return [
     ...new Set(
-      props.sections.map((item) => item.fields.year_range[0].start_year)
-    )
+      props.sections.map(item => item.fields.year_range[0].start_year),
+    ),
   ]
-}
-function startYear(section) {
-  return section.fields.year_range[0].start_year ?? ''
 }
 </script>
 

@@ -5,16 +5,16 @@ export const useAudioStore = defineStore({
   state: () => ({
     isPlaying: false,
     currentlyPlaying: null,
-    currentElement: null
+    currentElement: null,
 
   }),
   actions: {
     test(id) {
       this.currentlyPlaying = id
-    }
+    },
   },
   getters: {
-    getCurrentlyPlaying: (state) => state.currentlyPlaying
+    getCurrentlyPlaying: state => state.currentlyPlaying,
   },
   setters: {
 
@@ -23,7 +23,7 @@ export const useAudioStore = defineStore({
     },
     setCurrentlyPlayingElement(state, element) {
       state.currentlyElement = element
-    }
+    },
 
-  }
+  },
 })
