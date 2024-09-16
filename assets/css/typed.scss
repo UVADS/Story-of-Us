@@ -383,8 +383,9 @@ $__typed-id: 0;
 		@if $iterations == infinite {
 			animation: #{$animation-name} #{$dur-total}s linear #{$animation-delay}s #{$iterations} forwards;
 		} @else {
+			// Why wait 4s to start this awesome animation? Let's get it going right away!
 			animation:
-				#{$animation-name} #{$dur-total}s linear #{$animation-delay}s #{$iterations} forwards,
+				#{$animation-name} #{$dur-total}s linear 0.5s #{$iterations} forwards,
 				#{$animation-name}-final #{str-length($final-string) * $dur-char-fwd}s linear #{$dur-total * $iterations + $animation-delay}s 1 forwards;
 			@include __typed-final-build-animation($dur-char-fwd, $final-string, $animation-name, $alt-text, $prefix, $end-styles, map-merge($global-styles, $final-string-styles));
 		}

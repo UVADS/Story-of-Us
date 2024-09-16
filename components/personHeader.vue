@@ -18,6 +18,7 @@
       <img
         class=""
         :src="`${person.fields.headshot.url}`"
+        :alt="`Headshot photo of ${person.name}`"
       >
     </div>
   </div>
@@ -36,12 +37,26 @@ defineProps(['person'])
   padding-bottom: 30px;
   justify-content: space-between;
 
+  h1 {
+    margin-bottom: 1rem;
+
+    @media (min-width: 450px) {
+      margin-bottom: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      margin-bottom: 2.5rem;
+    }
+  }
+
   .person-name {
     align-self: flex-start;
   }
   .person-description {
-    max-width: 640px;
-    padding: 20px 0;
+    line-height: 1.35;
+    max-width: 60ch;
+    padding: 0;
+    text-wrap: pretty;
   }
   .person-title {
     color: #fff;
@@ -51,20 +66,24 @@ defineProps(['person'])
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
-    line-height: 18px; /* 112.5% */
+    line-height: 1.35;
     letter-spacing: 2px;
     text-transform: uppercase;
     max-width: 640px;
-    padding: 20px 0;
+    padding: 0;
+    text-wrap: balance;
   }
   .person-headshot {
+    align-items: center;
+    display: flex;
     border-radius: 215px;
-
     flex: 0 0 auto;
+
     img {
+      aspect-ratio: 1 / 1;
       border-radius: inherit;
-      max-width: 215px;
-      height: 215px;
+      max-width: 240px;
+      height: auto;
       object-fit: cover;
     }
   }
@@ -94,7 +113,6 @@ defineProps(['person'])
     .person-description {
       width: unset;
       max-width: 100%;
-      padding: 20px 0;
       color: #fff;
       text-align: center;
       font-size: 18px;
@@ -111,7 +129,6 @@ defineProps(['person'])
       font-size: 14px;
       font-style: normal;
       font-weight: 500;
-      line-height: 18px; /* 128.571% */
       letter-spacing: 2px;
       text-transform: uppercase;
       max-width: 100%;
@@ -120,7 +137,7 @@ defineProps(['person'])
       border-radius: 215px;
       order: 1;
       flex: unset;
-      padding: 20px 0;
+      padding: 0;
       align-self: center;
       img {
         border-radius: inherit;

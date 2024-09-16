@@ -11,9 +11,6 @@
           </div>
         </div>
       </div>
-      <div class="btn-container" @click.prevent="collapseSection(section.id)">
-        <CloseButton class="btn btn-top-close" />
-      </div>
     </div>
     <div class="section-text">
       <div
@@ -34,6 +31,7 @@
       <button
         class="btn-close btn"
         @click.prevent="collapseSection(section.id)"
+        tabindex="-1"
       >
         <Icon icon="gridicons:cross" height="25" /> &nbsp; Close Section
       </button>
@@ -78,27 +76,31 @@
       </div>
 
       <h3 v-if="hasPeople()" class="section-content-header">People</h3>
-      <a
+      <NuxtLink
         v-for="person in section.fields.connected_people"
         :key="person.id"
         class="person-link"
-        :href="`/people/${titleUrl(person.name)}`"
+        :to="`/people/${titleUrl(person.name)}`"
       >
         {{ person.name }}
-      </a>
+      </NuxtLink>
       <br />
       <h3 v-if="hasTopics()" class="section-content-header">Topics</h3>
       <div v-if="section.fields.topics">
-        <a
+        <NuxtLink
           v-for="topic in section.fields.topics"
           :key="topic.id"
           class="topic-link"
-          :href="`/topic/${titleUrl(topic.name)}`"
+          :to="`/topic/${titleUrl(topic.name)}`"
         >
           {{ topic.name }}
-        </a>
+        </NuxtLink>
       </div>
     </div>
+    <!-- Close section button -->
+    <div class="btn-container" @click.prevent="collapseSection(section.id)">
+        <CloseButton class="btn btn-top-close" />
+      </div>
   </div>
 </template>
 
@@ -167,6 +169,11 @@ videoIds.value =
   height: 45px;
   color: #fff;
   margin-top: 30px;
+
+  &:hover, 
+  &:focus {
+    color: var(--color-yellow);
+  }
 }
 .btn.btn-image,
 .btn {
@@ -195,11 +202,25 @@ videoIds.value =
   }
 }
 
+.section-content-header {
+  margin-top: 2rem;
+}
+
 .section-detail {
   padding: 60px 0;
   display: flex;
   border-bottom: #fff solid 1px;
   position: relative;
+
+  @media (min-width: 768px) and (max-width: 1279px) {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+  }
+  @media (min-width: 1280px) {
+    display: grid;
+    grid-template-columns: 240px auto 240px;
+  }
+
   .icon-container {
     padding-right: 10px;
   }
@@ -212,15 +233,16 @@ videoIds.value =
     line-height: 22px;
     /* 110% */
     letter-spacing: 2px;
-    width: 130px;
-    margin-right: 110px;
+    min-width: 130px;
+    // margin-right: 110px;
     white-space: nowrap;
+    width: 100%;
   }
   .flex-center-line {
     display: flex;
     align-items: center;
-    padding: 10px 0 30px 0;
-    margin-right: 120px;
+    padding: 5px 0 30px 0;
+    // margin-right: 120px;
     white-space: nowrap;
   }
 
@@ -246,6 +268,7 @@ videoIds.value =
       letter-spacing: 0em;
       text-align: left;
       margin-bottom: 30px;
+      padding-bottom: 0;
     }
 
     .section-body {
@@ -255,6 +278,10 @@ videoIds.value =
       font-weight: 400;
       line-height: 30px;
       /* 157.895% */
+
+      > p:first-child {
+        margin-top: 0;
+      }
     }
 
     .icon-container {
@@ -277,7 +304,6 @@ videoIds.value =
     /* 133.333% */
     letter-spacing: 1px;
     text-transform: uppercase;
-    padding: 20px 0;
 
     &:first-of-type {
       padding-top: 0;
@@ -288,8 +314,7 @@ videoIds.value =
 
   .btn-close {
     border-radius: 50px;
-    background: #ffffff11;
-    color: #fff;
+    background: var(--color-dark-blue-67);
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -305,12 +330,17 @@ videoIds.value =
   }
   .section-media,
   .section-documents {
-    padding-left: 120px;
+    // padding-left: 120px;
     font-family: 'IBM Plex Mono', monospace;
 
     a {
       display: block;
       padding: 5px 0;
+
+      &:hover,
+      &:focus {
+        text-decoration: underline !important;
+      }
     }
 
     a,
@@ -335,12 +365,24 @@ videoIds.value =
       max-width: 240px;
       flex-wrap: wrap;
       margin: 5px 7.5px;
+
+      &:has(.btn.btn-image:only-child) {
+        margin: 0;
+      }
+
       img {
         width: 110px;
         max-width: 110px;
       }
       .btn.btn-image:only-child {
         width: 240px;
+        width: 100%;
+
+        @media (min-width: 768px) and (max-width: 1339px) {
+          max-width: calc(25vw - 1.5rem);
+          width: 100%;
+        }
+
         img {
           max-width: inherit;
           width: inherit;
@@ -361,9 +403,20 @@ videoIds.value =
     .section-media-videos {
       padding: 10px 0px;
       max-width: 240px;
+
+      @media (min-width: 768px) and (max-width: 1339px) {
+        max-width: calc(25vw - 1.5rem);
+        width: 100%;
+      }
+
       .section-video-thumbnail {
         max-width: inherit;
         width: 240px;
+
+        @media (min-width: 768px) and (max-width: 1339px) {
+          max-width: calc(25vw - 1.5rem);
+          width: 100%;
+        }
       }
     }
 
@@ -382,31 +435,20 @@ videoIds.value =
     }
   }
 }
-@media (min-width: 1120px) {
-  .section-detail {
-    .section-summary,
-    .section-text {
-      width: 480px;
+
+.section-detail {
+  .section-summary,
+  .section-text {
+    max-width: 35ch;
+    padding-right: 2rem;
+    width: 100%;
+
+    @media (max-width: 450px) {
+      padding-right: 0;
     }
   }
 }
-@media only screen and (max-width: 1080px) and (min-width: 960px) {
-  .section-detail {
-    .section-summary,
-    .section-text {
-      width: 340px;
-      margin-right: 20px;
-    }
-  }
-}
-@media (min-width: 1120px) {
-  .section-detail {
-    .section-summary,
-    .section-text {
-      width: 480px;
-    }
-  }
-}
+
 @media (min-width: 769px) {
   .section-detail .btn-container {
     position: absolute;
@@ -429,7 +471,7 @@ videoIds.value =
     flex-direction: column;
     clear: both;
     border-bottom: #fff solid 1px;
-    padding: 20px 21px;
+    padding: 2rem 0;
     .section-top-container {
       display: flex;
       justify-content: space-between;
@@ -531,6 +573,28 @@ videoIds.value =
         }
       }
     }
+  }
+}
+
+.btn.btn-top-close {
+
+  &:hover,
+  &:focus {
+    color: var(--color-yellow);
+  }
+}
+
+.btn-image {
+  transition: opacity 0.3s;
+  &:hover,
+  &:focus {
+    opacity: 0.8;
+  }
+}
+
+.section-media {
+  @media (min-width: 768px) and (max-width: 1020px) {
+    max-width: calc(25vw - 1.5rem);
   }
 }
 </style>

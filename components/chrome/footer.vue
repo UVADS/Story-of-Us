@@ -11,7 +11,7 @@
 
 <style>
 .footer {
-  position: fixed;
+  align-self: flex-end;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,5 +21,8 @@
   width: 100%;
   background: #1a2835;
   z-index: 1;
+  text-align: center;
+  text-wrap: pretty;
+  position: balance;
 }
 </style>

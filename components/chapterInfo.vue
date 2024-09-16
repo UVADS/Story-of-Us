@@ -5,13 +5,12 @@
     class="chapter-info"
   >
     <div class="chapter-number">
-      <nuxt-link :to="`/chapters/${chapter.tid}`">
-        0{{ chapter.field_chapter_number }}</nuxt-link>
+      0{{ chapter.field_chapter_number }}
     </div>
     <div class="chapter-name">
-      <nuxt-link :to="`/chapters/${titleUrl(chapter.name)}`">{{
-        chapter.name
-      }}</nuxt-link>
+      <nuxt-link class="cover-link" :to="`/chapters/${titleUrl(chapter.name)}`">
+        <span class="cover-link__inner">{{ chapter.name }}</span>
+      </nuxt-link>
       <span class="arrow" />
     </div>
     <div class="chapter-years padding-top-20">
@@ -34,90 +33,129 @@ div a {
   text-decoration: none !important;
 }
 .chapters {
-  height: 100%;
   display: flex;
   flex-direction: column;
   max-width: 1200px;
+  overflow: hidden;
 }
 
 .chapter-info {
-  //animation: slide-in 10s ease-in;
-  //animation-delay: 3s;
   border-bottom: solid 1px #fff;
   display: grid;
   grid-template-columns: 120px auto;
-  vertical-align: flex-start;
   align-items: center;
   align-content: center;
-  height: 240px;
-  height: calc(100% / 3);
   clear: both;
-  min-height: 240px;
-  transition: all 0.5s;
   grid-row: 1/3;
+  padding-block: 3rem;
+  position: relative;
+  transition: 0.3s var(--ease-authentic);
+}
+
+#chaptersPage {
+  .chapter-info {
+    @media (max-width: 450px) {
+      display: block;
+
+      .chapter-name {
+        margin-top: 0.5rem;
+      }
+    }
+    @media (max-width: 600px) {
+      padding-block: 2rem;
+
+      &:first-child {
+        padding-top: 0;
+      }
+
+      .chapter-number {
+        font-size: 32px;
+      }
+      .chapter-name {
+        font-size: 32px;
+      }
+    }
+  }
 }
 
 .chapter-name {
-  font-size: 48px;
+  align-self: center;
+  font-size: 54px;
   font-family: 'franklin-gothic-urw', 'Franklin Gothic', 'ITC Franklin Gothic',
     'franklin-gothic-ext-comp-urw', Arial, sans-serif;
   font-style: normal;
   font-weight: 600;
-  font-size: 90px;
-  line-height: 80px;
-  transition: all 0.5s;
+  line-height: 0.9;
+  transition: 0.3s var(--ease-authentic);
 }
 
 .chapter-years {
   font-size: 24px;
   font-family: Digital-7;
-  line-height: 24px;
+  line-height: 1;
   grid-column: 2;
   animation: 2s;
-  transition: all 0.5s;
-  padding-top: 20px;
+  transition: 0.3s var(--ease-authentic);
 }
 
-.chapter-number,
-.chapter-number a {
+.chapter-number {
   color: #fdda24 !important;
   font-family: Digital-7;
   font-size: 90px;
   font-style: normal;
   font-weight: 400;
-  line-height: 80px;
-  width: 120px;
-  min-width: 120px;
-  padding-top: calc(1em / 8);
+  line-height: 0.75;
+  width: 100px;
+  min-width: 100px;
+  padding-top: 0.175em;
 }
 
 .chapter-info:last-child {
   border: none;
 }
 @media (max-width: 768px) {
+  .chapter-info {
+    grid-template-columns: 100px auto;
+  }
   .chapter-name {
     font-size: 30px;
     font-style: normal;
     font-weight: 600;
-    line-height: 30px; /* 100% */
   }
   .chapter-number {
-    font-size: 50px;
-    line-height: 30px;
+    font-size: 75px;
   }
   .sections-page .chapter-info {
     border-bottom: solid 1px #fff;
     display: grid;
-    grid-template-columns: 120px auto;
+    grid-template-columns: 100px auto;
     vertical-align: flex-start;
     align-items: center;
     align-content: center;
-
     clear: both;
   }
   .chapter-years {
     font-size: 20px;
-    line-height: 16px;
+  }
+}
+@media (min-width: 1200px) {
+  .chapter-name {
+    font-size: 72px;
+  }
+  .chapter-number {
+    font-size: 90px;
+  }
+  .chapter-years {
+    font-size: 24px;
+  }
+}
+
+@media (min-width: 1360px) {
+  .chapter-name {
+    font-size: 90px;
+  }
+  .chapter-years {
+    padding-top: 1rem;
   }
 }
 </style>
@@ -129,32 +167,47 @@ div a {
   }
   .chapter-name::after {
     content: '\00bb';
-    position: relative;
-    top: 0;
-    left: 10px;
-    transition: all 1s;
-    opacity: 1;
-    z-index: 10;
     display: none;
+    position: absolute;
+    left: auto;
+    opacity: 0;
+    z-index: 10;
     color: #fdda24;
+    transition: 0.3s var(--ease-authentic);
+    transform: translateX(10px);
+
+    @media (min-width: 768px) {
+      display: inline-block;
+    }
   }
 
-  .chapter-info:hover {
+  .chapter-info:has(.chapter-name a:hover),
+  .chapter-info:has(.chapter-name a:focus) {
     .chapter-name,
-    .chapter-years {
-      padding-left: 20px;
-      color: #fdda24;
-      transition: all 0.5s;
-    }
+    .chapter-years,
     .chapter-name a {
       color: #fdda24;
     }
 
     .chapter-name::after {
-      transition: all 0.5s;
       opacity: 1;
-      display: inline;
+    }
+
+    @media (min-width: 768px) {
+      .chapter-years,
+      .chapter-name::after {
+        transform: translateX(20px);
+      }
+      .chapter-name .cover-link__inner {
+        padding-left: 20px;
+      }
     }
   }
+}
+.cover-link__inner {
+  transition: padding 0.3s var(--ease-authentic);
+}
+.cover-link::after {
+  z-index: 1;
 }
 </style>

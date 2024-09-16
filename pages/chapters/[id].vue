@@ -135,15 +135,18 @@ useHead({
 
 <style lang="scss">
 .chapter-header {
-  min-height: 240px;
-  height: 240px;
   border-bottom: solid 1px #fff;
+  pointer-events: none;
 }
 .sections-page,
 .person-page,
 .topic-page {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+
+  @media (min-width: 1340px) {
+    flex-direction: row;
+  }
 
   .sections-right {
     max-width: 240px;
@@ -152,18 +155,33 @@ useHead({
     font-style: normal;
     font-weight: 600;
     line-height: 16px; /* 114.286% */
-    padding-left: 120px;
+    padding-left: 3rem;
+
+    @media (min-width: 1280px) {
+      max-width: 240px;
+      padding-left: 60px;
+    }
+    
+    @media (min-width: 1600px) {
+      padding-left: 120px;
+    }
+
     .menu-chapters {
       color: #fff;
       font-size: 14px;
       font-style: normal;
       font-weight: 600;
       line-height: 16px; /* 114.286% */
+      padding-right: 1rem;
     }
   }
 
   .sections-left {
-    max-width: 1080px;
+    width: 100%;
+    
+    @media (min-width: 1340px) {
+      max-width: 1080px;
+    }
   }
   .chapter-info {
     padding-bottom: 60px;
@@ -177,7 +195,6 @@ useHead({
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    max-width: 1080px;
   }
   .section-year {
     white-space: nowrap;
@@ -204,7 +221,7 @@ useHead({
 .year-menu-item {
   color: #fff;
 
-  font-family: ibm-plex-mono, Helvetica, sans-serif;
+  font-family: 'ibm-plex-mono', monospace, Helvetica, sans-serif;
   font-size: 13px;
   font-style: normal;
   font-weight: 400;
@@ -214,43 +231,39 @@ useHead({
   .section-play.full-audio {
     display: none;
   }
-  .sections-right {
-    display: none;
-  }
 
   .chapter-header {
-    min-height: 240px;
     height: fit-content;
   }
   .chapter-name {
-    font-size: 30px;
+    font-size: 42px;
     font-style: normal;
     font-weight: 600;
-    line-height: 30px; /* 100% */
+    line-height: 1;
   }
   .chapter-number {
-    font-size: 50px;
+    font-size: 75px;
     line-height: 30px;
     width: unset;
-    min-width: 120px;
+    min-width: 100px;
   }
 
   .chapter-years {
     font-size: 20px;
     line-height: 16px;
+    padding-top: 1rem;
   }
   .sections-page {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+
     .sections-right {
-      max-width: 240px;
+      max-width: 100%;
       color: #fff;
       font-size: 14px;
       font-style: normal;
       font-weight: 600;
       line-height: 16px; /* 114.286% */
-      padding-left: 120px;
+      padding-left: 2rem;
+
       .menu-chapters {
         color: #fff;
         font-size: 14px;
@@ -276,6 +289,9 @@ useHead({
       justify-content: center;
       clear: both;
       border: none;
+      @media (max-width: 768px) {
+        padding-top: 10px;
+      }
       div {
         padding: 10px 0;
       }

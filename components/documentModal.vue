@@ -1,5 +1,9 @@
 <template>
   <button
+    aria-label="Open document dialog"
+    :aria-controls="`${modalId}`"
+    :aria-expanded="showModal"
+    aria-haspopup="dialog"
     v-if="document"
     class="btn btn-document"
     @click="toggleModal(true)"
@@ -7,6 +11,10 @@
     {{ document.description }}
   </button>
   <button
+    aria-label="Open image dialog"
+    :aria-controls="`${modalId}`"
+    :aria-expanded="showModal"
+    aria-haspopup="dialog"
     v-if="image"
     class="btn btn-image"
     @click="toggleModal(true)"
@@ -19,6 +27,10 @@
     />
   </button>
   <button
+    aria-label="Open video dialog"
+    :aria-controls="`${modalId}`"
+    :aria-expanded="showModal"
+    aria-haspopup="dialog"
     v-if="video"
     class="btn btn-image"
     @click="toggleModal(true)"
@@ -33,9 +45,14 @@
   <Teleport to="body">
     <Transition name="modal-fade">
       <div
+        :aria-labelledby="triggerId"
         v-if="showModal"
+        :id="modalId"
         class="modal-mask"
+        ref="trapRef"
+        role="dialog"
         onkeydown="event.key === 'Escape' && $emit('close')"
+        :aria-expanded="showModal"
       >
         <div class="modal-container">
           <div class="modal-body">
@@ -50,7 +67,7 @@
               </div>
               <div class="image-container">
                 <NuxtImg
-                  :src="`${image.url.replace('files/', 'files/styles/max_650x650/public/')}`"
+                  :src="`${image.url.replace('files/', 'files/styles/wide/public/')}`"
                   :alt="`${image.alt}`"
                   sizes="50vw sm:200px md:600px lg:1000px "
                 />
@@ -71,7 +88,9 @@
                 </p>
               </div>
               <div class="document-container">
-                <ClientOnly> <VuePdfEmbed :source="docUrl" /></ClientOnly>
+                <ClientOnly>
+                  <VuePdfEmbed :source="docUrl" />
+                </ClientOnly>
               </div>
             </div>
             <div
@@ -84,16 +103,22 @@
                 :key="vimeoVideo"
                 :video-id="video"
                 class="video-player"
-                :player-width="435"
+                :player-width="900"
                 @playing="checkAudio"
               />
             </div>
           </div>
-          <button
-            class="modal-close"
+          <button 
+            ref="btnModalClose" 
+            class="modal-close btn btn-top-close" 
             @click="toggleModal(false)"
           >
-            <CloseButton class="btn btn-top-close" />
+            <Icon
+              icon="gridicons:cross-circle"
+              height="50"
+              width="50"
+            />
+            <span class="sr-only">Close Section</span>
           </button>
         </div>
         <footer class="modal-footer">
@@ -105,7 +130,8 @@
 </template>
 
 <script setup>
-import CloseButton from './vectors/closeButton.vue'
+import useFocusTrap from "../composables/useFocusTrap";
+import { Icon } from '@iconify/vue'
 
 const showModal = ref(false)
 defineEmits(['close'])
@@ -140,6 +166,8 @@ const props = defineProps({
     type: Boolean,
   },
 })
+const { trapRef } = useFocusTrap();
+const btnModalClose = ref(null)
 const docUrl = props.document ? props.document.url : null
 /* const width = computed(() => {
   if (process.client) {
@@ -148,10 +176,25 @@ const docUrl = props.document ? props.document.url : null
   }
 }) */
 
+// ARIA Labels
+const triggerId = `trigger-${props.id}`
+const modalId = `modal-${props.id}`
+
 function toggleModal(modalValue) {
   showModal.value = modalValue
   if (showModal.value) {
     document.body.classList.add('modal-open')
+    // Put tab focus inside modal
+    if (btnModalClose.value) {
+      btnModalClose.value.focus()
+    }
+    watchEffect(() => {
+      if (btnModalClose.value) {
+        btnModalClose.value.focus()
+      } else {
+        // not mounted yet, or the element was unmounted (e.g. by v-if)
+      }
+    })
   }
   else {
     document.body.classList.remove('modal-open')
@@ -171,7 +214,7 @@ function checkAudio() {
 }
 function keydownListener(event) {
   // Assert the key is escape
-  if (event.key === 'Escape') showModal.value = false
+  if (event.key === 'Escape') toggleModal(false)
 }
 async function getVideoTitle() {
   const videoElement = document.getElementById('vimeo-video-player')
@@ -196,7 +239,7 @@ onUnmounted(() => {
 // Make a function that will trigger on keydown
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 * {
   font-family: 'ibm-plex-mono', monospace !important;
 }
@@ -226,7 +269,7 @@ onUnmounted(() => {
 }
 .btn-document {
   color: #fdda24;
-
+  margin-bottom: 1rem;
   max-width: 240px;
   font-size: 12px;
   font-weight: 400;
@@ -234,9 +277,14 @@ onUnmounted(() => {
   letter-spacing: 0em;
   text-align: left;
   width: 240px;
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+  }
 }
 .image-container {
-  max-width: 540px;
+  max-width: 900px;
   width: 100%;
   align-self: center;
   margin: 0 auto;
@@ -266,8 +314,8 @@ embed {
 }
 .modal-close {
   position: absolute;
-  top: 60px;
-  right: 60px;
+  top: 1rem;
+  right: 1rem;
   z-index: 10;
   background: transparent;
   border: none;
@@ -275,10 +323,15 @@ embed {
     color: #fff;
     background: #000;
   }
+
+  @media (min-width: 768px) {
+    top: 60px;
+    right: 60px;
+  }
 }
 .modal-mask {
-  max-width: 1440px;
-  max-height: 960px;
+  max-width: 100vw;
+  max-height: 100vh;
   position: fixed;
   inset: 60px 0 0 0;
   background: rgba(0, 0, 0, 0.95);
@@ -314,7 +367,7 @@ embed {
 
 .v-enter-active,
 .v-leave-active {
-  transition: 0.25s ease all;
+  transition: 0.15s var(--ease-authentic) all;
 }
 .modal-fade-enter-from,
 .modal-fade-leave-to {
@@ -323,13 +376,11 @@ embed {
 
 .modal-fade-enter-active,
 .modal-fade-leave-active {
-  transition: 1s ease all;
+  transition: 0.3s var(--ease-authentic) all;
 }
 .document-container {
   .toolbar {
     display: none;
-  }
-  :root {
   }
 }
 

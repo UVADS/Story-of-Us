@@ -1,7 +1,7 @@
 <template>
   <div>
     <ChromePageHeader />
-    <div class="page-content font-size-24">
+    <div class="page-content">
       <p>
         The Story of Us is a digital brand showcase that chronicles the creation
         of a data science school at the University of Virginia. From an idea to
@@ -46,12 +46,20 @@
 
 <script lang="ts" setup></script>
 
-<style>
+<style lang="scss">
 .page-content {
-  padding: 60px 0;
+  padding: 2rem 0 60px;
   max-width: 960px;
+  line-height: 1.625;
+  font-size: 18px;
 
-  font-size: 24px;
+  @media (min-width: 700px) {
+    font-size: 20px;
+  }
+
+  @media (min-width: 800px) {
+    font-size: 22px;
+  }
 }
 .main-content {
   max-width: 1200px;

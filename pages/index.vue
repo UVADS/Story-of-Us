@@ -18,23 +18,21 @@
 <template>
   <!-- vue/no-multiple-template-root -->
   <div>
-    <video
-      id="homeVideo"
-      src="/videos/homepage_video.mp4"
-      autoplay
-      muted
-      loop
-      preload="auto"
-      width="100%"
-      height="100%"
-    />
+    <video id="homeVideo" width="100%" height="100%" preload="auto" autoplay loop muted playsinline>
+      <source 
+        src="/videos/homepage_video.webm" 
+        type="video/webm">
+      <source 
+        src="/videos/homepage_video.mp4" 
+        type='video/mp4'>
+    </video>
     <div class="homepage-content-wrapper">
       <div class="homepage-content">
         <h1 class="home-text homepage-text">
           <span class="nowrap"
             >To
             <span class="build-text" />
-            a school</span
+            <span class="mobile-break"> a school</span></span
           ><span class="break" /> without walls
         </h1>
         <div class="home-subtext homepage-text">
@@ -47,10 +45,8 @@
             and hear from the people who turned a vision into reality.
           </p>
         </div>
-        <a href="/chapters"
-          ><button class="btn-yellow enter">View Digital Exhibition</button></a
-        >
-        <h1 class="typing" />
+        <a class="btn-yellow enter" href="/chapters">View Digital Exhibition</a>
+        <!-- <h1 class="typing" /> -->
       </div>
     </div>
   </div>
@@ -61,37 +57,71 @@
   header.story-header {
     background-color: transparent;
     justify-content: center;
-    padding-top: 60px;
     .about {
       display: none;
     }
+
+    @media (max-width: 450px) {
+      background-color: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+  }
+  .main-content {
+    background-image: url('assets/images/databurst.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
   }
 }
 </style>
 
 <style scoped lang="scss">
 @import '@/assets/css/typed.scss';
+
+.mobile-break {
+  @media (max-width: 450px) {
+    display: block;
+  }
+  @media (min-width: 768px) and (max-width: 1020px) {
+    display: block;
+  }
+}
 .text-1 {
-  animation-name: fadeIn;
-  animation-duration: 7s;
+  animation: fadeIn 2s 1.5s var(--ease-authentic) forwards;
 }
 .text-2 {
-  animation-name: fadeIn;
-  animation-duration: 12s;
+  animation: fadeIn 2s 1.55s var(--ease-authentic) forwards;
 }
 .text-1,
 .text-2 {
   line-clamp: 2;
+  margin-inline: auto;
+  max-width: 65ch;
+  opacity: 0;
+  text-wrap: balance;
 }
 h1 {
   display: flex;
   flex-wrap: wrap;
+  margin-block: 0 2rem;
+}
+
+p {
+  padding-bottom: 0;
 }
 
 .nowrap {
   white-space: nowrap;
   text-align: center;
 }
+.homepage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #homeVideo {
   position: fixed;
   right: 0;
@@ -102,11 +132,6 @@ h1 {
   opacity: 0.5;
   object-fit: cover;
 }
-.homepage {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 .homepage-content {
   height: 100%;
@@ -116,25 +141,18 @@ h1 {
   align-items: center;
 }
 .homepage-content-wrapper {
-  background-image: url('assets/images/databurst.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  height: 100%;
-  width: 100%;
+  // background-image: url('assets/images/databurst.svg');
+  // background-repeat: no-repeat;
+  // background-position: center;
+  // background-size: contain;
+  // height: 100%;
+  // width: 100%;
 }
 .btn-yellow.enter {
-  font-size: 16px;
-}
-.btn-yellow:hover {
-  //animation: glowing 5s ease-in-out infinite;
-  background-color: #fdd924d7;
-}
-
-.homepage-text {
-  animation: fadeIn 2s;
+  font-size: 18px;
 }
 .home-text {
+  animation: fadeIn 0.5s 0.2s forwards;
   font-family: 'franklin-gothic-urw', 'Franklin Gothic', 'ITC Franklin Gothic',
     Arial, sans-serif;
   font-size: 100px;
@@ -147,6 +165,11 @@ h1 {
   align-items: center;
   color: white;
   width: 100%;
+  opacity: 0;
+
+  @media (max-width: 450px) {
+    margin-bottom: 0;
+  }
 }
 
 .build-text {
@@ -171,7 +194,7 @@ h1 {
   letter-spacing: 0em;
   text-align: center;
   max-width: 700px;
-  padding: 30px 60px;
+  padding: 2rem;
 }
 
 .break {
@@ -221,16 +244,12 @@ $options: (
   0% {
     opacity: 0;
   }
-
-  66% {
-    opacity: 0;
-  }
   100% {
     opacity: 1;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   h1 {
     color: #fff;
     text-align: center;
@@ -259,8 +278,8 @@ $options: (
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
-    line-height: 26px; /* 144.444% */
-    padding: 10px 20px;
+    line-height: 24px; /* 144.444% */
+    padding: 10px 1rem;
   }
   .story-logo {
     line-height: 60px;

@@ -20,10 +20,10 @@ const chapters = store.chapters
         >
           About This Project
         </NuxtLink>
-        <NuxtLink
+        <a
           class="btn-yellow"
           to="https://uvadatapoints.castos.com/episodes/the-story-of-us"
-        >The Story of Us Full Podcast</NuxtLink>
+        >The Story of Us Full Podcast</a>
       </div>
     </div>
   </div>

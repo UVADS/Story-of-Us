@@ -1,40 +1,45 @@
 <template>
   <header class="story-header">
-    <nuxt-link
-      to="https://datascience.virginia.edu"
+    <a
+      href="https://datascience.virginia.edu"
       class="story-logo"
     >
-      <vectors-logo /></nuxt-link>
+      <span class="sr-only">University of Virginia Data Science homepage</span>
+      <vectors-logo /></a>
     <div class="separator" />
     <div class="header-title">
       <a
         href="/"
         class="story-logo"
         title="Story of Us"
-        load="eager"
       >The Story of Us</a>
     </div>
     <div class="about">
-      <nuxt-link
+      <NuxtLink
         to="/about"
         class="ibm-plex-mono about"
-      >About this project</nuxt-link>
+      >About this project</NuxtLink>
     </div>
   </header>
+  <div class="header-spacer" />
 </template>
 
 <style scoped lang="scss">
 header {
   display: flex;
-
   flex-direction: row;
   background: #1a2835;
   height: 60px;
-  position: absolute;
   z-index: 10;
   justify-self: center;
-  width: calc(100% - 120px);
+  width: 100%;
+  left: 0;
   padding: 0 60px;
+  position: fixed;
+  top: 0;
+}
+.header-spacer {
+  height: 60px;
 }
 .story-header {
   color: #fff;
@@ -58,6 +63,14 @@ header {
   line-height: 60px; /* 107.692% */
   text-transform: none;
   flex: 1 1 auto;
+}
+a.about {
+  text-decoration: none;
+
+  &:hover, 
+  &:focus {
+    text-decoration: underline !important;
+  }
 }
 .header-title {
   font-family: 'franklin-gothic-ext-comp-urw', 'sans-serif';
@@ -94,17 +107,15 @@ header {
 @media (max-width: 768px) {
   header {
     display: flex;
-
     flex-direction: row;
     background: #1a2835;
     width: 100%;
     align-items: center;
     justify-content: center;
     font-family: 'franklin-gothic-ext-comp-urw', 'sans-serif';
-    position: unset;
-    z-index: unset;
     width: 100%;
     padding: 0;
+
     .story-header {
       color: #fff;
       font-family: 'franklin-gothic-urw', 'Franklin Gothic',

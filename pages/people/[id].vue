@@ -89,7 +89,8 @@ function closeAll(id) {
   display: flex;
   flex-direction: row;
   .page-left {
-    max-width: 1080px;
+    // max-width: 1080px;
+    width: 100%;
   }
   .page-right {
     max-width: 240px;
@@ -98,7 +99,13 @@ function closeAll(id) {
     font-style: normal;
     font-weight: 600;
     line-height: 16px; /* 114.286% */
-    padding-left: 120px;
+    padding-left: 3rem;
+    display: none;
+
+    @media (min-width: 1280px) {
+      max-width: 240px;
+      padding-left: 60px;
+    }
   }
 }
 @media (max-width: 768px) {
@@ -114,9 +121,6 @@ function closeAll(id) {
     .page-left {
       max-width: unset;
       width: 100%;
-    }
-    .page-right {
-      display: none;
     }
   }
 }

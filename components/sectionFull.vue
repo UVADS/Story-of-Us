@@ -7,15 +7,21 @@
       <slot name="audioPlayer" />
     </div>
     <SectionTeaser
+      :aria-label="`Expand content for ${ section.title }`"
+      :aria-expanded="showDetails"
+      :aria-controls="`section_detail_${section.id}`"
       v-show="!showDetails"
       :id="`section_teaser_${section.id}`"
       :ref="`section_teaser_${section.id}`"
       :section="section"
       :index="index"
       class="section-teaser-component"
+      tabindex="0"
       @click="showSectionDetails(section.id)"
+      v-on:keyup.enter="showSectionDetails(section.id)"
     />
     <SectionDetail
+      :aria-labelledby="`section_teaser_${section.id}`"
       v-show="showDetails"
       :id="`section_detail_${section.id}`"
       :ref="`section_detail_${section.id}`"
@@ -66,18 +72,22 @@ function closeDetails(id) {
 }
 </script>
 
-<style>
+<style lang="scss">
 .section-detail-component {
-  animation: show_div 2s;
+  > :not(.section-top-container) {
+    animation: show_div 0.3s;
+  }
 }
 .section-detail-component-close {
-  animation: hide_div 2s;
+  > :not(.section-top-container) {
+    animation: hide_div 0.5s;
+  }
 }
 .hidden {
-  animation: hide_div 2s;
+  animation: hide_div 0.5s;
   transition-property: all;
-  transition-duration: 0.5s;
-  transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+  transition-duration: 0.3s;
+  transition-timing-function: var(--ease-authentic);
 }
 @media screen and (max-width: 768px) {
   .audio-container {
@@ -88,9 +98,11 @@ function closeDetails(id) {
 @keyframes show_div {
   0% {
     opacity: 0;
+    transform: translateY(1rem);
   }
   100% {
     opacity: 1;
+    transform: translate(0);
   }
 }
 @keyframes hide_div {

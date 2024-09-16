@@ -9,24 +9,27 @@
         :id="`audioFile_${section.id}${isResponsiveId()}`"
         :src="audio.url"
       />
-      <Icon
-        v-show="!isVisible"
-        :id="`audio_play_${section.id}${isResponsiveId()}`"
-        ref="play"
-        icon="gridicons:play"
-        height="50"
-        width="50"
-        class="icon-play icon"
-      />
-      <Icon
-        v-show="isVisible"
-        :id="`audio_pause_${section.id}${isResponsiveId()}`"
-        ref="pause"
-        icon="gridicons:pause"
-        height="50"
-        width="50"
-        class="icon-pause icon"
-      />
+      <button>
+        <Icon
+          v-show="!isVisible"
+          :id="`audio_play_${section.id}${isResponsiveId()}`"
+          ref="play"
+          icon="gridicons:play"
+          height="50"
+          width="50"
+          class="icon-play icon"
+        />
+        <Icon
+          v-show="isVisible"
+          :id="`audio_pause_${section.id}${isResponsiveId()}`"
+          ref="pause"
+          icon="gridicons:pause"
+          height="50"
+          width="50"
+          class="icon-pause icon"
+        />
+        <span class="sr-only">Play/Pause audio clip for {{ section.title }}</span>
+      </button>
     </div>
     <div class="duration">
       Listen <br>
@@ -44,23 +47,28 @@
         />
       </div>
       <div class="audio-controls">
-        <Icon
-          :id="`audio_replay_${section.id}${isResponsiveId()}`"
-          ref="rewind"
-          icon="material-symbols-light:replay-10"
-          height="35"
-          width="35"
-          class="icon-replay icon"
-        />
-
-        <Icon
-          :id="`audio_forward_${section.id}${isResponsiveId()}`"
-          ref="forward"
-          icon="material-symbols-light:forward-10"
-          height="35"
-          width="35"
-          class="icon-forward icon"
-        />
+        <button>
+          <Icon
+            :id="`audio_replay_${section.id}${isResponsiveId()}`"
+            ref="rewind"
+            icon="material-symbols-light:replay-10"
+            height="35"
+            width="35"
+            class="icon-replay icon"
+          />
+          <span class="sr-only">Skip backward 10 seconds</span>
+        </button>
+        <button>
+          <Icon
+            :id="`audio_forward_${section.id}${isResponsiveId()}`"
+            ref="forward"
+            icon="material-symbols-light:forward-10"
+            height="35"
+            width="35"
+            class="icon-forward icon"
+          />
+          <span class="sr-only">Skip forward 10 seconds</span>
+        </button>
       </div>
     </div>
   </div>
@@ -120,7 +128,11 @@ async function setDuration() {
   const durationElement = document.getElementById(
     `duration_${props.section.id}${isResponsiveId()}`,
   )
-  durationElement.innerHTML = playTimer.value + '/' + duration.value
+  if (duration.value === '0:00') {
+    durationElement.innerHTML = 'loading…'
+  } else {
+    durationElement.innerHTML = playTimer.value + '/' + duration.value
+  }
 }
 function secondsToMinutes(seconds = 0) {
   if (seconds === 0 || seconds === '0:00') return '0:00'
@@ -180,7 +192,7 @@ function stopAudio() {
 }
 </script>
 
-<style>
+<style lang="scss">
 .audio-controls {
   display: flex;
   flex-direction: row;
@@ -196,17 +208,25 @@ function stopAudio() {
   max-height: 0px;
   position: relative;
   z-index: 4;
-  top: 120px;
+  top: 116px;
   display: flex;
   flex-direction: row;
   font-family: 'ibm-plex-mono', monospace;
   font-size: 13px;
   line-height: 18px;
   width: 240px;
+
+  button {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 0;
+  }
 }
 
 .duration {
-  padding-left: 30px;
+  padding-left: 1.5rem;
 }
 @media (min-width: 769px) {
   .section-play.mobile-audio {
@@ -230,4 +250,23 @@ function stopAudio() {
     display: none;
   }
 }
+
+.audio-progress {
+  border-radius: 30px;
+  margin-top: 5px;
+  overflow: hidden;
+}
+progress {
+  background: var(--color-yellow) !important;
+  display: block;
+  height: 8px;
+
+  @media (min-width: 768px) and (max-width: 960px) {
+    width: 80px;
+  }
+}
+progress::-webkit-progress-value { 
+  background: var(--color-yellow) !important;
+}
+
 </style>

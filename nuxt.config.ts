@@ -107,10 +107,10 @@ export default defineNuxtConfig({
   vue: {
     compilerOptions: {
       isCustomElement: tag => tag === 'vue-typed-js',
-    },
-    app: {
-      pageTransition: { name: 'page', mode: 'out-in' },
-      layoutTransition: { name: 'layout', mode: 'out-in' },
-    },
+    }
   },
+  app: {
+    pageTransition: { name: 'page', mode: 'out-in' },
+    layoutTransition: { name: 'layout', mode: 'out-in' },
+  }
 })
