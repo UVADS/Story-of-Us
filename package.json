@@ -44,5 +44,8 @@
     "volar-service-vetur": "^0.0.16",
     "vue-pdf-embed": "^2.0.2",
     "vue-vimeo-player": "^1.1.2"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.21.3"
   }
 }
